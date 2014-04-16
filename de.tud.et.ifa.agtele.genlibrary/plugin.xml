@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.epsilon.common.dt.tool">
+      <tool
+            class="de.tud.et.ifa.agtele.movisa.library.libraryprocessor.impl.LibraryPluginImpl"
+            defaultName="LibraryPluginImpl">
+      </tool>
+      <tool
+            class="de.tud.et.ifa.agtele.movisa.library.libraryprocessor.impl.LibraryPathParserImpl"
+            defaultName="LibraryPathParserImpl">
+      </tool>
+   </extension>
+   <extension
+         point="org.eclipse.emf.ecore.generated_package">
+      <package
+            class="de.tud.et.ifa.agtele.movisa.library.model.Library.LibraryPackage"
+            uri="http://lib/1.0">
+      </package>
+   </extension>
+</plugin>
