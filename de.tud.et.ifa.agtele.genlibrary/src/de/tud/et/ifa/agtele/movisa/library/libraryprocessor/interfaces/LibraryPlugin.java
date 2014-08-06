@@ -15,6 +15,8 @@ public interface LibraryPlugin {
 
 	public LibraryItem getElement(String path, boolean usehigher);
 
+	public String getResultingElementLibraryPath(String path);
+
 	public LibraryItem getElement(String path, MetaData metadata, boolean usehigher);
 
 	public MetaData getMetaData(String path, boolean usehigher);

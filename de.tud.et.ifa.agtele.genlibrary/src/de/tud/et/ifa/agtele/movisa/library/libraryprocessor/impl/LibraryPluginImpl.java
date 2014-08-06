@@ -163,6 +163,17 @@ public class LibraryPluginImpl implements LibraryPlugin {
 
 	}
 
+	@Override
+	public String getResultingElementLibraryPath(String path) {
+		LibraryPath libpath = parser.parse(path);
+		Item item = getItem(libpath, true);
+		if (item == null) {
+			return null;
+		} else {
+			return item.getKey();
+		}
+	}
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public MetaData getMetaData(String path, boolean usehigher) {
@@ -217,7 +228,7 @@ public class LibraryPluginImpl implements LibraryPlugin {
 		for (int i = startIndex; i < lib.getItems().size(); i++) {
 
 			if (tmp.size() < count) {
-				tmp.add(((Item) lib.getItems().get(i)).getKey());
+				tmp.add(lib.getItems().get(i).getKey());
 			} else {
 				break;
 			}
@@ -362,7 +373,7 @@ public class LibraryPluginImpl implements LibraryPlugin {
 		Item item = null;
 		while (item == null) {
 			for (int k = 0; k < lib.getItems().size(); k++) {
-				Item tmpitem = (Item) lib.getItems().get(k);
+				Item tmpitem = lib.getItems().get(k);
 				if (tmpitem.getKey().equals(path.getPath())) {
 					// item with highest value
 					if (item == null || Long.valueOf(item.getVersion()) < Long.valueOf(tmpitem.getVersion())) {
@@ -552,4 +563,5 @@ public class LibraryPluginImpl implements LibraryPlugin {
 	private String getFilename(String res) {
 		return new File(res).getName();
 	}
+
 }
