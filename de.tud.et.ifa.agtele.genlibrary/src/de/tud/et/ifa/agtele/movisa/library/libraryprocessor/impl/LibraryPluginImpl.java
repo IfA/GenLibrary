@@ -203,7 +203,7 @@ public class LibraryPluginImpl implements LibraryPlugin {
 
 				Resource resource = lf.createResource();
 
-				resource.setName(getFilename(respathes.get(i)));
+				resource.setName(getFilename(respathes.get(i), getResultingElementLibraryPath(item.getKey())));
 
 				md.getResources().add(resource);
 			}
@@ -286,7 +286,7 @@ public class LibraryPluginImpl implements LibraryPlugin {
 			List<String> list = libfileentry.getResourceNameList();
 			List<String> result = new ArrayList<String>();
 			for (String str : list) {
-				result.add(getFilename(str));
+				result.add(getFilename(str, getResultingElementLibraryPath(item.getKey())));
 			}
 			return result;
 		} catch (IOException e) {
@@ -560,8 +560,10 @@ public class LibraryPluginImpl implements LibraryPlugin {
 		return path.replace(".", "/") + "/" + resourcename;
 	}
 
-	private String getFilename(String res) {
-		return new File(res).getName();
+	private String getFilename(String res, String libraryPath) {
+		String parsedLibPath = libraryPath.replaceAll("\\.", "/") + "/";
+		String resName = res.replace(parsedLibPath, "");
+		return resName;
 	}
 
 }

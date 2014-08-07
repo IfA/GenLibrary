@@ -48,6 +48,7 @@ public class FileParserImpl implements FileParser {
 	}
 
 	private LibraryFileEntry getLibraryFileEntry(ZipFile zip, ArrayList<ZipEntry> zipentries, ZipEntry zipentry) {
+		String entryName;
 		LibraryFileEntry libraryfileentry = new LibraryFileEntryZip();
 		libraryfileentry.setFile(zip);
 
@@ -56,8 +57,13 @@ public class FileParserImpl implements FileParser {
 
 		List<ZipEntry> zipentrylist = new ArrayList<ZipEntry>();
 		for (ZipEntry ze : zipentries) {
-			if (getParent(ze.getName()).equals(parent) && !ze.isDirectory()) {
+			entryName = ze.getName();
+			if (getParent(entryName).equals(parent) && !ze.isDirectory()) {
 				zipentrylist.add(ze);
+			} else if ((entryName.contains("/_files/")) && !ze.isDirectory()) {
+				if (entryName.substring(0, entryName.indexOf("/_files/")).equals(parent)) {
+					zipentrylist.add(ze);
+				}
 			}
 		}
 		libraryfileentry.setEntries(zipentrylist);
