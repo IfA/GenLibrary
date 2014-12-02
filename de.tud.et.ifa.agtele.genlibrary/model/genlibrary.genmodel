@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/de.tud.et.ifa.agtele.genlibrary/src" editDirectory="/de.tud.et.ifa.agtele.genlibrary.edit/src"
+    editorDirectory="/de.tud.et.ifa.agtele.genlibrary.editor/src" modelPluginID="de.tud.et.ifa.agtele.genlibrary"
+    modelName="GenLibrary" editPluginClass="de.tud.et.ifa.agtele.genlibrary.provider.GenLibraryEditPlugin"
+    editorPluginClass="de.tud.et.ifa.agtele.genlibrary.presentation.GenLibraryEditorPlugin"
+    testSuiteClass="de.tud.et.ifa.agtele.genlibrary.tests.LibAllTests" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false" editPluginID="de.tud.et.ifa.agtele.genlibrary.edit"
+    editorPluginID="de.tud.et.ifa.agtele.genlibrary.editor">
+  <foreignModel>genlibrary.ecore</foreignModel>
+  <genPackages prefix="GenLibrary" basePackage="de.tud.et.ifa.agtele.genlibrary.model"
+      disposableProviderFactory="true" ecorePackage="genlibrary.ecore#/">
+    <genClasses ecoreClass="genlibrary.ecore#//LibraryEntry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute genlibrary.ecore#//LibraryEntry/Version"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference genlibrary.ecore#//LibraryEntry/LibraryItem"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference genlibrary.ecore#//LibraryEntry/MetaData"/>
+    </genClasses>
+    <genClasses ecoreClass="genlibrary.ecore#//Library">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute genlibrary.ecore#//Library/Checksum"/>
+      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference genlibrary.ecore#//Library/Items"/>
+    </genClasses>
+    <genClasses ecoreClass="genlibrary.ecore#//Item">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute genlibrary.ecore#//Item/Key"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute genlibrary.ecore#//Item/Path"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute genlibrary.ecore#//Item/Version"/>
+    </genClasses>
+    <genClasses ecoreClass="genlibrary.ecore#//LibraryItem"/>
+    <genClasses ecoreClass="genlibrary.ecore#//MetaData">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference genlibrary.ecore#//MetaData/Resources"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute genlibrary.ecore#//MetaData/ID"/>
+    </genClasses>
+    <genClasses ecoreClass="genlibrary.ecore#//Resource">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute genlibrary.ecore#//Resource/Name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute genlibrary.ecore#//Resource/newPath"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
