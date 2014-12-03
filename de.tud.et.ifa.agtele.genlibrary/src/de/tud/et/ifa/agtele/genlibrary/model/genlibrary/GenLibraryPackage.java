@@ -279,6 +279,118 @@ public interface GenLibraryPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.AbstractMapperImpl <em>Abstract Mapper</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.AbstractMapperImpl
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.GenLibraryPackageImpl#getAbstractMapper()
+	 * @generated
+	 */
+	int ABSTRACT_MAPPER = 6;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_MAPPER__SOURCE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_MAPPER__TARGET = 1;
+
+	/**
+	 * The number of structural features of the '<em>Abstract Mapper</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_MAPPER_FEATURE_COUNT = 2;
+
+	/**
+	 * The meta object id for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.AbstractExternalReferenceMapperImpl <em>Abstract External Reference Mapper</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.AbstractExternalReferenceMapperImpl
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.GenLibraryPackageImpl#getAbstractExternalReferenceMapper()
+	 * @generated
+	 */
+	int ABSTRACT_EXTERNAL_REFERENCE_MAPPER = 7;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_EXTERNAL_REFERENCE_MAPPER__SOURCE = ABSTRACT_MAPPER__SOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_EXTERNAL_REFERENCE_MAPPER__TARGET = ABSTRACT_MAPPER__TARGET;
+
+	/**
+	 * The number of structural features of the '<em>Abstract External Reference Mapper</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_EXTERNAL_REFERENCE_MAPPER_FEATURE_COUNT = ABSTRACT_MAPPER_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.AbstractContainerMapperImpl <em>Abstract Container Mapper</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.AbstractContainerMapperImpl
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.GenLibraryPackageImpl#getAbstractContainerMapper()
+	 * @generated
+	 */
+	int ABSTRACT_CONTAINER_MAPPER = 8;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_CONTAINER_MAPPER__SOURCE = ABSTRACT_MAPPER__SOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_CONTAINER_MAPPER__TARGET = ABSTRACT_MAPPER__TARGET;
+
+	/**
+	 * The number of structural features of the '<em>Abstract Container Mapper</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_CONTAINER_MAPPER_FEATURE_COUNT = ABSTRACT_MAPPER_FEATURE_COUNT + 0;
+
+
+	/**
 	 * Returns the meta object for class '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry <em>Library Entry</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -471,6 +583,58 @@ public interface GenLibraryPackage extends EPackage {
 	EAttribute getResource_NewPath();
 
 	/**
+	 * Returns the meta object for class '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractMapper <em>Abstract Mapper</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Abstract Mapper</em>'.
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractMapper
+	 * @generated
+	 */
+	EClass getAbstractMapper();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractMapper#getSource <em>Source</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Source</em>'.
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractMapper#getSource()
+	 * @see #getAbstractMapper()
+	 * @generated
+	 */
+	EReference getAbstractMapper_Source();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractMapper#getTarget <em>Target</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Target</em>'.
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractMapper#getTarget()
+	 * @see #getAbstractMapper()
+	 * @generated
+	 */
+	EReference getAbstractMapper_Target();
+
+	/**
+	 * Returns the meta object for class '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceMapper <em>Abstract External Reference Mapper</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Abstract External Reference Mapper</em>'.
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceMapper
+	 * @generated
+	 */
+	EClass getAbstractExternalReferenceMapper();
+
+	/**
+	 * Returns the meta object for class '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerMapper <em>Abstract Container Mapper</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Abstract Container Mapper</em>'.
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerMapper
+	 * @generated
+	 */
+	EClass getAbstractContainerMapper();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -647,6 +811,52 @@ public interface GenLibraryPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute RESOURCE__NEW_PATH = eINSTANCE.getResource_NewPath();
+
+		/**
+		 * The meta object literal for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.AbstractMapperImpl <em>Abstract Mapper</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.AbstractMapperImpl
+		 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.GenLibraryPackageImpl#getAbstractMapper()
+		 * @generated
+		 */
+		EClass ABSTRACT_MAPPER = eINSTANCE.getAbstractMapper();
+
+		/**
+		 * The meta object literal for the '<em><b>Source</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ABSTRACT_MAPPER__SOURCE = eINSTANCE.getAbstractMapper_Source();
+
+		/**
+		 * The meta object literal for the '<em><b>Target</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ABSTRACT_MAPPER__TARGET = eINSTANCE.getAbstractMapper_Target();
+
+		/**
+		 * The meta object literal for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.AbstractExternalReferenceMapperImpl <em>Abstract External Reference Mapper</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.AbstractExternalReferenceMapperImpl
+		 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.GenLibraryPackageImpl#getAbstractExternalReferenceMapper()
+		 * @generated
+		 */
+		EClass ABSTRACT_EXTERNAL_REFERENCE_MAPPER = eINSTANCE.getAbstractExternalReferenceMapper();
+
+		/**
+		 * The meta object literal for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.AbstractContainerMapperImpl <em>Abstract Container Mapper</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.AbstractContainerMapperImpl
+		 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.GenLibraryPackageImpl#getAbstractContainerMapper()
+		 * @generated
+		 */
+		EClass ABSTRACT_CONTAINER_MAPPER = eINSTANCE.getAbstractContainerMapper();
 
 	}
 

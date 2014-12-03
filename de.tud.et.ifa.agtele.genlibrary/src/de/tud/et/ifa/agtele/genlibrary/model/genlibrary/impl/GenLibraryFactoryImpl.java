@@ -3,24 +3,31 @@
 package de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl;
 
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.*;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
+import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.GenLibraryFactory;
+import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.GenLibraryPackage;
+import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.Item;
+import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.Library;
+import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry;
+import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryItem;
+import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.MetaData;
+import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.Resource;
+
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model <b>Factory</b>.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!--
+ * end-user-doc -->
  * @generated
  */
 public class GenLibraryFactoryImpl extends EFactoryImpl implements GenLibraryFactory {
 	/**
 	 * Creates the default factory implementation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * @generated
 	 */
 	public static GenLibraryFactory init() {
@@ -38,8 +45,8 @@ public class GenLibraryFactoryImpl extends EFactoryImpl implements GenLibraryFac
 
 	/**
 	 * Creates an instance of the factory.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * @generated
 	 */
 	public GenLibraryFactoryImpl() {
@@ -47,8 +54,7 @@ public class GenLibraryFactoryImpl extends EFactoryImpl implements GenLibraryFac
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -66,77 +72,66 @@ public class GenLibraryFactoryImpl extends EFactoryImpl implements GenLibraryFac
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public LibraryEntry createLibraryEntry() {
 		LibraryEntryImpl libraryEntry = new LibraryEntryImpl();
 		return libraryEntry;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Library createLibrary() {
 		LibraryImpl library = new LibraryImpl();
 		return library;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Item createItem() {
 		ItemImpl item = new ItemImpl();
 		return item;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public LibraryItem createLibraryItem() {
 		LibraryItemImpl libraryItem = new LibraryItemImpl();
 		return libraryItem;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public MetaData createMetaData() {
-		MetaDataImpl metaData = new MetaDataImpl();
-		return metaData;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+	@Override
 	public Resource createResource() {
 		ResourceImpl resource = new ResourceImpl();
 		return resource;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public GenLibraryPackage getGenLibraryPackage() {
 		return (GenLibraryPackage)getEPackage();
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @deprecated
 	 * @generated
 	 */
@@ -145,4 +140,10 @@ public class GenLibraryFactoryImpl extends EFactoryImpl implements GenLibraryFac
 		return GenLibraryPackage.eINSTANCE;
 	}
 
-} //LibraryFactoryImpl
+	@Override
+	public MetaData createMetaData() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+} // LibraryFactoryImpl

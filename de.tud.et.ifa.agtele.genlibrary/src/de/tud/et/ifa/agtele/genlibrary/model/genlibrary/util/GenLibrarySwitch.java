@@ -104,6 +104,26 @@ public class GenLibrarySwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case GenLibraryPackage.ABSTRACT_MAPPER: {
+				AbstractMapper<?, ?> abstractMapper = (AbstractMapper<?, ?>)theEObject;
+				T result = caseAbstractMapper(abstractMapper);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case GenLibraryPackage.ABSTRACT_EXTERNAL_REFERENCE_MAPPER: {
+				AbstractExternalReferenceMapper<?, ?> abstractExternalReferenceMapper = (AbstractExternalReferenceMapper<?, ?>)theEObject;
+				T result = caseAbstractExternalReferenceMapper(abstractExternalReferenceMapper);
+				if (result == null) result = caseAbstractMapper(abstractExternalReferenceMapper);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case GenLibraryPackage.ABSTRACT_CONTAINER_MAPPER: {
+				AbstractContainerMapper<?, ?> abstractContainerMapper = (AbstractContainerMapper<?, ?>)theEObject;
+				T result = caseAbstractContainerMapper(abstractContainerMapper);
+				if (result == null) result = caseAbstractMapper(abstractContainerMapper);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -195,6 +215,51 @@ public class GenLibrarySwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseResource(Resource object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Mapper</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Mapper</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <SourceType, TargetType> T caseAbstractMapper(AbstractMapper<SourceType, TargetType> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract External Reference Mapper</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract External Reference Mapper</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <ExternalReferenceMapperSourceType, ExternalReferenceMapperTargetType> T caseAbstractExternalReferenceMapper(AbstractExternalReferenceMapper<ExternalReferenceMapperSourceType, ExternalReferenceMapperTargetType> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Container Mapper</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Container Mapper</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <ContainerMapperSourceType, ContainerMapperTargetType> T caseAbstractContainerMapper(AbstractContainerMapper<ContainerMapperSourceType, ContainerMapperTargetType> object) {
 		return null;
 	}
 

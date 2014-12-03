@@ -7,6 +7,7 @@ import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.*;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -88,6 +89,18 @@ public class GenLibraryAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseResource(Resource object) {
 				return createResourceAdapter();
+			}
+			@Override
+			public <SourceType, TargetType> Adapter caseAbstractMapper(AbstractMapper<SourceType, TargetType> object) {
+				return createAbstractMapperAdapter();
+			}
+			@Override
+			public <ExternalReferenceMapperSourceType, ExternalReferenceMapperTargetType> Adapter caseAbstractExternalReferenceMapper(AbstractExternalReferenceMapper<ExternalReferenceMapperSourceType, ExternalReferenceMapperTargetType> object) {
+				return createAbstractExternalReferenceMapperAdapter();
+			}
+			@Override
+			public <ContainerMapperSourceType, ContainerMapperTargetType> Adapter caseAbstractContainerMapper(AbstractContainerMapper<ContainerMapperSourceType, ContainerMapperTargetType> object) {
+				return createAbstractContainerMapperAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -190,6 +203,48 @@ public class GenLibraryAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createResourceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractMapper <em>Abstract Mapper</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractMapper
+	 * @generated
+	 */
+	public Adapter createAbstractMapperAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceMapper <em>Abstract External Reference Mapper</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceMapper
+	 * @generated
+	 */
+	public Adapter createAbstractExternalReferenceMapperAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerMapper <em>Abstract Container Mapper</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerMapper
+	 * @generated
+	 */
+	public Adapter createAbstractContainerMapperAdapter() {
 		return null;
 	}
 

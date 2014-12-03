@@ -4,6 +4,7 @@ package de.tud.et.ifa.agtele.genlibrary.model.genlibrary;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -65,5 +66,14 @@ public interface MetaData extends EObject {
 	 * @generated
 	 */
 	void setID(String value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" required="true" many="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList<AbstractMapper<EObject, EObject>> abstractMappers = new BasicEList<AbstractMapper<EObject, EObject>>();\r\n\r\n// recursively iterate over all children of the metadata and collect\r\n// all objects that are of type \'AbstractMapper\'\r\nIterator<Object> it = EcoreUtil.getAllContents(this, true);\r\nwhile (it.hasNext()) {\r\n\tObject object = it.next();\r\n\tif (object instanceof AbstractMapper<?, ?>) {\r\n\t\tabstractMappers.add((AbstractMapper<EObject, EObject>) object);\r\n\t}\r\n}\r\n\r\nreturn abstractMappers;'"
+	 * @generated
+	 */
+	EList<AbstractMapper<EObject, EObject>> getAbstractMappers();
 
 } // MetaData
