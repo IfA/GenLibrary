@@ -51,6 +51,19 @@ public interface LibraryPlugin {
 	 */
 	public LibraryItem getElement(String path, boolean usehigher);
 
+	/**
+	 * For a given library classpath, this returns the resulting path for which
+	 * an actual item is found in the library. This is equal to repeatedly
+	 * calling 'elementExists(path, false)' and moving to a higher (more
+	 * abstract) level in the classpath each time until 'elementExists(...)'
+	 * returns true. If no element can be determined along the classpath, this
+	 * returns 'null'.
+	 * 
+	 * @param path
+	 *            The classpath for that the resulting path shall be calculated.
+	 * @return The resulting classpath; null if no resulting classpath could be
+	 *         determined because no element has been found.
+	 */
 	public String getResultingElementLibraryPath(String path);
 
 	/**

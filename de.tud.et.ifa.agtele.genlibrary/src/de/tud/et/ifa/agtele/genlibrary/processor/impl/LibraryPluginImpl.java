@@ -174,7 +174,6 @@ public class LibraryPluginImpl implements LibraryPlugin {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public MetaData getMetaData(String path, boolean usehigher) {
 		LibraryPath libpath = parser.parse(path);
