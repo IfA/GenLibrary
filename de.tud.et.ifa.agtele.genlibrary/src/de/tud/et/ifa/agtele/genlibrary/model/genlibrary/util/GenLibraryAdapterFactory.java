@@ -91,10 +91,6 @@ public class GenLibraryAdapterFactory extends AdapterFactoryImpl {
 				return createResourceAdapter();
 			}
 			@Override
-			public <SourceType, TargetType> Adapter caseAbstractMapper(AbstractMapper<SourceType, TargetType> object) {
-				return createAbstractMapperAdapter();
-			}
-			@Override
 			public <ExternalReferenceMapperSourceType, ExternalReferenceMapperTargetType> Adapter caseAbstractExternalReferenceMapper(AbstractExternalReferenceMapper<ExternalReferenceMapperSourceType, ExternalReferenceMapperTargetType> object) {
 				return createAbstractExternalReferenceMapperAdapter();
 			}
@@ -203,20 +199,6 @@ public class GenLibraryAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createResourceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractMapper <em>Abstract Mapper</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractMapper
-	 * @generated
-	 */
-	public Adapter createAbstractMapperAdapter() {
 		return null;
 	}
 

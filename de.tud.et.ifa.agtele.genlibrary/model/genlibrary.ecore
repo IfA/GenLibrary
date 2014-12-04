@@ -24,12 +24,23 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LibraryItem"/>
   <eClassifiers xsi:type="ecore:EClass" name="MetaData">
-    <eOperations name="getAbstractMappers" lowerBound="1">
+    <eOperations name="getExternalReferenceMappers" lowerBound="1">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="EList&lt;AbstractMapper&lt;EObject, EObject>> abstractMappers = new BasicEList&lt;AbstractMapper&lt;EObject, EObject>>();&#xD;&#xA;&#xD;&#xA;// recursively iterate over all children of the metadata and collect&#xD;&#xA;// all objects that are of type 'AbstractMapper'&#xD;&#xA;Iterator&lt;Object> it = EcoreUtil.getAllContents(this, true);&#xD;&#xA;while (it.hasNext()) {&#xD;&#xA;&#x9;Object object = it.next();&#xD;&#xA;&#x9;if (object instanceof AbstractMapper&lt;?, ?>) {&#xD;&#xA;&#x9;&#x9;abstractMappers.add((AbstractMapper&lt;EObject, EObject>) object);&#xD;&#xA;&#x9;}&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;return abstractMappers;"/>
+        <details key="body" value="EList&lt;AbstractExternalReferenceMapper&lt;EObject, EObject>> abstractMappers = &#xD;&#xA;&#x9;&#x9;new BasicEList&lt;AbstractExternalReferenceMapper&lt;EObject, EObject>>();&#xD;&#xA;&#xD;&#xA;// recursively iterate over all children of the metadata and collect&#xD;&#xA;// all objects that are of type 'AbstractMapper'&#xD;&#xA;Iterator&lt;Object> it = EcoreUtil.getAllContents(this, true);&#xD;&#xA;while (it.hasNext()) {&#xD;&#xA;&#x9;Object object = it.next();&#xD;&#xA;&#x9;if (object instanceof AbstractExternalReferenceMapper&lt;?, ?>) {&#xD;&#xA;&#x9;&#x9;abstractMappers.add((AbstractExternalReferenceMapper&lt;EObject, EObject>) object);&#xD;&#xA;&#x9;}&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;return abstractMappers;"/>
       </eAnnotations>
       <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EEList">
-        <eTypeArguments eClassifier="#//AbstractMapper">
+        <eTypeArguments eClassifier="#//AbstractExternalReferenceMapper">
+          <eTypeArguments eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+          <eTypeArguments eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+        </eTypeArguments>
+      </eGenericType>
+    </eOperations>
+    <eOperations name="getContainerMappers" lowerBound="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="EList&lt;AbstractContainerMapper&lt;EObject, EObject>> abstractMappers = &#xD;&#xA;&#x9;&#x9;new BasicEList&lt;AbstractContainerMapper&lt;EObject, EObject>>();&#xD;&#xA;&#xD;&#xA;// recursively iterate over all children of the metadata and collect&#xD;&#xA;// all objects that are of type 'AbstractMapper'&#xD;&#xA;Iterator&lt;Object> it = EcoreUtil.getAllContents(this, true);&#xD;&#xA;while (it.hasNext()) {&#xD;&#xA;&#x9;Object object = it.next();&#xD;&#xA;&#x9;if (object instanceof AbstractContainerMapper&lt;?, ?>) {&#xD;&#xA;&#x9;&#x9;abstractMappers.add((AbstractContainerMapper&lt;EObject, EObject>) object);&#xD;&#xA;&#x9;}&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;return abstractMappers;"/>
+      </eAnnotations>
+      <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EEList">
+        <eTypeArguments eClassifier="#//AbstractContainerMapper">
           <eTypeArguments eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
           <eTypeArguments eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
         </eTypeArguments>
@@ -44,31 +55,25 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="newPath" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AbstractMapper" abstract="true">
-    <eTypeParameters name="SourceType"/>
-    <eTypeParameters name="TargetType"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
-        containment="true">
-      <eGenericType eTypeParameter="#//AbstractMapper/SourceType"/>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="target">
-      <eGenericType eTypeParameter="#//AbstractMapper/TargetType"/>
-    </eStructuralFeatures>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractExternalReferenceMapper" abstract="true">
     <eTypeParameters name="ExternalReferenceMapperSourceType"/>
     <eTypeParameters name="ExternalReferenceMapperTargetType"/>
-    <eGenericSuperTypes eClassifier="#//AbstractMapper">
-      <eTypeArguments eTypeParameter="#//AbstractExternalReferenceMapper/ExternalReferenceMapperSourceType"/>
-      <eTypeArguments eTypeParameter="#//AbstractExternalReferenceMapper/ExternalReferenceMapperTargetType"/>
-    </eGenericSuperTypes>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        containment="true">
+      <eGenericType eTypeParameter="#//AbstractExternalReferenceMapper/ExternalReferenceMapperSourceType"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target">
+      <eGenericType eTypeParameter="#//AbstractExternalReferenceMapper/ExternalReferenceMapperTargetType"/>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractContainerMapper" abstract="true">
     <eTypeParameters name="ContainerMapperSourceType"/>
     <eTypeParameters name="ContainerMapperTargetType"/>
-    <eGenericSuperTypes eClassifier="#//AbstractMapper">
-      <eTypeArguments eTypeParameter="#//AbstractContainerMapper/ContainerMapperSourceType"/>
-      <eTypeArguments eTypeParameter="#//AbstractContainerMapper/ContainerMapperTargetType"/>
-    </eGenericSuperTypes>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1">
+      <eGenericType eTypeParameter="#//AbstractContainerMapper/ContainerMapperSourceType"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="container">
+      <eGenericType eTypeParameter="#//AbstractContainerMapper/ContainerMapperTargetType"/>
+    </eStructuralFeatures>
   </eClassifiers>
 </ecore:EPackage>

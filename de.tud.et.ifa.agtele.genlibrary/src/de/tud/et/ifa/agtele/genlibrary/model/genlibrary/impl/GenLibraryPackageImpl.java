@@ -4,7 +4,6 @@ package de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl;
 
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerMapper;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceMapper;
-import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractMapper;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.GenLibraryFactory;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.GenLibraryPackage;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.Item;
@@ -21,6 +20,7 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.ETypeParameter;
+
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
@@ -71,13 +71,6 @@ public class GenLibraryPackageImpl extends EPackageImpl implements GenLibraryPac
 	 * @generated
 	 */
 	private EClass resourceEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass abstractMapperEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -321,33 +314,6 @@ public class GenLibraryPackageImpl extends EPackageImpl implements GenLibraryPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getAbstractMapper() {
-		return abstractMapperEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getAbstractMapper_Source() {
-		return (EReference)abstractMapperEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getAbstractMapper_Target() {
-		return (EReference)abstractMapperEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getAbstractExternalReferenceMapper() {
 		return abstractExternalReferenceMapperEClass;
 	}
@@ -357,8 +323,44 @@ public class GenLibraryPackageImpl extends EPackageImpl implements GenLibraryPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getAbstractExternalReferenceMapper_Source() {
+		return (EReference)abstractExternalReferenceMapperEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAbstractExternalReferenceMapper_Target() {
+		return (EReference)abstractExternalReferenceMapperEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getAbstractContainerMapper() {
 		return abstractContainerMapperEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAbstractContainerMapper_Source() {
+		return (EReference)abstractContainerMapperEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAbstractContainerMapper_Container() {
+		return (EReference)abstractContainerMapperEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -413,13 +415,13 @@ public class GenLibraryPackageImpl extends EPackageImpl implements GenLibraryPac
 		createEAttribute(resourceEClass, RESOURCE__NAME);
 		createEAttribute(resourceEClass, RESOURCE__NEW_PATH);
 
-		abstractMapperEClass = createEClass(ABSTRACT_MAPPER);
-		createEReference(abstractMapperEClass, ABSTRACT_MAPPER__SOURCE);
-		createEReference(abstractMapperEClass, ABSTRACT_MAPPER__TARGET);
-
 		abstractExternalReferenceMapperEClass = createEClass(ABSTRACT_EXTERNAL_REFERENCE_MAPPER);
+		createEReference(abstractExternalReferenceMapperEClass, ABSTRACT_EXTERNAL_REFERENCE_MAPPER__SOURCE);
+		createEReference(abstractExternalReferenceMapperEClass, ABSTRACT_EXTERNAL_REFERENCE_MAPPER__TARGET);
 
 		abstractContainerMapperEClass = createEClass(ABSTRACT_CONTAINER_MAPPER);
+		createEReference(abstractContainerMapperEClass, ABSTRACT_CONTAINER_MAPPER__SOURCE);
+		createEReference(abstractContainerMapperEClass, ABSTRACT_CONTAINER_MAPPER__CONTAINER);
 	}
 
 	/**
@@ -446,8 +448,6 @@ public class GenLibraryPackageImpl extends EPackageImpl implements GenLibraryPac
 		setNsURI(eNS_URI);
 
 		// Create type parameters
-		ETypeParameter abstractMapperEClass_SourceType = addETypeParameter(abstractMapperEClass, "SourceType");
-		ETypeParameter abstractMapperEClass_TargetType = addETypeParameter(abstractMapperEClass, "TargetType");
 		ETypeParameter abstractExternalReferenceMapperEClass_ExternalReferenceMapperSourceType = addETypeParameter(abstractExternalReferenceMapperEClass, "ExternalReferenceMapperSourceType");
 		ETypeParameter abstractExternalReferenceMapperEClass_ExternalReferenceMapperTargetType = addETypeParameter(abstractExternalReferenceMapperEClass, "ExternalReferenceMapperTargetType");
 		ETypeParameter abstractContainerMapperEClass_ContainerMapperSourceType = addETypeParameter(abstractContainerMapperEClass, "ContainerMapperSourceType");
@@ -456,18 +456,6 @@ public class GenLibraryPackageImpl extends EPackageImpl implements GenLibraryPac
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		EGenericType g1 = createEGenericType(this.getAbstractMapper());
-		EGenericType g2 = createEGenericType(abstractExternalReferenceMapperEClass_ExternalReferenceMapperSourceType);
-		g1.getETypeArguments().add(g2);
-		g2 = createEGenericType(abstractExternalReferenceMapperEClass_ExternalReferenceMapperTargetType);
-		g1.getETypeArguments().add(g2);
-		abstractExternalReferenceMapperEClass.getEGenericSuperTypes().add(g1);
-		g1 = createEGenericType(this.getAbstractMapper());
-		g2 = createEGenericType(abstractContainerMapperEClass_ContainerMapperSourceType);
-		g1.getETypeArguments().add(g2);
-		g2 = createEGenericType(abstractContainerMapperEClass_ContainerMapperTargetType);
-		g1.getETypeArguments().add(g2);
-		abstractContainerMapperEClass.getEGenericSuperTypes().add(g1);
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(libraryEntryEClass, LibraryEntry.class, "LibraryEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -490,11 +478,21 @@ public class GenLibraryPackageImpl extends EPackageImpl implements GenLibraryPac
 		initEReference(getMetaData_Resources(), this.getResource(), null, "Resources", null, 0, -1, MetaData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMetaData_ID(), ecorePackage.getEString(), "ID", null, 1, 1, MetaData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		EOperation op = addEOperation(metaDataEClass, null, "getAbstractMappers", 1, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(ecorePackage.getEEList());
-		g2 = createEGenericType(this.getAbstractMapper());
+		EOperation op = addEOperation(metaDataEClass, null, "getExternalReferenceMappers", 1, 1, IS_UNIQUE, IS_ORDERED);
+		EGenericType g1 = createEGenericType(ecorePackage.getEEList());
+		EGenericType g2 = createEGenericType(this.getAbstractExternalReferenceMapper());
 		g1.getETypeArguments().add(g2);
 		EGenericType g3 = createEGenericType(ecorePackage.getEObject());
+		g2.getETypeArguments().add(g3);
+		g3 = createEGenericType(ecorePackage.getEObject());
+		g2.getETypeArguments().add(g3);
+		initEOperation(op, g1);
+
+		op = addEOperation(metaDataEClass, null, "getContainerMappers", 1, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEEList());
+		g2 = createEGenericType(this.getAbstractContainerMapper());
+		g1.getETypeArguments().add(g2);
+		g3 = createEGenericType(ecorePackage.getEObject());
 		g2.getETypeArguments().add(g3);
 		g3 = createEGenericType(ecorePackage.getEObject());
 		g2.getETypeArguments().add(g3);
@@ -504,18 +502,20 @@ public class GenLibraryPackageImpl extends EPackageImpl implements GenLibraryPac
 		initEAttribute(getResource_Name(), ecorePackage.getEString(), "Name", null, 1, 1, Resource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getResource_NewPath(), ecorePackage.getEString(), "newPath", null, 1, 1, Resource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(abstractMapperEClass, AbstractMapper.class, "AbstractMapper", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		g1 = createEGenericType(abstractMapperEClass_SourceType);
-		initEReference(getAbstractMapper_Source(), g1, null, "source", null, 1, 1, AbstractMapper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		g1 = createEGenericType(abstractMapperEClass_TargetType);
-		initEReference(getAbstractMapper_Target(), g1, null, "target", null, 0, 1, AbstractMapper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
 		initEClass(abstractExternalReferenceMapperEClass, AbstractExternalReferenceMapper.class, "AbstractExternalReferenceMapper", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		g1 = createEGenericType(abstractExternalReferenceMapperEClass_ExternalReferenceMapperSourceType);
+		initEReference(getAbstractExternalReferenceMapper_Source(), g1, null, "source", null, 1, 1, AbstractExternalReferenceMapper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		g1 = createEGenericType(abstractExternalReferenceMapperEClass_ExternalReferenceMapperTargetType);
+		initEReference(getAbstractExternalReferenceMapper_Target(), g1, null, "target", null, 0, 1, AbstractExternalReferenceMapper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(abstractContainerMapperEClass, AbstractContainerMapper.class, "AbstractContainerMapper", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		g1 = createEGenericType(abstractContainerMapperEClass_ContainerMapperSourceType);
+		initEReference(getAbstractContainerMapper_Source(), g1, null, "source", null, 1, 1, AbstractContainerMapper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		g1 = createEGenericType(abstractContainerMapperEClass_ContainerMapperTargetType);
+		initEReference(getAbstractContainerMapper_Container(), g1, null, "container", null, 0, 1, AbstractContainerMapper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
 	}
 
-} //LibraryPackageImpl
+} //GenLibraryPackageImpl

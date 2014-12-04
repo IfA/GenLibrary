@@ -18,7 +18,8 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractMapper;
+import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerMapper;
+import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceMapper;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.GenLibraryPackage;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.MetaData;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.Resource;
@@ -29,8 +30,12 @@ import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.Resource;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.MetaDataImpl#getResources <em>Resources</em>}</li>
- *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.MetaDataImpl#getID <em>ID</em>}</li>
+ * <li>
+ * {@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.MetaDataImpl#getResources
+ * <em>Resources</em>}</li>
+ * <li>
+ * {@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.MetaDataImpl#getID
+ * <em>ID</em>}</li>
  * </ul>
  * </p>
  *
@@ -38,8 +43,9 @@ import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.Resource;
  */
 public class MetaDataImpl extends EObjectImpl implements MetaData {
 	/**
-	 * The cached value of the '{@link #getResources() <em>Resources</em>}' containment reference list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getResources() <em>Resources</em>}'
+	 * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getResources()
 	 * @generated
 	 * @ordered
@@ -68,6 +74,7 @@ public class MetaDataImpl extends EObjectImpl implements MetaData {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected MetaDataImpl() {
@@ -76,6 +83,7 @@ public class MetaDataImpl extends EObjectImpl implements MetaData {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -85,6 +93,7 @@ public class MetaDataImpl extends EObjectImpl implements MetaData {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -97,6 +106,7 @@ public class MetaDataImpl extends EObjectImpl implements MetaData {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -106,6 +116,7 @@ public class MetaDataImpl extends EObjectImpl implements MetaData {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -117,115 +128,144 @@ public class MetaDataImpl extends EObjectImpl implements MetaData {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->This iterates through all direct and indirect
-	 * children of this MetaData object and returns all objects that are of type
-	 * 'AbstractMapper'.<!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
-	public EList<AbstractMapper<EObject, EObject>> getAbstractMappers() {
-		EList<AbstractMapper<EObject, EObject>> abstractMappers = new BasicEList<AbstractMapper<EObject, EObject>>();
-		
+	public EList<AbstractExternalReferenceMapper<EObject, EObject>> getExternalReferenceMappers() {
+		EList<AbstractExternalReferenceMapper<EObject, EObject>> abstractMappers = new BasicEList<AbstractExternalReferenceMapper<EObject, EObject>>();
+
 		// recursively iterate over all children of the metadata and collect
 		// all objects that are of type 'AbstractMapper'
 		Iterator<Object> it = EcoreUtil.getAllContents(this, true);
 		while (it.hasNext()) {
 			Object object = it.next();
-			if (object instanceof AbstractMapper<?, ?>) {
-				abstractMappers.add((AbstractMapper<EObject, EObject>) object);
+			if (object instanceof AbstractExternalReferenceMapper<?, ?>) {
+				abstractMappers.add((AbstractExternalReferenceMapper<EObject, EObject>) object);
 			}
 		}
-		
+
 		return abstractMappers;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public EList<AbstractContainerMapper<EObject, EObject>> getContainerMappers() {
+		EList<AbstractContainerMapper<EObject, EObject>> abstractMappers = new BasicEList<AbstractContainerMapper<EObject, EObject>>();
+
+		// recursively iterate over all children of the metadata and collect
+		// all objects that are of type 'AbstractMapper'
+		Iterator<Object> it = EcoreUtil.getAllContents(this, true);
+		while (it.hasNext()) {
+			Object object = it.next();
+			if (object instanceof AbstractContainerMapper<?, ?>) {
+				abstractMappers.add((AbstractContainerMapper<EObject, EObject>) object);
+			}
+		}
+
+		return abstractMappers;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case GenLibraryPackage.META_DATA__RESOURCES:
-				return ((InternalEList<?>)getResources()).basicRemove(otherEnd, msgs);
+		case GenLibraryPackage.META_DATA__RESOURCES:
+			return ((InternalEList<?>) getResources()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case GenLibraryPackage.META_DATA__RESOURCES:
-				return getResources();
-			case GenLibraryPackage.META_DATA__ID:
-				return getID();
+		case GenLibraryPackage.META_DATA__RESOURCES:
+			return getResources();
+		case GenLibraryPackage.META_DATA__ID:
+			return getID();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case GenLibraryPackage.META_DATA__RESOURCES:
-				getResources().clear();
-				getResources().addAll((Collection<? extends Resource>)newValue);
-				return;
-			case GenLibraryPackage.META_DATA__ID:
-				setID((String)newValue);
-				return;
+		case GenLibraryPackage.META_DATA__RESOURCES:
+			getResources().clear();
+			getResources().addAll((Collection<? extends Resource>) newValue);
+			return;
+		case GenLibraryPackage.META_DATA__ID:
+			setID((String) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case GenLibraryPackage.META_DATA__RESOURCES:
-				getResources().clear();
-				return;
-			case GenLibraryPackage.META_DATA__ID:
-				setID(ID_EDEFAULT);
-				return;
+		case GenLibraryPackage.META_DATA__RESOURCES:
+			getResources().clear();
+			return;
+		case GenLibraryPackage.META_DATA__ID:
+			setID(ID_EDEFAULT);
+			return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case GenLibraryPackage.META_DATA__RESOURCES:
-				return resources != null && !resources.isEmpty();
-			case GenLibraryPackage.META_DATA__ID:
-				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
+		case GenLibraryPackage.META_DATA__RESOURCES:
+			return resources != null && !resources.isEmpty();
+		case GenLibraryPackage.META_DATA__ID:
+			return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy())
+			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (ID: ");

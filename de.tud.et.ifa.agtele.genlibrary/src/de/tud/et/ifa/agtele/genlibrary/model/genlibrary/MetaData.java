@@ -71,9 +71,18 @@ public interface MetaData extends EObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation" required="true" many="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList<AbstractMapper<EObject, EObject>> abstractMappers = new BasicEList<AbstractMapper<EObject, EObject>>();\r\n\r\n// recursively iterate over all children of the metadata and collect\r\n// all objects that are of type \'AbstractMapper\'\r\nIterator<Object> it = EcoreUtil.getAllContents(this, true);\r\nwhile (it.hasNext()) {\r\n\tObject object = it.next();\r\n\tif (object instanceof AbstractMapper<?, ?>) {\r\n\t\tabstractMappers.add((AbstractMapper<EObject, EObject>) object);\r\n\t}\r\n}\r\n\r\nreturn abstractMappers;'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList<AbstractExternalReferenceMapper<EObject, EObject>> abstractMappers = \r\n\t\tnew BasicEList<AbstractExternalReferenceMapper<EObject, EObject>>();\r\n\r\n// recursively iterate over all children of the metadata and collect\r\n// all objects that are of type \'AbstractMapper\'\r\nIterator<Object> it = EcoreUtil.getAllContents(this, true);\r\nwhile (it.hasNext()) {\r\n\tObject object = it.next();\r\n\tif (object instanceof AbstractExternalReferenceMapper<?, ?>) {\r\n\t\tabstractMappers.add((AbstractExternalReferenceMapper<EObject, EObject>) object);\r\n\t}\r\n}\r\n\r\nreturn abstractMappers;'"
 	 * @generated
 	 */
-	EList<AbstractMapper<EObject, EObject>> getAbstractMappers();
+	EList<AbstractExternalReferenceMapper<EObject, EObject>> getExternalReferenceMappers();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" required="true" many="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList<AbstractContainerMapper<EObject, EObject>> abstractMappers = \r\n\t\tnew BasicEList<AbstractContainerMapper<EObject, EObject>>();\r\n\r\n// recursively iterate over all children of the metadata and collect\r\n// all objects that are of type \'AbstractMapper\'\r\nIterator<Object> it = EcoreUtil.getAllContents(this, true);\r\nwhile (it.hasNext()) {\r\n\tObject object = it.next();\r\n\tif (object instanceof AbstractContainerMapper<?, ?>) {\r\n\t\tabstractMappers.add((AbstractContainerMapper<EObject, EObject>) object);\r\n\t}\r\n}\r\n\r\nreturn abstractMappers;'"
+	 * @generated
+	 */
+	EList<AbstractContainerMapper<EObject, EObject>> getContainerMappers();
 
 } // MetaData
