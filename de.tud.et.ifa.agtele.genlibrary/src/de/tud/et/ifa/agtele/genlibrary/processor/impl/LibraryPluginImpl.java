@@ -15,6 +15,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 
@@ -132,7 +133,26 @@ public class LibraryPluginImpl implements LibraryPlugin {
 	}
 
 	@Override
-	public LibraryItem getElement(String path, MetaData metadata, boolean usehigher) {
+	public void insertIntoTargetModel(EObject targetModel, LibraryItem libraryItem, MetaData metaData, String path) {
+		Item item = getItem(parser.parse(path), false);
+		LibraryFileEntry fileitem = getLibraryFileEntry(item);
+
+		// LibraryItem result =
+		librarycontent.transformLibraryItem(targetModel, libraryItem, metaData, path);
+
+		List<Resource> resources = metaData.getResources();
+
+		for (Resource res : resources) {
+			if (res.getNewPath() != null && !res.getNewPath().isEmpty()) {
+				LibraryPath newrespath = libpathparser.parse(res.getNewPath());
+				copyResourceTo(item, fileitem, res.getName(), newrespath);
+			}
+
+		}
+	}
+
+	@Override
+	public LibraryItem getElement(EObject targetModel, String path, MetaData metadata, boolean usehigher) {
 		LibraryPath libpath = parser.parse(path);
 		Item item = getItem(libpath, usehigher);
 		if (item == null) {
@@ -146,9 +166,8 @@ public class LibraryPluginImpl implements LibraryPlugin {
 
 		LibraryFileEntry fileitem = getLibraryFileEntry(item);
 
-		LibraryItem result = librarycontent.transformLibraryItem(libitem, metadata);
+		LibraryItem result = librarycontent.transformLibraryItem(libitem, libitem, metadata, path);
 
-		@SuppressWarnings("unchecked")
 		List<Resource> resources = metadata.getResources();
 
 		for (Resource res : resources) {

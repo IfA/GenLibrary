@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
+
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryItem;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.MetaData;
 
@@ -69,6 +71,8 @@ public interface LibraryPlugin {
 	/**
 	 * This returns the library item after evaluating the metadata.
 	 * 
+	 * @param targetModel
+	 *            The target model into that the library item shall be inserted.
 	 * @param path
 	 *            The classpath for the library item to be checked.
 	 * @param usehigher
@@ -76,7 +80,8 @@ public interface LibraryPlugin {
 	 *            a higher (more abstract) level in the classpath.
 	 * @return The library item after evaluating the metadata.
 	 */
-	public LibraryItem getElement(String path, MetaData metadata, boolean usehigher);
+	@Deprecated
+	public LibraryItem getElement(EObject targetModel, String path, MetaData metadata, boolean usehigher);
 
 	/**
 	 * Returns the interfaces (the metadata) for a library element represented
@@ -108,4 +113,23 @@ public interface LibraryPlugin {
 	public boolean copyResourceTo(String path, boolean usehigher, String resourcename, String pathto);
 
 	public List<String> getElementsResources(String path, boolean usehigher);
+
+	/**
+	 * This inserts the given library item into the given target model while
+	 * taking the given metadata into account. This is done by calling the
+	 * function 'insertIntoTargetModel(...)' of the library context passed in
+	 * the 'init' function of the library plugin.
+	 * 
+	 * @param targetModel
+	 *            The target model into that the given library item shall be
+	 *            inserted.
+	 * @param libraryItem
+	 *            The library item to be inserted.
+	 * @param metaData
+	 *            The metadata to take into account while inserting the libary
+	 *            item into the target model.
+	 * @param path
+	 *            The classpath of the library item.
+	 */
+	public void insertIntoTargetModel(EObject targetModel, LibraryItem libraryItem, MetaData metaData, String path);
 }
