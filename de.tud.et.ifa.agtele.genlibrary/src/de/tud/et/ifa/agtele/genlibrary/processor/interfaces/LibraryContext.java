@@ -16,7 +16,7 @@ public interface LibraryContext {
 	 * This applies the given metadata to a given library item. Implementations
 	 * of this function have to take the different mappers into account and are
 	 * responsible for correctly inserting the library item into the target
-	 * model..
+	 * model.
 	 * 
 	 * @param targetModel
 	 *            The target model into that the given library item shall be
@@ -28,7 +28,7 @@ public interface LibraryContext {
 	 * @param path
 	 *            The classpath of the library item.
 	 */
-	public LibraryItem transformLibraryItem(EObject targetModel, LibraryItem libraryitem, MetaData metadata, String path);
+	public LibraryItem applyMetaData(EObject targetModel, LibraryItem libraryitem, MetaData metadata, String path);
 
 	public MetaData transformMetaData(LibraryItem libraryitem, MetaData metadata);
 

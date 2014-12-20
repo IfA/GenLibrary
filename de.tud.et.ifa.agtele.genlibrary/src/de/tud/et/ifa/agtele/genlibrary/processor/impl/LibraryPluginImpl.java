@@ -138,7 +138,7 @@ public class LibraryPluginImpl implements LibraryPlugin {
 		LibraryFileEntry fileitem = getLibraryFileEntry(item);
 
 		// LibraryItem result =
-		librarycontent.transformLibraryItem(targetModel, libraryItem, metaData, path);
+		librarycontent.applyMetaData(targetModel, libraryItem, metaData, path);
 
 		List<Resource> resources = metaData.getResources();
 
@@ -166,7 +166,7 @@ public class LibraryPluginImpl implements LibraryPlugin {
 
 		LibraryFileEntry fileitem = getLibraryFileEntry(item);
 
-		LibraryItem result = librarycontent.transformLibraryItem(libitem, libitem, metadata, path);
+		LibraryItem result = librarycontent.applyMetaData(libitem, libitem, metadata, path);
 
 		List<Resource> resources = metadata.getResources();
 
