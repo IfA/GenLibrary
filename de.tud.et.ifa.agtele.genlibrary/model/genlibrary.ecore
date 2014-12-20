@@ -76,4 +76,14 @@
       <eGenericType eTypeParameter="#//AbstractContainerMapper/ContainerMapperTargetType"/>
     </eStructuralFeatures>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractAttributeMapper" abstract="true"
+      interface="true">
+    <eTypeParameters name="AttributeMapperSourceType"/>
+    <eOperations name="getAttribute" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EAttribute"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1">
+      <eGenericType eTypeParameter="#//AbstractAttributeMapper/AttributeMapperSourceType"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="newValue" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
 </ecore:EPackage>

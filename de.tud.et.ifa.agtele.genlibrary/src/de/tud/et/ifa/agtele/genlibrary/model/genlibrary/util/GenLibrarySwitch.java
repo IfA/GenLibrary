@@ -116,6 +116,12 @@ public class GenLibrarySwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case GenLibraryPackage.ABSTRACT_ATTRIBUTE_MAPPER: {
+				AbstractAttributeMapper<?> abstractAttributeMapper = (AbstractAttributeMapper<?>)theEObject;
+				T result = caseAbstractAttributeMapper(abstractAttributeMapper);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -237,6 +243,21 @@ public class GenLibrarySwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public <ContainerMapperSourceType, ContainerMapperTargetType> T caseAbstractContainerMapper(AbstractContainerMapper<ContainerMapperSourceType, ContainerMapperTargetType> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Attribute Mapper</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Attribute Mapper</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <AttributeMapperSourceType> T caseAbstractAttributeMapper(AbstractAttributeMapper<AttributeMapperSourceType> object) {
 		return null;
 	}
 

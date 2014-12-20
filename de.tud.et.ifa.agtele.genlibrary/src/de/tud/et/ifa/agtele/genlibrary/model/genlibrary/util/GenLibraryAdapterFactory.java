@@ -99,6 +99,10 @@ public class GenLibraryAdapterFactory extends AdapterFactoryImpl {
 				return createAbstractContainerMapperAdapter();
 			}
 			@Override
+			public <AttributeMapperSourceType> Adapter caseAbstractAttributeMapper(AbstractAttributeMapper<AttributeMapperSourceType> object) {
+				return createAbstractAttributeMapperAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -227,6 +231,20 @@ public class GenLibraryAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAbstractContainerMapperAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeMapper <em>Abstract Attribute Mapper</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeMapper
+	 * @generated
+	 */
+	public Adapter createAbstractAttributeMapperAdapter() {
 		return null;
 	}
 

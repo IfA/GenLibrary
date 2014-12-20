@@ -2,6 +2,7 @@
  */
 package de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl;
 
+import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeMapper;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerMapper;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceMapper;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.GenLibraryFactory;
@@ -85,6 +86,13 @@ public class GenLibraryPackageImpl extends EPackageImpl implements GenLibraryPac
 	 * @generated
 	 */
 	private EClass abstractContainerMapperEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass abstractAttributeMapperEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -368,6 +376,33 @@ public class GenLibraryPackageImpl extends EPackageImpl implements GenLibraryPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getAbstractAttributeMapper() {
+		return abstractAttributeMapperEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAbstractAttributeMapper_Source() {
+		return (EReference)abstractAttributeMapperEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAbstractAttributeMapper_NewValue() {
+		return (EAttribute)abstractAttributeMapperEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public GenLibraryFactory getGenLibraryFactory() {
 		return (GenLibraryFactory)getEFactoryInstance();
 	}
@@ -422,6 +457,10 @@ public class GenLibraryPackageImpl extends EPackageImpl implements GenLibraryPac
 		abstractContainerMapperEClass = createEClass(ABSTRACT_CONTAINER_MAPPER);
 		createEReference(abstractContainerMapperEClass, ABSTRACT_CONTAINER_MAPPER__SOURCE);
 		createEReference(abstractContainerMapperEClass, ABSTRACT_CONTAINER_MAPPER__CONTAINER);
+
+		abstractAttributeMapperEClass = createEClass(ABSTRACT_ATTRIBUTE_MAPPER);
+		createEReference(abstractAttributeMapperEClass, ABSTRACT_ATTRIBUTE_MAPPER__SOURCE);
+		createEAttribute(abstractAttributeMapperEClass, ABSTRACT_ATTRIBUTE_MAPPER__NEW_VALUE);
 	}
 
 	/**
@@ -452,6 +491,7 @@ public class GenLibraryPackageImpl extends EPackageImpl implements GenLibraryPac
 		ETypeParameter abstractExternalReferenceMapperEClass_ExternalReferenceMapperTargetType = addETypeParameter(abstractExternalReferenceMapperEClass, "ExternalReferenceMapperTargetType");
 		ETypeParameter abstractContainerMapperEClass_ContainerMapperSourceType = addETypeParameter(abstractContainerMapperEClass, "ContainerMapperSourceType");
 		ETypeParameter abstractContainerMapperEClass_ContainerMapperTargetType = addETypeParameter(abstractContainerMapperEClass, "ContainerMapperTargetType");
+		ETypeParameter abstractAttributeMapperEClass_AttributeMapperSourceType = addETypeParameter(abstractAttributeMapperEClass, "AttributeMapperSourceType");
 
 		// Set bounds for type parameters
 
@@ -513,6 +553,13 @@ public class GenLibraryPackageImpl extends EPackageImpl implements GenLibraryPac
 		initEReference(getAbstractContainerMapper_Source(), g1, null, "source", null, 1, 1, AbstractContainerMapper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		g1 = createEGenericType(abstractContainerMapperEClass_ContainerMapperTargetType);
 		initEReference(getAbstractContainerMapper_Container(), g1, null, "container", null, 0, 1, AbstractContainerMapper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(abstractAttributeMapperEClass, AbstractAttributeMapper.class, "AbstractAttributeMapper", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		g1 = createEGenericType(abstractAttributeMapperEClass_AttributeMapperSourceType);
+		initEReference(getAbstractAttributeMapper_Source(), g1, null, "source", null, 1, 1, AbstractAttributeMapper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAbstractAttributeMapper_NewValue(), ecorePackage.getEString(), "newValue", null, 1, 1, AbstractAttributeMapper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		addEOperation(abstractAttributeMapperEClass, ecorePackage.getEAttribute(), "getAttribute", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

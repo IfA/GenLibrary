@@ -354,6 +354,44 @@ public interface GenLibraryPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeMapper <em>Abstract Attribute Mapper</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeMapper
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.GenLibraryPackageImpl#getAbstractAttributeMapper()
+	 * @generated
+	 */
+	int ABSTRACT_ATTRIBUTE_MAPPER = 8;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_ATTRIBUTE_MAPPER__SOURCE = 0;
+
+	/**
+	 * The feature id for the '<em><b>New Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_ATTRIBUTE_MAPPER__NEW_VALUE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Abstract Attribute Mapper</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_ATTRIBUTE_MAPPER_FEATURE_COUNT = 2;
+
+
+	/**
 	 * Returns the meta object for class '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry <em>Library Entry</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -610,6 +648,38 @@ public interface GenLibraryPackage extends EPackage {
 	EReference getAbstractContainerMapper_Container();
 
 	/**
+	 * Returns the meta object for class '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeMapper <em>Abstract Attribute Mapper</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Abstract Attribute Mapper</em>'.
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeMapper
+	 * @generated
+	 */
+	EClass getAbstractAttributeMapper();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeMapper#getSource <em>Source</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Source</em>'.
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeMapper#getSource()
+	 * @see #getAbstractAttributeMapper()
+	 * @generated
+	 */
+	EReference getAbstractAttributeMapper_Source();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeMapper#getNewValue <em>New Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>New Value</em>'.
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeMapper#getNewValue()
+	 * @see #getAbstractAttributeMapper()
+	 * @generated
+	 */
+	EAttribute getAbstractAttributeMapper_NewValue();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -838,6 +908,32 @@ public interface GenLibraryPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ABSTRACT_CONTAINER_MAPPER__CONTAINER = eINSTANCE.getAbstractContainerMapper_Container();
+
+		/**
+		 * The meta object literal for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeMapper <em>Abstract Attribute Mapper</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeMapper
+		 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.GenLibraryPackageImpl#getAbstractAttributeMapper()
+		 * @generated
+		 */
+		EClass ABSTRACT_ATTRIBUTE_MAPPER = eINSTANCE.getAbstractAttributeMapper();
+
+		/**
+		 * The meta object literal for the '<em><b>Source</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ABSTRACT_ATTRIBUTE_MAPPER__SOURCE = eINSTANCE.getAbstractAttributeMapper_Source();
+
+		/**
+		 * The meta object literal for the '<em><b>New Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ABSTRACT_ATTRIBUTE_MAPPER__NEW_VALUE = eINSTANCE.getAbstractAttributeMapper_NewValue();
 
 	}
 
