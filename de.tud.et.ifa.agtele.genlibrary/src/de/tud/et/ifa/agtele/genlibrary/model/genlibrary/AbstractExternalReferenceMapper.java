@@ -4,6 +4,7 @@ package de.tud.et.ifa.agtele.genlibrary.model.genlibrary;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 
 
 /**
@@ -20,7 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  *
  * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.GenLibraryPackage#getAbstractExternalReferenceMapper()
- * @model abstract="true"
+ * @model interface="true" abstract="true"
  * @generated
  */
 public interface AbstractExternalReferenceMapper<ExternalReferenceMapperSourceType, ExternalReferenceMapperTargetType> extends EObject {
@@ -76,4 +77,12 @@ public interface AbstractExternalReferenceMapper<ExternalReferenceMapperSourceTy
 	 * @generated
 	 */
 	void setTarget(ExternalReferenceMapperTargetType value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" required="true"
+	 * @generated
+	 */
+	EReference getReference();
 } // AbstractExternalReferenceMapper

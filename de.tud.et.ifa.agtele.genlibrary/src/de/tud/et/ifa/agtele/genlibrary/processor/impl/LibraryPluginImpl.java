@@ -38,7 +38,7 @@ import de.tud.et.ifa.agtele.genlibrary.util.interfaces.LibraryFileEntry;
 
 public class LibraryPluginImpl implements LibraryPlugin {
 
-	private LibraryContext librarycontent;
+	private LibraryContext libraryContext;
 
 	private Library lib;
 
@@ -59,7 +59,7 @@ public class LibraryPluginImpl implements LibraryPlugin {
 		System.out.println("Init Library! " + libpath);
 		System.out.println("Version: " + version);
 
-		this.librarycontent = librarycontext;
+		this.libraryContext = librarycontext;
 		this.parser = parser;
 		this.fileparser = new FileParserImpl();
 
@@ -71,7 +71,7 @@ public class LibraryPluginImpl implements LibraryPlugin {
 		GenLibraryFactoryImpl.init();
 		GenLibraryFactoryImpl lf = (GenLibraryFactoryImpl) GenLibraryFactoryImpl.eINSTANCE;
 
-		this.librarycontent.init();
+		this.libraryContext.init();
 
 		URI libXMI = URI.createFileURI(librarypath.getPath() + File.separator + "lib.xmi");
 		XMIResource resource = new XMIResourceImpl(libXMI);
@@ -138,7 +138,7 @@ public class LibraryPluginImpl implements LibraryPlugin {
 		LibraryFileEntry fileitem = getLibraryFileEntry(item);
 
 		// LibraryItem result =
-		librarycontent.applyMetaData(targetModel, libraryItem, metaData, path);
+		libraryContext.applyMetaData(targetModel, libraryItem, metaData, path);
 
 		List<Resource> resources = metaData.getResources();
 
@@ -166,7 +166,7 @@ public class LibraryPluginImpl implements LibraryPlugin {
 
 		LibraryFileEntry fileitem = getLibraryFileEntry(item);
 
-		LibraryItem result = librarycontent.applyMetaData(libitem, libitem, metadata, path);
+		LibraryItem result = libraryContext.applyMetaData(libitem, libitem, metadata, path);
 
 		List<Resource> resources = metadata.getResources();
 
@@ -210,7 +210,7 @@ public class LibraryPluginImpl implements LibraryPlugin {
 		if (md != null) {
 			md.getResources().clear();
 		} else {
-			md = librarycontent.getNewMetaData();
+			md = libraryContext.getNewMetaData();
 		}
 		LibraryFileEntry fileentry = getLibraryFileEntry(item);
 
@@ -230,7 +230,7 @@ public class LibraryPluginImpl implements LibraryPlugin {
 			e.printStackTrace();
 		}
 
-		return librarycontent.transformMetaData(entry.getLibraryItem(), md);
+		return libraryContext.transformMetaData(entry.getLibraryItem(), md);
 	}
 
 	@Override
@@ -440,7 +440,7 @@ public class LibraryPluginImpl implements LibraryPlugin {
 				resource.load(entry.getXMIFileAsInputStream(), null);
 				LibraryEntry libentry = (LibraryEntry) resource.getContents().get(0);
 
-				if (!librarycontent.isValid(libentry, entry.getResourceNameList())) {
+				if (!libraryContext.isValid(libentry, entry.getResourceNameList())) {
 					throw new IllegalArgumentException("Library element: " + entry.getKey() + " is not consistent");
 				}
 

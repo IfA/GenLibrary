@@ -55,9 +55,11 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="newPath" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AbstractExternalReferenceMapper" abstract="true">
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractExternalReferenceMapper" abstract="true"
+      interface="true">
     <eTypeParameters name="ExternalReferenceMapperSourceType"/>
     <eTypeParameters name="ExternalReferenceMapperTargetType"/>
+    <eOperations name="getReference" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
         containment="true">
       <eGenericType eTypeParameter="#//AbstractExternalReferenceMapper/ExternalReferenceMapperSourceType"/>
@@ -66,9 +68,11 @@
       <eGenericType eTypeParameter="#//AbstractExternalReferenceMapper/ExternalReferenceMapperTargetType"/>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AbstractContainerMapper" abstract="true">
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractContainerMapper" abstract="true"
+      interface="true">
     <eTypeParameters name="ContainerMapperSourceType"/>
     <eTypeParameters name="ContainerMapperTargetType"/>
+    <eOperations name="getReference" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1">
       <eGenericType eTypeParameter="#//AbstractContainerMapper/ContainerMapperSourceType"/>
     </eStructuralFeatures>
