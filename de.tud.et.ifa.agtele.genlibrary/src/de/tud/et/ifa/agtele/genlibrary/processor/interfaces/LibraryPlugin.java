@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 
+import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryItem;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.MetaData;
 
@@ -42,16 +43,16 @@ public interface LibraryPlugin {
 	public boolean elementExists(String path, boolean usehigher);
 
 	/**
-	 * This returns the library item without evaluating the metadata.
+	 * This returns the library entry without evaluating the metadata.
 	 * 
 	 * @param path
-	 *            The classpath for the library item to be checked.
+	 *            The classpath for the library entry to be checked.
 	 * @param usehigher
 	 *            Whether the algorithm shall check for alternative elements at
 	 *            a higher (more abstract) level in the classpath.
-	 * @return The library item.
+	 * @return The library entry.
 	 */
-	public LibraryItem getElement(String path, boolean usehigher);
+	public LibraryEntry getElement(String path, boolean usehigher);
 
 	/**
 	 * For a given library classpath, this returns the resulting path for which
@@ -95,6 +96,7 @@ public interface LibraryPlugin {
 	 * @return The metadata for the library item if everything worked well, null
 	 *         otherwise.
 	 */
+	@Deprecated
 	public MetaData getMetaData(String path, boolean usehigher);
 
 	/**
@@ -123,13 +125,12 @@ public interface LibraryPlugin {
 	 * @param targetModel
 	 *            The target model into that the given library item shall be
 	 *            inserted.
-	 * @param libraryItem
-	 *            The library item to be inserted.
-	 * @param metaData
-	 *            The metadata to take into account while inserting the libary
-	 *            item into the target model.
+	 * @param libraryEntry
+	 *            The library entry that includes the libary item to be inserted
+	 *            into the target model and the metadata that shall be taken
+	 *            into account.
 	 * @param path
 	 *            The classpath of the library item.
 	 */
-	public void insertIntoTargetModel(EObject targetModel, LibraryItem libraryItem, MetaData metaData, String path);
+	public void insertIntoTargetModel(EObject targetModel, LibraryEntry libraryEntry, String path);
 }

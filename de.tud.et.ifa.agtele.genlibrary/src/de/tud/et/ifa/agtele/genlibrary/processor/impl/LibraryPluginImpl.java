@@ -119,7 +119,7 @@ public class LibraryPluginImpl implements LibraryPlugin {
 	}
 
 	@Override
-	public LibraryItem getElement(String path, boolean usehigher) {
+	public LibraryEntry getElement(String path, boolean usehigher) {
 		LibraryPath libpath = parser.parse(path);
 		Item item = getItem(libpath, usehigher);
 		if (item == null) {
@@ -129,19 +129,42 @@ public class LibraryPluginImpl implements LibraryPlugin {
 		if (entry == null) {
 			return null;
 		}
-		return entry.getLibraryItem();
+
+		// fix the name/path of the resources
+		entry.getMetaData().getResources().clear();
+		LibraryFileEntry fileentry = getLibraryFileEntry(item);
+		GenLibraryFactoryImpl lf = (GenLibraryFactoryImpl) GenLibraryFactoryImpl.eINSTANCE;
+		try {
+			List<String> respathes = fileentry.getResourceNameList();
+			for (int i = 0; i < respathes.size(); i++) {
+
+				Resource resource = lf.createResource();
+
+				resource.setName(getFilename(respathes.get(i), getResultingElementLibraryPath(item.getKey())));
+
+				entry.getMetaData().getResources().add(resource);
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return entry;
 	}
 
 	@Override
-	public void insertIntoTargetModel(EObject targetModel, LibraryItem libraryItem, MetaData metaData, String path) {
-		Item item = getItem(parser.parse(path), false);
-		LibraryFileEntry fileitem = getLibraryFileEntry(item);
+	public void insertIntoTargetModel(EObject targetModel, LibraryEntry libraryEntry, String path) {
+
+		LibraryItem libraryItem = libraryEntry.getLibraryItem();
+		MetaData metaData = libraryEntry.getMetaData();
 
 		// LibraryItem result =
 		libraryContext.applyMetaData(targetModel, libraryItem, metaData, path);
 
 		List<Resource> resources = metaData.getResources();
 
+		Item item = getItem(parser.parse(path), false);
+		LibraryFileEntry fileitem = getLibraryFileEntry(item);
 		for (Resource res : resources) {
 			if (res.getNewPath() != null && !res.getNewPath().isEmpty()) {
 				LibraryPath newrespath = libpathparser.parse(res.getNewPath());
@@ -427,7 +450,6 @@ public class LibraryPluginImpl implements LibraryPlugin {
 		return null;
 	}
 
-	@SuppressWarnings("unchecked")
 	private void buildLibrary(Path path) {
 		System.out.println("building Library...");
 		List<Path> res = getAllArchives(path);
