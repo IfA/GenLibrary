@@ -4,11 +4,13 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
+import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeMapper;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerMapper;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceMapper;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryItem;
@@ -31,6 +33,13 @@ import de.tud.et.ifa.agtele.genlibrary.processor.interfaces.LibraryContext;
  */
 public abstract class AbstractLibraryContext implements LibraryContext {
 
+	/**
+	 * This default implementation of the 'applyMetaData' function handles all
+	 * 'AbstractContainerMappers', 'AbstractExternalReferenceMappers' and
+	 * 'AbstractAttributeMappers'. Clients may override this function to add
+	 * special behavior but should call 'super.applyMetaData' to reuse the base
+	 * functionality.
+	 */
 	@Override
 	public LibraryItem applyMetaData(EObject targetModel, LibraryItem libraryitem, MetaData metadata, String path) {
 
@@ -39,6 +48,9 @@ public abstract class AbstractLibraryContext implements LibraryContext {
 
 		// handle the external reference mappers
 		applyExternalReferenceMappers(targetModel, libraryitem, metadata, path);
+
+		// handle the attribute mappers
+		applyAttributeMappers(targetModel, libraryitem, metadata, path);
 
 		return libraryitem;
 	}
@@ -118,6 +130,35 @@ public abstract class AbstractLibraryContext implements LibraryContext {
 			for (Setting setting : crossReferences) {
 				EcoreUtil.replace(setting, source, target);
 			}
+		}
+	}
+
+	/**
+	 * This function handles the abstract attribute mappers and may be
+	 * overriden.
+	 * 
+	 * @param targetModel
+	 * @param libraryitem
+	 * @param metadata
+	 * @param path
+	 */
+	protected void applyAttributeMappers(EObject targetModel, LibraryItem libraryitem, MetaData metadata, String path) {
+
+		EList<AbstractAttributeMapper<EObject>> attributeMappers = metadata.getAttributeMappers();
+
+		for (AbstractAttributeMapper<EObject> attributeMapper : attributeMappers) {
+
+			// this is the new attribute value to be set
+			String newValue = attributeMapper.getNewValue();
+
+			// this is the source object
+			EObject source = attributeMapper.getSource();
+
+			// this is the attribute to set
+			EAttribute attribute = attributeMapper.getAttribute();
+
+			// now, convert the new value to the necessary type and set it
+			source.eSet(attribute, EcoreUtil.createFromString(attribute.getEAttributeType(), newValue));
 		}
 	}
 }
