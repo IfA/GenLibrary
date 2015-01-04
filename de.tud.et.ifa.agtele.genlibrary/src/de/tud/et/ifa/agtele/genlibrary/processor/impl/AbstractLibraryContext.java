@@ -37,7 +37,7 @@ public abstract class AbstractLibraryContext implements LibraryContext {
 		// handle the container mappers
 		applyContainerMappers(targetModel, libraryitem, metadata, path);
 
-		// handle th external reference mappers
+		// handle the external reference mappers
 		applyExternalReferenceMappers(targetModel, libraryitem, metadata, path);
 
 		return libraryitem;
@@ -107,22 +107,17 @@ public abstract class AbstractLibraryContext implements LibraryContext {
 			// this is the old source object
 			EObject source = referenceMapper.getSource();
 
-			// this is the feature that shall be used as reference
-			EReference reference = referenceMapper.getReference();
-			if (reference.isContainment()) {
-				throw new RuntimeException("The reference must not be a containment reference!");
-			}
-			if (!reference.isMany()) {
-				throw new RuntimeException("The reference must be multi-valued!");
-			}
-
+			// now, search for cross references to the old source object from
+			// the library item as well as from the target model (in case
+			// something has been added to the target model before)
 			Collection<Setting> crossReferences = EcoreUtil.UsageCrossReferencer.find(source, libraryitem);
+			crossReferences.addAll(EcoreUtil.UsageCrossReferencer.find(source, targetModel));
 
-			// TODO check if this works
+			// last, redirect the references from the source object to the
+			// target object
 			for (Setting setting : crossReferences) {
 				EcoreUtil.replace(setting, source, target);
 			}
 		}
 	}
-
 }
