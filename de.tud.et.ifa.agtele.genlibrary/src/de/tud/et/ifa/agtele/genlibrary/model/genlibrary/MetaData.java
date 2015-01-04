@@ -85,4 +85,13 @@ public interface MetaData extends EObject {
 	 */
 	EList<AbstractContainerMapper<EObject, EObject>> getContainerMappers();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" required="true" many="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList<AbstractAttributeMapper<EObject>> abstractMappers = \r\n\t\tnew BasicEList<AbstractAttributeMapper<EObject>>();\r\n\r\n// recursively iterate over all children of the metadata and collect\r\n// all objects that are of type \'AbstractMapper\'\r\nIterator<Object> it = EcoreUtil.getAllContents(this, true);\r\nwhile (it.hasNext()) {\r\n\tObject object = it.next();\r\n\tif (object instanceof AbstractAttributeMapper<?>) {\r\n\t\tabstractMappers.add((AbstractAttributeMapper<EObject>) object);\r\n\t}\r\n}\r\n\r\nreturn abstractMappers;'"
+	 * @generated
+	 */
+	EList<AbstractAttributeMapper<EObject>> getAttributeMappers();
+
 } // MetaData

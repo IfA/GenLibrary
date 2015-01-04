@@ -2,6 +2,7 @@
  */
 package de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl;
 
+import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeMapper;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -157,6 +158,28 @@ public class MetaDataImpl extends EObjectImpl implements MetaData {
 			Object object = it.next();
 			if (object instanceof AbstractContainerMapper<?, ?>) {
 				abstractMappers.add((AbstractContainerMapper<EObject, EObject>) object);
+			}
+		}
+		
+		return abstractMappers;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<AbstractAttributeMapper<EObject>> getAttributeMappers() {
+		EList<AbstractAttributeMapper<EObject>> abstractMappers = 
+				new BasicEList<AbstractAttributeMapper<EObject>>();
+		
+		// recursively iterate over all children of the metadata and collect
+		// all objects that are of type 'AbstractMapper'
+		Iterator<Object> it = EcoreUtil.getAllContents(this, true);
+		while (it.hasNext()) {
+			Object object = it.next();
+			if (object instanceof AbstractAttributeMapper<?>) {
+				abstractMappers.add((AbstractAttributeMapper<EObject>) object);
 			}
 		}
 		

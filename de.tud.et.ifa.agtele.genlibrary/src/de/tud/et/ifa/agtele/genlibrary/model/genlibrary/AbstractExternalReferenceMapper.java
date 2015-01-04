@@ -77,12 +77,4 @@ public interface AbstractExternalReferenceMapper<ExternalReferenceMapperSourceTy
 	 * @generated
 	 */
 	void setTarget(ExternalReferenceMapperTargetType value);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation" required="true"
-	 * @generated
-	 */
-	EReference getReference();
 } // AbstractExternalReferenceMapper
