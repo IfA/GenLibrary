@@ -60,7 +60,7 @@ public interface AbstractAttributeMapper<AttributeMapperSourceType> extends EObj
 	 * @return the value of the '<em>New Value</em>' attribute.
 	 * @see #setNewValue(String)
 	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.GenLibraryPackage#getAbstractAttributeMapper_NewValue()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	String getNewValue();

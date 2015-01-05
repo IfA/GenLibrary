@@ -567,7 +567,7 @@ public class GenLibraryPackageImpl extends EPackageImpl implements GenLibraryPac
 		initEClass(abstractAttributeMapperEClass, AbstractAttributeMapper.class, "AbstractAttributeMapper", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		g1 = createEGenericType(abstractAttributeMapperEClass_AttributeMapperSourceType);
 		initEReference(getAbstractAttributeMapper_Source(), g1, null, "source", null, 1, 1, AbstractAttributeMapper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAbstractAttributeMapper_NewValue(), ecorePackage.getEString(), "newValue", null, 1, 1, AbstractAttributeMapper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAbstractAttributeMapper_NewValue(), ecorePackage.getEString(), "newValue", null, 0, 1, AbstractAttributeMapper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(abstractAttributeMapperEClass, ecorePackage.getEAttribute(), "getAttribute", 1, 1, IS_UNIQUE, IS_ORDERED);
 
