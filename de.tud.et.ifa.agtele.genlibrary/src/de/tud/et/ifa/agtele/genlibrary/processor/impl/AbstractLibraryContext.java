@@ -63,117 +63,153 @@ public abstract class AbstractLibraryContext implements LibraryContext {
 	public void applyMetaData(EObject targetModel, LibraryEntry libraryEntry, String path) {
 
 		// handle the container mappers
-		applyContainerMappers(targetModel, libraryEntry, path);
+		applyContainerMappers(libraryEntry.getMetaData().getContainerMappers());
 
 		// handle the external reference mappers
-		applyExternalReferenceMappers(targetModel, libraryEntry, path);
+		applyExternalReferenceMappers(libraryEntry.getMetaData().getExternalReferenceMappers(), targetModel, libraryEntry);
 
 		// handle the attribute mappers
-		applyAttributeMappers(targetModel, libraryEntry, path);
+		applyAttributeMappers(libraryEntry.getMetaData().getAttributeMappers());
 
 	}
 
 	/**
-	 * This function handles the abstract container mappers and may be
-	 * overriden.
+	 * This function handles the abstract container mappers in a way that all
+	 * mappers are applied in a serial manner. Clients may override this e.g. in
+	 * order to introduce a special behavior for certain types of mappers.
 	 * 
-	 * @param targetModel
-	 * @param libraryEntry
-	 * @param path
+	 * @param containerMappers
+	 *            The container mappers to be applied.
 	 */
-	@SuppressWarnings("unchecked")
-	protected void applyContainerMappers(EObject targetModel, LibraryEntry libraryEntry, String path) {
-
-		EList<AbstractContainerMapper<EObject, EObject>> containerMappers = libraryEntry.getMetaData().getContainerMappers();
+	protected void applyContainerMappers(EList<AbstractContainerMapper<EObject, EObject>> containerMappers) {
 
 		for (AbstractContainerMapper<EObject, EObject> containerMapper : containerMappers) {
 
-			// this is the object that we want to use as new container
-			EObject container = containerMapper.getContainer();
-
-			// this is the object that we want to add to the new container
-			EObject source = containerMapper.getSource();
-
-			// this is the feature that shall be used as container reference
-			EReference reference = containerMapper.getReference();
-			if (!reference.isContainment()) {
-				throw new RuntimeException("The reference must be a containment reference!");
-			}
-			if (!reference.isMany()) {
-				throw new RuntimeException("The reference must be multi-valued!");
-			}
-			if (!reference.getEReferenceType().isSuperTypeOf(source.eClass())) {
-				throw new RuntimeException("The type of the source object does not match the reference!");
-			}
-			if (container.eClass().getEAllContainments().contains(reference)) {
-				EList<EObject> existing = new BasicEList<EObject>((EList<EObject>) container.eGet(reference));
-				existing.add(source);
-				container.eSet(reference, existing);
-			} else {
-				throw new RuntimeException("The reference could not be set for the container!");
-			}
+			applyContainerMapper(containerMapper);
 		}
 	}
 
 	/**
-	 * This function handles the abstract external reference mappers and may be
-	 * overriden.
+	 * This function handles the abstract external reference mappers in a way
+	 * that all mappers are applied in a serial manner. Clients may override
+	 * this e.g. to introduce a special behavior for certain types of mappers.
 	 * 
+	 * @param referenceMappers
+	 *            The external reference mappers to be applied.
 	 * @param targetModel
+	 *            The target model to be used.
 	 * @param libraryEntry
-	 * @param path
+	 *            The library entry.
 	 */
-	protected void applyExternalReferenceMappers(EObject targetModel, LibraryEntry libraryEntry, String path) {
-
-		EList<AbstractExternalReferenceMapper<EObject, EObject>> referenceMappers = libraryEntry.getMetaData().getExternalReferenceMappers();
+	protected void applyExternalReferenceMappers(EList<AbstractExternalReferenceMapper<EObject, EObject>> referenceMappers, EObject targetModel, LibraryEntry libraryEntry) {
 
 		for (AbstractExternalReferenceMapper<EObject, EObject> referenceMapper : referenceMappers) {
 
-			// this is the object that we want to use as new target
-			EObject target = referenceMapper.getTarget();
-
-			// this is the old source object
-			EObject source = referenceMapper.getSource();
-
-			// now, search for cross references to the old source object from
-			// the library item as well as from the target model (in case
-			// something has been added to the target model before)
-			Collection<Setting> crossReferences = EcoreUtil.UsageCrossReferencer.find(source, libraryEntry.getLibraryItem());
-			crossReferences.addAll(EcoreUtil.UsageCrossReferencer.find(source, targetModel));
-
-			// last, redirect the references from the source object to the
-			// target object
-			for (Setting setting : crossReferences) {
-				EcoreUtil.replace(setting, source, target);
-			}
+			applyExternalReferenceMapper(targetModel, libraryEntry, referenceMapper);
 		}
 	}
 
 	/**
-	 * This function handles the abstract attribute mappers and may be
-	 * overriden.
+	 * This function handles the attribute mappers in a way that all mappers are
+	 * applied in a serial manner. Clients may override this e.g. to introduce a
+	 * special behavior for certain types of mappers.
 	 * 
-	 * @param targetModel
-	 * @param libraryEntry
-	 * @param path
+	 * @param attributeMappers
+	 *            The attribute mappers to be applied.
 	 */
-	protected void applyAttributeMappers(EObject targetModel, LibraryEntry libraryEntry, String path) {
-
-		EList<AbstractAttributeMapper<EObject>> attributeMappers = libraryEntry.getMetaData().getAttributeMappers();
+	protected void applyAttributeMappers(EList<AbstractAttributeMapper<EObject>> attributeMappers) {
 
 		for (AbstractAttributeMapper<EObject> attributeMapper : attributeMappers) {
 
-			// this is the new attribute value to be set
-			String newValue = attributeMapper.getNewValue();
-
-			// this is the source object
-			EObject source = attributeMapper.getSource();
-
-			// this is the attribute to set
-			EAttribute attribute = attributeMapper.getAttribute();
-
-			// now, convert the new value to the necessary type and set it
-			source.eSet(attribute, EcoreUtil.createFromString(attribute.getEAttributeType(), newValue));
+			applyAttributeMapper(attributeMapper);
 		}
+	}
+
+	/**
+	 * This function applies a single container mapper, i.e. it inserts part of
+	 * a library item into a target model.
+	 * 
+	 * @param containerMapper
+	 *            The container mapper to be applied.
+	 */
+	final protected void applyContainerMapper(AbstractContainerMapper<EObject, EObject> containerMapper) {
+		// this is the object that we want to use as new container
+		EObject container = containerMapper.getContainer();
+
+		// this is the object that we want to add to the new container
+		EObject source = containerMapper.getSource();
+
+		// this is the feature that shall be used as container reference
+		EReference reference = containerMapper.getReference();
+		if (!reference.isContainment()) {
+			throw new RuntimeException("The reference must be a containment reference!");
+		}
+		if (!reference.isMany()) {
+			throw new RuntimeException("The reference must be multi-valued!");
+		}
+		if (!reference.getEReferenceType().isSuperTypeOf(source.eClass())) {
+			throw new RuntimeException("The type of the source object does not match the reference!");
+		}
+		if (container.eClass().getEAllContainments().contains(reference)) {
+			@SuppressWarnings("unchecked")
+			EList<EObject> existing = new BasicEList<EObject>((EList<EObject>) container.eGet(reference));
+			existing.add(source);
+			container.eSet(reference, existing);
+		} else {
+			throw new RuntimeException("The reference could not be set for the container!");
+		}
+	}
+
+	/**
+	 * This function applies a single external reference mapper, i.e. it
+	 * redirects a reference from a metadata element to an element of the target
+	 * model.
+	 * 
+	 * @param targetModel
+	 *            The target model into that the library element is inserted.
+	 * @param libraryEntry
+	 *            The library entry that is inserted.
+	 * @param referenceMapper
+	 *            The reference mapper to be applied.
+	 */
+	final protected void applyExternalReferenceMapper(EObject targetModel, LibraryEntry libraryEntry, AbstractExternalReferenceMapper<EObject, EObject> referenceMapper) {
+		// this is the object that we want to use as new target
+		EObject target = referenceMapper.getTarget();
+
+		// this is the old source object
+		EObject source = referenceMapper.getSource();
+
+		// now, search for cross references to the old source object from
+		// the library item as well as from the target model (in case
+		// something has been added to the target model before)
+		Collection<Setting> crossReferences = EcoreUtil.UsageCrossReferencer.find(source, libraryEntry.getLibraryItem());
+		crossReferences.addAll(EcoreUtil.UsageCrossReferencer.find(source, targetModel));
+
+		// last, redirect the references from the source object to the
+		// target object
+		for (Setting setting : crossReferences) {
+			EcoreUtil.replace(setting, source, target);
+		}
+	}
+
+	/**
+	 * This function applies a single attribute mapper, i.e. it changes a
+	 * default attribute value inside a library item to a new value.
+	 * 
+	 * @param attributeMapper
+	 *            The attribute mapper to be applied.
+	 */
+	final protected void applyAttributeMapper(AbstractAttributeMapper<EObject> attributeMapper) {
+		// this is the new attribute value to be set
+		String newValue = attributeMapper.getNewValue();
+
+		// this is the source object
+		EObject source = attributeMapper.getSource();
+
+		// this is the attribute to set
+		EAttribute attribute = attributeMapper.getAttribute();
+
+		// now, convert the new value to the necessary type and set it
+		source.eSet(attribute, EcoreUtil.createFromString(attribute.getEAttributeType(), newValue));
 	}
 }
