@@ -13,14 +13,15 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeMapper;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerMapper;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceMapper;
+import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryItem;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.MetaData;
 import de.tud.et.ifa.agtele.genlibrary.processor.interfaces.LibraryContext;
 
 /**
  * This is an abstract base class for the implementation of the 'LibraryContext'
- * interface. Classes wishing to implement the 'LibraryContext' interface may
- * choose to extend this class instead.
+ * interface. Classes wishing to implement the 'LibraryContext' interface should
+ * consider to extend this class instead.
  * 
  * This class only provides a default implementation for the 'applyMetaData'
  * function that handles all 'AbstractMappers'. Implementing classes should call
@@ -32,6 +33,26 @@ import de.tud.et.ifa.agtele.genlibrary.processor.interfaces.LibraryContext;
  * @author mfreund
  */
 public abstract class AbstractLibraryContext implements LibraryContext {
+
+	/**
+	 * This default implementation of the 'init' function does nothing. Clients
+	 * should override this if a special initialization (e.g. for package
+	 * loading) is necessary.
+	 */
+	@Override
+	public void init() {
+		// do nothing
+	}
+
+	/**
+	 * This default implementation of the 'defaultInsertIntoTargetModel'
+	 * function does nothing. Clients should override if elements that are not
+	 * covered by metadata need to be inserted into the target model.
+	 */
+	@Override
+	public void defaultInsertIntoTargetModel(EObject targetModel, LibraryEntry libraryEntry, String path) {
+		// do nothing
+	}
 
 	/**
 	 * This default implementation of the 'applyMetaData' function handles all

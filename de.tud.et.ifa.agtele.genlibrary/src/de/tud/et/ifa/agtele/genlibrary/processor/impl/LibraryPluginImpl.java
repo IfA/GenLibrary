@@ -158,7 +158,8 @@ public class LibraryPluginImpl implements LibraryPlugin {
 		LibraryItem libraryItem = libraryEntry.getLibraryItem();
 		MetaData metaData = libraryEntry.getMetaData();
 
-		// LibraryItem result =
+		libraryContext.defaultInsertIntoTargetModel(targetModel, libraryEntry, path);
+
 		libraryContext.applyMetaData(targetModel, libraryItem, metaData, path);
 
 		List<Resource> resources = metaData.getResources();

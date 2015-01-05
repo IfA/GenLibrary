@@ -30,10 +30,26 @@ public interface LibraryContext {
 	 */
 	public LibraryItem applyMetaData(EObject targetModel, LibraryItem libraryitem, MetaData metadata, String path);
 
+	/**
+	 * This method is called before 'applyMetaData' and should be used to add
+	 * elements to the target model that are not covered by the meta data.
+	 * 
+	 * @param targetModel
+	 *            The target model into that elements from the library entry
+	 *            shall be inserted.
+	 * @param libraryEntry
+	 *            The library entry containing the elements to be inserted.
+	 * @param path
+	 *            The classpath of the library entry.
+	 */
+	public void defaultInsertIntoTargetModel(EObject targetModel, LibraryEntry libraryEntry, String path);
+
+	@Deprecated
 	public MetaData transformMetaData(LibraryItem libraryitem, MetaData metadata);
 
 	public void init();
 
+	@Deprecated
 	public MetaData getNewMetaData();
 
 }
