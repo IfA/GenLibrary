@@ -13,22 +13,21 @@ public interface LibraryContext {
 	public boolean isValid(LibraryEntry entry, List<String> resources);
 
 	/**
-	 * This applies the given metadata to a given library item. Implementations
-	 * of this function have to take the different mappers into account and are
-	 * responsible for correctly inserting the library item into the target
-	 * model.
+	 * This applies the metadata to a library item that are both part of a
+	 * library entry. Implementations of this function have to take the
+	 * different mappers into account and are responsible for correctly
+	 * inserting the library item into the target model.
 	 * 
 	 * @param targetModel
 	 *            The target model into that the given library item shall be
 	 *            inserted.
-	 * @param libraryItem
-	 *            The library item to be inserted.
-	 * @param metaData
-	 *            The metadata to apply.
+	 * @param libraryEntry
+	 *            The library entry containing the meta data to be applied and
+	 *            the library item referenced by the metadata.
 	 * @param path
 	 *            The classpath of the library item.
 	 */
-	public LibraryItem applyMetaData(EObject targetModel, LibraryItem libraryitem, MetaData metadata, String path);
+	public void applyMetaData(EObject targetModel, LibraryEntry entry, String path);
 
 	/**
 	 * This method is called before 'applyMetaData' and should be used to add
@@ -47,6 +46,9 @@ public interface LibraryContext {
 	@Deprecated
 	public MetaData transformMetaData(LibraryItem libraryitem, MetaData metadata);
 
+	/**
+	 * 
+	 */
 	public void init();
 
 	@Deprecated

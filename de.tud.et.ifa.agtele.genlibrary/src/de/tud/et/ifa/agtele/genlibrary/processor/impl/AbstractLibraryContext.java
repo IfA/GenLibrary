@@ -14,8 +14,6 @@ import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeMapper;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerMapper;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceMapper;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry;
-import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryItem;
-import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.MetaData;
 import de.tud.et.ifa.agtele.genlibrary.processor.interfaces.LibraryContext;
 
 /**
@@ -62,18 +60,17 @@ public abstract class AbstractLibraryContext implements LibraryContext {
 	 * functionality.
 	 */
 	@Override
-	public LibraryItem applyMetaData(EObject targetModel, LibraryItem libraryitem, MetaData metadata, String path) {
+	public void applyMetaData(EObject targetModel, LibraryEntry libraryEntry, String path) {
 
 		// handle the container mappers
-		applyContainerMappers(targetModel, libraryitem, metadata, path);
+		applyContainerMappers(targetModel, libraryEntry, path);
 
 		// handle the external reference mappers
-		applyExternalReferenceMappers(targetModel, libraryitem, metadata, path);
+		applyExternalReferenceMappers(targetModel, libraryEntry, path);
 
 		// handle the attribute mappers
-		applyAttributeMappers(targetModel, libraryitem, metadata, path);
+		applyAttributeMappers(targetModel, libraryEntry, path);
 
-		return libraryitem;
 	}
 
 	/**
@@ -81,14 +78,13 @@ public abstract class AbstractLibraryContext implements LibraryContext {
 	 * overriden.
 	 * 
 	 * @param targetModel
-	 * @param libraryitem
-	 * @param metadata
+	 * @param libraryEntry
 	 * @param path
 	 */
 	@SuppressWarnings("unchecked")
-	protected void applyContainerMappers(EObject targetModel, LibraryItem libraryitem, MetaData metadata, String path) {
+	protected void applyContainerMappers(EObject targetModel, LibraryEntry libraryEntry, String path) {
 
-		EList<AbstractContainerMapper<EObject, EObject>> containerMappers = metadata.getContainerMappers();
+		EList<AbstractContainerMapper<EObject, EObject>> containerMappers = libraryEntry.getMetaData().getContainerMappers();
 
 		for (AbstractContainerMapper<EObject, EObject> containerMapper : containerMappers) {
 
@@ -124,13 +120,12 @@ public abstract class AbstractLibraryContext implements LibraryContext {
 	 * overriden.
 	 * 
 	 * @param targetModel
-	 * @param libraryitem
-	 * @param metadata
+	 * @param libraryEntry
 	 * @param path
 	 */
-	protected void applyExternalReferenceMappers(EObject targetModel, LibraryItem libraryitem, MetaData metadata, String path) {
+	protected void applyExternalReferenceMappers(EObject targetModel, LibraryEntry libraryEntry, String path) {
 
-		EList<AbstractExternalReferenceMapper<EObject, EObject>> referenceMappers = metadata.getExternalReferenceMappers();
+		EList<AbstractExternalReferenceMapper<EObject, EObject>> referenceMappers = libraryEntry.getMetaData().getExternalReferenceMappers();
 
 		for (AbstractExternalReferenceMapper<EObject, EObject> referenceMapper : referenceMappers) {
 
@@ -143,7 +138,7 @@ public abstract class AbstractLibraryContext implements LibraryContext {
 			// now, search for cross references to the old source object from
 			// the library item as well as from the target model (in case
 			// something has been added to the target model before)
-			Collection<Setting> crossReferences = EcoreUtil.UsageCrossReferencer.find(source, libraryitem);
+			Collection<Setting> crossReferences = EcoreUtil.UsageCrossReferencer.find(source, libraryEntry.getLibraryItem());
 			crossReferences.addAll(EcoreUtil.UsageCrossReferencer.find(source, targetModel));
 
 			// last, redirect the references from the source object to the
@@ -159,13 +154,12 @@ public abstract class AbstractLibraryContext implements LibraryContext {
 	 * overriden.
 	 * 
 	 * @param targetModel
-	 * @param libraryitem
-	 * @param metadata
+	 * @param libraryEntry
 	 * @param path
 	 */
-	protected void applyAttributeMappers(EObject targetModel, LibraryItem libraryitem, MetaData metadata, String path) {
+	protected void applyAttributeMappers(EObject targetModel, LibraryEntry libraryEntry, String path) {
 
-		EList<AbstractAttributeMapper<EObject>> attributeMappers = metadata.getAttributeMappers();
+		EList<AbstractAttributeMapper<EObject>> attributeMappers = libraryEntry.getMetaData().getAttributeMappers();
 
 		for (AbstractAttributeMapper<EObject> attributeMapper : attributeMappers) {
 

@@ -155,13 +155,16 @@ public class LibraryPluginImpl implements LibraryPlugin {
 	@Override
 	public void insertIntoTargetModel(EObject targetModel, LibraryEntry libraryEntry, String path) {
 
-		LibraryItem libraryItem = libraryEntry.getLibraryItem();
-		MetaData metaData = libraryEntry.getMetaData();
-
+		// At first, we give clients the chance to insert anything that is not
+		// covered by metadata into the target model.
 		libraryContext.defaultInsertIntoTargetModel(targetModel, libraryEntry, path);
 
-		libraryContext.applyMetaData(targetModel, libraryItem, metaData, path);
+		// Second, we apply the metadata so that all mappers are evaluated.
+		libraryContext.applyMetaData(targetModel, libraryEntry, path);
 
+		// Last, the resource are handled.
+		// TODO This might have to be moved to 'applyMetaData'
+		MetaData metaData = libraryEntry.getMetaData();
 		List<Resource> resources = metaData.getResources();
 
 		Item item = getItem(parser.parse(path), false);
@@ -190,7 +193,7 @@ public class LibraryPluginImpl implements LibraryPlugin {
 
 		LibraryFileEntry fileitem = getLibraryFileEntry(item);
 
-		LibraryItem result = libraryContext.applyMetaData(libitem, libitem, metadata, path);
+		libraryContext.applyMetaData(libitem, entry, path);
 
 		List<Resource> resources = metadata.getResources();
 
@@ -202,7 +205,7 @@ public class LibraryPluginImpl implements LibraryPlugin {
 
 		}
 
-		return result;
+		return libitem;
 
 	}
 
