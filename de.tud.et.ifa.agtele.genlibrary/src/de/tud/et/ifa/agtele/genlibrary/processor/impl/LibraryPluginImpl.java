@@ -179,6 +179,7 @@ public class LibraryPluginImpl implements LibraryPlugin {
 	}
 
 	@Override
+	@Deprecated
 	public LibraryItem getElement(EObject targetModel, String path, MetaData metadata, boolean usehigher) {
 		LibraryPath libpath = parser.parse(path);
 		Item item = getItem(libpath, usehigher);
@@ -221,6 +222,7 @@ public class LibraryPluginImpl implements LibraryPlugin {
 	}
 
 	@Override
+	@Deprecated
 	public MetaData getMetaData(String path, boolean usehigher) {
 		LibraryPath libpath = parser.parse(path);
 		Item item = getItem(libpath, usehigher);
