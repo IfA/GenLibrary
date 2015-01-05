@@ -10,6 +10,26 @@ import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.MetaData;
 
 public interface LibraryContext {
 
+	/**
+	 * This method is called once during the initialization of the library
+	 * plugin. Special initialization routines (e.g. for package loading) should
+	 * be placed here.
+	 */
+	public void init();
+
+	/**
+	 * This method is called once for every library element during the
+	 * initialization of the library plugin for a given library path. This
+	 * checks if a given library entry is consistent. Implementations should
+	 * check if all resources that are to be copied during the insertion of the
+	 * item exist under the given path.
+	 * 
+	 * @param entry
+	 *            The library entry to be inserted into the model later on.
+	 * @param resources
+	 *            The list of resources to be checked.
+	 * @return True if the library entry is valid, false otherwise.
+	 */
 	public boolean isValid(LibraryEntry entry, List<String> resources);
 
 	/**
@@ -45,11 +65,6 @@ public interface LibraryContext {
 
 	@Deprecated
 	public MetaData transformMetaData(LibraryItem libraryitem, MetaData metadata);
-
-	/**
-	 * 
-	 */
-	public void init();
 
 	@Deprecated
 	public MetaData getNewMetaData();
