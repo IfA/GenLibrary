@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreUtil.UsageCrossReferencer;
 
+import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryItem;
 
 /**
@@ -25,8 +26,8 @@ public abstract class LibraryFixer {
 	 * Prevents objects from being added multiple times by redirecting the
 	 * references to these objects to those already present in the target model.
 	 * 
-	 * @param libraryItem
-	 *            the current library item
+	 * @param libraryEntry
+	 *            the current library entry
 	 * @param libObjects
 	 *            a list of objects (part of the library item) that shall be
 	 *            checked
@@ -38,7 +39,9 @@ public abstract class LibraryFixer {
 	 *            decides if existing references to the libObject shall be
 	 *            redirected to the modelObject
 	 */
-	public static <T extends EObject> void fixRedundantElements(LibraryItem libraryItem, List<T> libObjects, List<T> modelObjects, ILibItemComparator<T> comparator) {
+	public static <T extends EObject> void fixRedundantElements(LibraryEntry libraryEntry, List<T> libObjects, List<T> modelObjects, ILibItemComparator<T> comparator) {
+
+		LibraryItem libraryItem = libraryEntry.getLibraryItem();
 
 		// Collect the objects to be deleted from the lib item
 		ArrayList<T> objectsToDelete = new ArrayList<T>();
