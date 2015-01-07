@@ -6,6 +6,8 @@ Bundle-Version: 0.0.1.qualifier
 Bundle-Activator: de.tud.et.ifa.agtele.genlibrary.ui.Activator
 Bundle-Vendor: AGTele
 Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime
+ org.eclipse.core.runtime,
+ de.tud.et.ifa.agtele.genlibrary;bundle-version="1.0.9"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
+Export-Package: de.tud.et.ifa.agtele.genlibrary.ui.wizards
