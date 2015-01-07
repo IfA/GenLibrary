@@ -19,16 +19,24 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ITreeContentProvider;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.StyledCellLabelProvider;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerCell;
 
+import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry;
+import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Label;
+
 public class SelectLibraryEntryPage extends WizardPage {
 
 	protected AddGenlibraryEntryWizardData data;
 	private TreeViewer treeViewer;
+	private Label lblVersionValue, lblNamevalue;
 	private Image folderImage, libEntryImage;
 	
 	protected SelectLibraryEntryPage(AddGenlibraryEntryWizardData data) {
@@ -73,14 +81,16 @@ public class SelectLibraryEntryPage extends WizardPage {
 			}
 		});
 		
+		// LibraryEntry Selector starts here
 		Composite libEntrySelectionContainer = new Composite(container, SWT.NONE);
-		libEntrySelectionContainer.setLayout(new GridLayout(1, false));
+		libEntrySelectionContainer.setLayout(new GridLayout(2, false));
 		libEntrySelectionContainer.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		
 		treeViewer = new TreeViewer(libEntrySelectionContainer, SWT.BORDER);
 		Tree tree = treeViewer.getTree();
-		tree.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		tree.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));		
 		
+		// ContentProvider for the LibraryEntry selection TreeViewer
 		treeViewer.setContentProvider(new ITreeContentProvider() {
 			
 			@Override
@@ -108,14 +118,14 @@ public class SelectLibraryEntryPage extends WizardPage {
 			@Override
 			public Object[] getElements(Object inputElement) {
 				
-				return getTreeData(inputElement);
+				return getTreeData(inputElement, "");
 			}
 
 			
 			@Override
 			public Object[] getChildren(Object parentElement) {
 								
-				return getTreeData(((TreeData) parentElement).getValues());
+				return getTreeData(((TreeData) parentElement).getValues(), ((TreeData) parentElement).getClassPath());
 			}
 			
 			/**
@@ -125,13 +135,16 @@ public class SelectLibraryEntryPage extends WizardPage {
 			 * @return
 			 */
 			@SuppressWarnings("unchecked")
-			private Object[] getTreeData(Object classpathsList) {
+			private Object[] getTreeData(Object classpathsList, String parentClassPath) {
 				LinkedHashMap<String, TreeData> nodes = new LinkedHashMap<String, TreeData>();
 				
 				for (String element : (List<String>) classpathsList) {
 					String[] classPath = element.split("\\.", 2);
 					if (!nodes.containsKey(classPath[0])) {
-						nodes.put(classPath[0], new TreeData(classPath[0]));
+						String newClassPath;
+						if (parentClassPath.equals("")) newClassPath = classPath[0];
+						else newClassPath = parentClassPath + "." + classPath[0];
+						nodes.put(classPath[0], new TreeData(classPath[0], newClassPath));
 					}
 					if (classPath.length > 1) nodes.get(classPath[0]).addValue(classPath[1]);
 					else nodes.get(classPath[0]).setHasLibEntry(true);
@@ -141,6 +154,7 @@ public class SelectLibraryEntryPage extends WizardPage {
 			}
 		});
 		
+		// LabelProvider for the LibraryEntry selection TreeViewer
 		treeViewer.setLabelProvider(new StyledCellLabelProvider() {
 			
 			@Override
@@ -158,24 +172,89 @@ public class SelectLibraryEntryPage extends WizardPage {
 			}
 		});
 		
+		// Eventlistener for the LibraryEntry selection TreeViewer
+		treeViewer.addSelectionChangedListener(new ISelectionChangedListener() {
+			
+			@Override
+			public void selectionChanged(SelectionChangedEvent event) {
+				lblNamevalue.setText("");
+				lblNamevalue.setToolTipText("");
+				lblVersionValue.setText("");
+				if (event.getSelection() instanceof StructuredSelection) {
+					if (((StructuredSelection) event.getSelection()).size() == 1) {
+						TreeData td = ((TreeData) ((StructuredSelection) event.getSelection()).getFirstElement());
+						if (td.hasLibEntry()) {
+							// show the detailview of the corresponding libraryentry
+							
+							LibraryEntry libEntry = data.getLibrary().getElement(td.getClassPath(), false);
+							
+							lblNamevalue.setText(td.getName());
+							lblNamevalue.setToolTipText(td.getClassPath());
+							lblVersionValue.setText(libEntry.getVersion());
+							
+							// TODO add more magic here
+						}
+					}
+				}
+				
+			}
+		});
+		
 		treeViewer.setInput(data.getLibrary().getAllElementLibraryPathAsString(0, 0));
+		
+		// DetailView starts here
+		Group grpDetails = new Group(libEntrySelectionContainer, SWT.NONE);
+		grpDetails.setLayout(new GridLayout(2, false));
+		GridData gd_grpDetails = new GridData(SWT.LEFT, SWT.FILL, false, false, 1, 1);
+		gd_grpDetails.widthHint = 150;
+		grpDetails.setLayoutData(gd_grpDetails);
+		grpDetails.setText("Details");
+		
+		Label lblName = new Label(grpDetails, SWT.NONE);
+		lblName.setText("Name:");
+		
+		lblNamevalue = new Label(grpDetails, SWT.NONE);
+		lblNamevalue.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		
+		Label lblVersion = new Label(grpDetails, SWT.NONE);
+		lblVersion.setText("Version:");
+		
+		lblVersionValue = new Label(grpDetails, SWT.NONE);
+		lblVersionValue.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		
+		
+		
 	}
 
+	/**
+	 * loads an image from the bundle
+	 * 
+	 * @param path
+	 * @return
+	 */
 	private Image loadImage(String path) {
 		URL url = FileLocator.find(data.getBundle(), new Path(path), null);
 	    ImageDescriptor imageDcr = ImageDescriptor.createFromURL(url);
 	    return imageDcr.createImage();
 	}
 
+	/**
+	 * DataBean containing all necessary information about a node in the library tree
+	 * 
+	 * @author martin
+	 *
+	 */
 	class TreeData {
 		private String name;
 		private ArrayList<String> values;
 		private Boolean hasLibEntry;
+		private String classPath;
 		
-		public TreeData (String name) {
+		public TreeData (String name, String classpath) {
 			this.name = name;
 			this.values = new ArrayList<String>();
 			this.hasLibEntry = false;
+			this.classPath = classpath;
 		}
 		
 		public String getName() {
@@ -196,6 +275,10 @@ public class SelectLibraryEntryPage extends WizardPage {
 		
 		public boolean hasLibEntry() {
 			return this.hasLibEntry;
+		}
+		
+		public String getClassPath() {
+			return this.classPath;
 		}
 	}
 	
