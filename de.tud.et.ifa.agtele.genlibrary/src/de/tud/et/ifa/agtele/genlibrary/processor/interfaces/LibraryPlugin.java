@@ -110,6 +110,21 @@ public interface LibraryPlugin {
 	 */
 	public List<String> getAllElementLibraryPathAsString(int startIndex, int count);
 
+	/**
+	 * Returns an {@link InputStream} of a resource contained in a library
+	 * entry.
+	 * 
+	 * @param path
+	 *            classpath of the {@link LibraryEntry} the resource is
+	 *            contained in
+	 * @param usehigher
+	 *            determines whether the algorithm shall check for alternative
+	 *            elements at a higher (more abstract) level in the classpath.
+	 * @param resourcename
+	 *            name of the desired resource
+	 * @return {@link InputStream} of the resource
+	 * @throws IOException
+	 */
 	public InputStream getResourceInputStream(String path, boolean usehigher, String resourcename) throws IOException;
 
 	public boolean copyResourceTo(String path, boolean usehigher, String resourcename, String pathto);
