@@ -78,7 +78,8 @@ public class GenlibraryViewer extends Composite {
 	 * @param libraryContext {@link LibraryContext} for the specific library technology that is used
 	 * @param libraryPathParser {@link LibraryPathParser} of the specific library technology that is used
 	 */
-	public GenlibraryViewer(Composite parent, int style, String libPath, LibraryPlugin library, LibraryContext libraryContext, LibraryPathParser libraryPathParser) {
+	public GenlibraryViewer(Composite parent, int style, String libPath, LibraryPlugin library, 
+			LibraryContext libraryContext, LibraryPathParser libraryPathParser) {
 		super(parent, style);
 		
 		this.setLibPath(libPath);
@@ -89,7 +90,11 @@ public class GenlibraryViewer extends Composite {
 		createControl();
 	}
 
-	public void createControl() {
+	public void addTreeViewerSelectionListener (ISelectionChangedListener listener) {
+		treeViewer.addSelectionChangedListener(listener);
+	}
+
+	private void createControl() {
 		this.setLayout(new GridLayout(1, false));
 		
 		Composite container = new Composite(this, SWT.NONE);
@@ -101,6 +106,20 @@ public class GenlibraryViewer extends Composite {
 		
 		container.setLayout(new GridLayout(1, false));
 		
+		createLibDirectorySelector(container);
+		
+		// LibraryEntry Selector starts here
+		Composite libEntrySelectionContainer = new Composite(container, SWT.NONE);
+		libEntrySelectionContainer.setLayout(new GridLayout(2, false));
+		libEntrySelectionContainer.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		
+		createLibraryTreeViewer(libEntrySelectionContainer);
+		
+		createDetailsView(libEntrySelectionContainer);
+		
+	}
+
+	private void createLibDirectorySelector(Composite container) {
 		// LibraryPath Directory Selector
 		Composite DirectorySelectorContainer = new Composite(container, SWT.NONE);
 		DirectorySelectorContainer.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
@@ -124,12 +143,12 @@ public class GenlibraryViewer extends Composite {
 				}
 			}
 		});
-		
-		// LibraryEntry Selector starts here
-		Composite libEntrySelectionContainer = new Composite(container, SWT.NONE);
-		libEntrySelectionContainer.setLayout(new GridLayout(2, false));
-		libEntrySelectionContainer.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-		
+	}
+
+	/**
+	 * @param libEntrySelectionContainer
+	 */
+	private void createLibraryTreeViewer(Composite libEntrySelectionContainer) {
 		treeViewer = new TreeViewer(libEntrySelectionContainer, SWT.BORDER);
 		Tree tree = treeViewer.getTree();
 		tree.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));		
@@ -265,7 +284,12 @@ public class GenlibraryViewer extends Composite {
 		});
 		
 		treeViewer.setInput(getLibrary().getAllElementLibraryPathAsString(0, 0));
-		
+	}
+
+	/**
+	 * @param libEntrySelectionContainer
+	 */
+	private void createDetailsView(Composite libEntrySelectionContainer) {
 		grpDetails = new Group(libEntrySelectionContainer, SWT.NONE);
 		grpDetails.setLayout(new GridLayout(1, false));
 		GridData gd_grpDetails = new GridData(SWT.LEFT, SWT.FILL, false, true, 1, 1);
@@ -339,9 +363,8 @@ public class GenlibraryViewer extends Composite {
 		
 		scrolledComposite.setContent(composite);
 		scrolledComposite.setMinSize(composite.computeSize(SWT.DEFAULT, SWT.DEFAULT));
-		
 	}
-	
+
 	/**
 	 * loads an image from the bundle
 	 * 
