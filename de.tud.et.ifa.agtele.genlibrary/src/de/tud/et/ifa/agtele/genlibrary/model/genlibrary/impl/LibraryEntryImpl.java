@@ -24,6 +24,8 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.LibraryEntryImpl#getVersion <em>Version</em>}</li>
  *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.LibraryEntryImpl#getLibraryItem <em>Library Item</em>}</li>
  *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.LibraryEntryImpl#getMetaData <em>Meta Data</em>}</li>
+ *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.LibraryEntryImpl#getDescription <em>Description</em>}</li>
+ *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.LibraryEntryImpl#getThumbnail <em>Thumbnail</em>}</li>
  * </ul>
  * </p>
  *
@@ -69,6 +71,46 @@ public class LibraryEntryImpl extends EObjectImpl implements LibraryEntry {
 	 * @ordered
 	 */
 	protected MetaData metaData;
+
+	/**
+	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDescription()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DESCRIPTION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDescription()
+	 * @generated
+	 * @ordered
+	 */
+	protected String description = DESCRIPTION_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getThumbnail() <em>Thumbnail</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getThumbnail()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String THUMBNAIL_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getThumbnail() <em>Thumbnail</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getThumbnail()
+	 * @generated
+	 * @ordered
+	 */
+	protected String thumbnail = THUMBNAIL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -201,6 +243,48 @@ public class LibraryEntryImpl extends EObjectImpl implements LibraryEntry {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDescription(String newDescription) {
+		String oldDescription = description;
+		description = newDescription;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, GenLibraryPackage.LIBRARY_ENTRY__DESCRIPTION, oldDescription, description));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getThumbnail() {
+		return thumbnail;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setThumbnail(String newThumbnail) {
+		String oldThumbnail = thumbnail;
+		thumbnail = newThumbnail;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, GenLibraryPackage.LIBRARY_ENTRY__THUMBNAIL, oldThumbnail, thumbnail));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -226,6 +310,10 @@ public class LibraryEntryImpl extends EObjectImpl implements LibraryEntry {
 				return getLibraryItem();
 			case GenLibraryPackage.LIBRARY_ENTRY__META_DATA:
 				return getMetaData();
+			case GenLibraryPackage.LIBRARY_ENTRY__DESCRIPTION:
+				return getDescription();
+			case GenLibraryPackage.LIBRARY_ENTRY__THUMBNAIL:
+				return getThumbnail();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -246,6 +334,12 @@ public class LibraryEntryImpl extends EObjectImpl implements LibraryEntry {
 				return;
 			case GenLibraryPackage.LIBRARY_ENTRY__META_DATA:
 				setMetaData((MetaData)newValue);
+				return;
+			case GenLibraryPackage.LIBRARY_ENTRY__DESCRIPTION:
+				setDescription((String)newValue);
+				return;
+			case GenLibraryPackage.LIBRARY_ENTRY__THUMBNAIL:
+				setThumbnail((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -268,6 +362,12 @@ public class LibraryEntryImpl extends EObjectImpl implements LibraryEntry {
 			case GenLibraryPackage.LIBRARY_ENTRY__META_DATA:
 				setMetaData((MetaData)null);
 				return;
+			case GenLibraryPackage.LIBRARY_ENTRY__DESCRIPTION:
+				setDescription(DESCRIPTION_EDEFAULT);
+				return;
+			case GenLibraryPackage.LIBRARY_ENTRY__THUMBNAIL:
+				setThumbnail(THUMBNAIL_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -286,6 +386,10 @@ public class LibraryEntryImpl extends EObjectImpl implements LibraryEntry {
 				return libraryItem != null;
 			case GenLibraryPackage.LIBRARY_ENTRY__META_DATA:
 				return metaData != null;
+			case GenLibraryPackage.LIBRARY_ENTRY__DESCRIPTION:
+				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
+			case GenLibraryPackage.LIBRARY_ENTRY__THUMBNAIL:
+				return THUMBNAIL_EDEFAULT == null ? thumbnail != null : !THUMBNAIL_EDEFAULT.equals(thumbnail);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -302,6 +406,10 @@ public class LibraryEntryImpl extends EObjectImpl implements LibraryEntry {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (Version: ");
 		result.append(version);
+		result.append(", description: ");
+		result.append(description);
+		result.append(", thumbnail: ");
+		result.append(thumbnail);
 		result.append(')');
 		return result.toString();
 	}

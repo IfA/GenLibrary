@@ -9,6 +9,8 @@
         eType="#//LibraryItem" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="MetaData" lowerBound="1"
         eType="#//MetaData" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="thumbnail" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Library">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Checksum" lowerBound="1"
