@@ -1,6 +1,8 @@
 package de.tud.et.ifa.agtele.genlibrary.ui.wizards;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -14,6 +16,7 @@ import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Tree;
@@ -29,8 +32,11 @@ import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerCell;
 
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry;
+
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.custom.ScrolledComposite;
 
 public class SelectLibraryEntryPage extends WizardPage {
 
@@ -38,6 +44,14 @@ public class SelectLibraryEntryPage extends WizardPage {
 	private TreeViewer treeViewer;
 	private Label lblVersionValue, lblNamevalue;
 	private Image folderImage, libEntryImage;
+	private Label lblDescriptionvalue;
+	private Label lblThumb;
+	private Image thumbnail;
+	private Group grpDetails;
+	private Composite thumbContainer;
+	private ScrolledComposite scrolledComposite;
+	private Composite composite;
+	private Composite innerThumbContainer;
 	
 	protected SelectLibraryEntryPage(AddGenlibraryEntryWizardData data) {
 		super("Select LibraryEntry");
@@ -174,14 +188,18 @@ public class SelectLibraryEntryPage extends WizardPage {
 		
 		// Eventlistener for the LibraryEntry selection TreeViewer
 		treeViewer.addSelectionChangedListener(new ISelectionChangedListener() {
-			
 			@Override
 			public void selectionChanged(SelectionChangedEvent event) {
 				lblNamevalue.setText("");
 				lblNamevalue.setToolTipText("");
 				lblVersionValue.setText("");
+				lblDescriptionvalue.setText("");
+				lblThumb.setImage(null);
+				if (thumbnail != null) thumbnail.dispose();
 				if (event.getSelection() instanceof StructuredSelection) {
 					if (((StructuredSelection) event.getSelection()).size() == 1) {
+						// TODO add some library path checking magic here
+						
 						TreeData td = ((TreeData) ((StructuredSelection) event.getSelection()).getFirstElement());
 						if (td.hasLibEntry()) {
 							// show the detailview of the corresponding libraryentry
@@ -191,38 +209,107 @@ public class SelectLibraryEntryPage extends WizardPage {
 							lblNamevalue.setText(td.getName());
 							lblNamevalue.setToolTipText(td.getClassPath());
 							lblVersionValue.setText(libEntry.getVersion());
+							if (libEntry.getDescription() != null) {
+								lblDescriptionvalue.setText(libEntry.getDescription());
+							}
+							try {
+								InputStream thumbInputStream = data.getLibrary().getResourceInputStream(td.getClassPath(), false, libEntry.getThumbnail());
+								thumbnail = new Image(Display.getCurrent(), thumbInputStream);								
+								thumbInputStream.close();
+								thumbnail = resizeImage(thumbnail, 150, 150);
+								lblThumb.setSize(thumbnail.getImageData().width, thumbnail.getImageData().height);
+								lblThumb.setImage(thumbnail);
+							} catch (IllegalArgumentException | IOException e) {
+								
+							}
 							
-							// TODO add more magic here
+							composite.layout();
+							innerThumbContainer.layout();
+							
+							scrolledComposite.setMinHeight(composite.computeSize(SWT.DEFAULT, SWT.DEFAULT).y);
+							
 						}
 					}
 				}
-				
 			}
 		});
 		
 		treeViewer.setInput(data.getLibrary().getAllElementLibraryPathAsString(0, 0));
 		
-		// DetailView starts here
-		Group grpDetails = new Group(libEntrySelectionContainer, SWT.NONE);
-		grpDetails.setLayout(new GridLayout(2, false));
-		GridData gd_grpDetails = new GridData(SWT.LEFT, SWT.FILL, false, false, 1, 1);
-		gd_grpDetails.widthHint = 150;
+		grpDetails = new Group(libEntrySelectionContainer, SWT.NONE);
+		grpDetails.setLayout(new GridLayout(1, false));
+		GridData gd_grpDetails = new GridData(SWT.LEFT, SWT.FILL, false, true, 1, 1);
+		gd_grpDetails.widthHint = 180;
 		grpDetails.setLayoutData(gd_grpDetails);
 		grpDetails.setText("Details");
 		
-		Label lblName = new Label(grpDetails, SWT.NONE);
+		scrolledComposite = new ScrolledComposite(grpDetails, SWT.V_SCROLL);
+		scrolledComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		scrolledComposite.setExpandHorizontal(true);
+		scrolledComposite.setExpandVertical(true);
+		
+		composite = new Composite(scrolledComposite, SWT.NONE);
+		composite.setLayout(new GridLayout(2, false));
+		
+		// Details: Name
+		Label lblName = new Label(composite, SWT.NONE);
 		lblName.setText("Name:");
 		
-		lblNamevalue = new Label(grpDetails, SWT.NONE);
-		lblNamevalue.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		lblNamevalue = new Label(composite, SWT.NONE);
+		lblNamevalue.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
 		
-		Label lblVersion = new Label(grpDetails, SWT.NONE);
+		// Details: Version
+		Label lblVersion = new Label(composite, SWT.NONE);
 		lblVersion.setText("Version:");
 		
-		lblVersionValue = new Label(grpDetails, SWT.NONE);
-		lblVersionValue.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		lblVersionValue = new Label(composite, SWT.NONE);
+		lblVersionValue.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
+		
+		// Details: Description
+		Label lblDescription = new Label(composite, SWT.NONE);
+		lblDescription.setText("Description:");
+		new Label(composite, SWT.NONE);
+		
+		lblDescriptionvalue = new Label(composite, SWT.WRAP);
+		GridData gd = new GridData(SWT.LEFT, SWT.TOP, true, false, 2, 1);
+		gd.widthHint = 160;
+		lblDescriptionvalue.setLayoutData(gd);
 		
 		
+		thumbContainer = new Composite(composite, SWT.NONE);
+		GridData gd_thumbContainer = new GridData(SWT.CENTER, SWT.TOP, true, true, 2, 1);
+		gd_thumbContainer.widthHint = 160;
+		gd_thumbContainer.heightHint = 160;
+		gd_thumbContainer.minimumWidth = 160;
+		gd_thumbContainer.minimumHeight = 160;
+		thumbContainer.setLayoutData(gd_thumbContainer);
+		GridLayout gl_thumbContainer = new GridLayout(1, false);
+		gl_thumbContainer.marginHeight = 0;
+		gl_thumbContainer.marginWidth = 0;
+		gl_thumbContainer.marginTop = 5;
+		thumbContainer.setLayout(gl_thumbContainer);
+		
+		innerThumbContainer = new Composite(thumbContainer, SWT.BORDER);
+		GridData gd_innerThumbContainer = new GridData(SWT.CENTER, SWT.FILL, true, false, 1, 1);
+		gd_innerThumbContainer.heightHint = 150;
+		gd_innerThumbContainer.widthHint = 150;
+		gd_innerThumbContainer.minimumWidth = 150;
+		gd_innerThumbContainer.minimumHeight = 150;
+		innerThumbContainer.setLayoutData(gd_innerThumbContainer);
+		GridLayout gl_innerThumbContainer = new GridLayout(1, false);
+		gl_innerThumbContainer.marginHeight = 0;
+		gl_innerThumbContainer.marginWidth = 0;
+		innerThumbContainer.setLayout(gl_innerThumbContainer);
+		
+		lblThumb = new Label(innerThumbContainer, SWT.CENTER);
+		GridData gd_lblThumb = new GridData(SWT.CENTER, SWT.BOTTOM, false, false, 1, 1);
+		gd_lblThumb.widthHint = 150;
+		gd_lblThumb.heightHint = 150;
+		lblThumb.setLayoutData(gd_lblThumb);
+		
+		scrolledComposite.setContent(composite);
+		scrolledComposite.setMinSize(composite.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+		//lblThumb.setSize(120, 120);
 		
 	}
 
@@ -236,6 +323,31 @@ public class SelectLibraryEntryPage extends WizardPage {
 		URL url = FileLocator.find(data.getBundle(), new Path(path), null);
 	    ImageDescriptor imageDcr = ImageDescriptor.createFromURL(url);
 	    return imageDcr.createImage();
+	}
+	
+	private Image resizeImage(Image image, int width, int height) {
+		ImageData oldImageData = image.getImageData();
+		int oldWidth = oldImageData.width;
+		int oldHeight = oldImageData.height;
+		int newWidth = width;
+		int newHeight = height;
+		
+		
+		Double ratio = ((double) oldWidth)/((double) oldHeight);
+		
+		if (ratio >= 1) {
+			newHeight = (int) (newHeight/ratio);
+		}
+		else {
+			newWidth = (int) (newWidth*ratio);
+		}
+		
+		ImageData newImageData = oldImageData.scaledTo(newWidth, newHeight);
+		
+		Image newImage = new Image(Display.getCurrent(), newImageData);
+		image.dispose();
+		
+		return newImage;	
 	}
 
 	/**
@@ -286,6 +398,7 @@ public class SelectLibraryEntryPage extends WizardPage {
 	public void dispose() {
 		folderImage.dispose();
 		libEntryImage.dispose();
+		if (thumbnail != null) thumbnail.dispose();
 		
 		super.dispose();
 	}
