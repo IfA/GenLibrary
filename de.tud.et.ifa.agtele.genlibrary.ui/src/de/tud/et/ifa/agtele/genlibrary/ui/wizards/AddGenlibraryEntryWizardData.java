@@ -4,6 +4,7 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.EObject;
 import org.osgi.framework.Bundle;
 
+import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry;
 import de.tud.et.ifa.agtele.genlibrary.processor.impl.LibraryPluginImpl;
 import de.tud.et.ifa.agtele.genlibrary.processor.interfaces.LibraryContext;
 import de.tud.et.ifa.agtele.genlibrary.processor.interfaces.LibraryPathParser;
@@ -15,6 +16,7 @@ public class AddGenlibraryEntryWizardData {
 	private LibraryContext libraryContext;
 	private LibraryPathParser libraryPathParser;
 	private LibraryPluginImpl library;
+	private LibraryEntry libEntry;
 	
 	public Bundle getBundle() {
 		return bundle;
@@ -68,5 +70,15 @@ public class AddGenlibraryEntryWizardData {
 		this.library = library;
 		
 		return this.library;
+	}
+
+	public LibraryEntry getLibEntry() {
+		return libEntry;
+	}
+
+	public LibraryEntry setLibEntry(LibraryEntry libEntry) {
+		this.libEntry = libEntry;
+		
+		return libEntry;
 	}
 }

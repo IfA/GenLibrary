@@ -15,6 +15,7 @@ public class AddGenlibraryEntryWizard extends Wizard {
 	
 	protected AddGenlibraryEntryWizardData data;	
 	protected SelectLibraryEntryPage one;
+	protected EditMetaDataWizardPage two;
 	
 	
 	/**
@@ -37,6 +38,8 @@ public class AddGenlibraryEntryWizard extends Wizard {
 	public void addPages() {
 		one = new SelectLibraryEntryPage(data);
 		addPage(one);
+		two = new EditMetaDataWizardPage(data);
+		addPage(two);
 	};
 	
 	@Override

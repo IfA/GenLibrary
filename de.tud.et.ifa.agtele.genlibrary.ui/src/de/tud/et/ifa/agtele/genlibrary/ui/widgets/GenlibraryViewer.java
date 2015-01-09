@@ -90,6 +90,11 @@ public class GenlibraryViewer extends Composite {
 		createControl();
 	}
 
+	/**
+	 * Adds an {@link ISelectionChangedListener} to the LibraryEntryTreeViewer
+	 * 
+	 * @param listener
+	 */
 	public void addTreeViewerSelectionListener (ISelectionChangedListener listener) {
 		treeViewer.addSelectionChangedListener(listener);
 	}
@@ -135,6 +140,8 @@ public class GenlibraryViewer extends Composite {
 			public void propertyChange(PropertyChangeEvent event) {
 				// get new value, refresh the library entries and redraw the tree
 				if (!(event.getNewValue().toString().equals(event.getOldValue().toString()))) {
+					
+					// TODO add some library path checking magic here
 					setLibPath(event.getNewValue().toString());
 					
 					getLibrary().init(getLibPath(), getLibraryContext(), getLibraryPathParser());
@@ -246,9 +253,7 @@ public class GenlibraryViewer extends Composite {
 				lblThumb.setImage(null);
 				if (thumbnail != null) thumbnail.dispose();
 				if (event.getSelection() instanceof StructuredSelection) {
-					if (((StructuredSelection) event.getSelection()).size() == 1) {
-						// TODO add some library path checking magic here
-						
+					if (((StructuredSelection) event.getSelection()).size() == 1) {						
 						TreeData td = ((TreeData) ((StructuredSelection) event.getSelection()).getFirstElement());
 						if (td.hasLibEntry()) {
 							// show the detailview of the corresponding libraryentry
@@ -440,7 +445,7 @@ public class GenlibraryViewer extends Composite {
 	 * @author martin
 	 *
 	 */
-	class TreeData {
+	public class TreeData {
 		private String name;
 		private ArrayList<String> values;
 		private Boolean hasLibEntry;

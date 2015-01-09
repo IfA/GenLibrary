@@ -1,9 +1,16 @@
 package de.tud.et.ifa.agtele.genlibrary.ui.wizards;
 
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
+
+import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry;
 import de.tud.et.ifa.agtele.genlibrary.ui.widgets.GenlibraryViewer;
+import de.tud.et.ifa.agtele.genlibrary.ui.widgets.GenlibraryViewer.TreeData;
+
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.GridData;
 
@@ -11,6 +18,7 @@ public class SelectLibraryEntryPage extends WizardPage {
 
 	protected AddGenlibraryEntryWizardData data;
 	private GenlibraryViewer genlibViewer;
+	private LibraryEntry selectedLibraryEntry;
 	
 	protected SelectLibraryEntryPage(AddGenlibraryEntryWizardData data) {
 		super("Select LibraryEntry");
@@ -28,5 +36,44 @@ public class SelectLibraryEntryPage extends WizardPage {
 		
 		genlibViewer = new GenlibraryViewer(container, SWT.NONE, data.getLibPath(), data.getLibrary(), data.getLibraryContext(), data.getLibraryPathParser());
 		genlibViewer.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		
+		genlibViewer.addTreeViewerSelectionListener(new ISelectionChangedListener() {
+			
+			@Override
+			public void selectionChanged(SelectionChangedEvent event) {
+				// TODO Auto-generated method stub
+				
+				if (event.getSelection() instanceof StructuredSelection) {
+					if (((StructuredSelection) event.getSelection()).size() == 1) {						
+						TreeData td = ((TreeData) ((StructuredSelection) event.getSelection()).getFirstElement());
+						if (td.hasLibEntry()) {
+							selectedLibraryEntry = data.setLibEntry(data.getLibrary().getElement(td.getClassPath(), false));
+							getWizard().getContainer().updateButtons();
+						}
+					}
+				}
+			}
+		});
+	}
+	
+	@Override
+	public boolean canFlipToNextPage() {
+		/* WizardPage is allowed to flip to the next page, when those conditions are met:
+		 * 1. a valid LibPath was selected
+		 * 2. a valid LibraryEntry was selected
+		 */
+		
+		if((genlibViewer.getLibPath() != "") && (selectedLibraryEntry != null)) {
+			if ((selectedLibraryEntry.getMetaData() != null) && (selectedLibraryEntry.getLibraryItem() != null)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	public LibraryEntry getSelectedLibraryEntry() {
+		
+		return selectedLibraryEntry;
 	}
 }
