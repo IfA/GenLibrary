@@ -2,10 +2,16 @@ package de.tud.et.ifa.agtele.genlibrary.ui.wizards;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jface.fieldassist.AutoCompleteField;
+import org.eclipse.jface.fieldassist.ComboContentAdapter;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
@@ -16,6 +22,7 @@ import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerMapper;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.Resource;
 
 import org.eclipse.swt.custom.CTabFolder;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
@@ -23,6 +30,8 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.custom.ScrolledComposite;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.widgets.Text;
 
 public class EditMetaDataWizardPage extends WizardPage {
@@ -133,6 +142,31 @@ public class EditMetaDataWizardPage extends WizardPage {
 						lblNewContainerLabel.setText(mapper.eClass().getEAllGenericSuperTypes().get(0).getETypeArguments().get(1).getEClassifier().getName());
 						
 						// TODO change this to a Combo Box with proposals
+						// a combo box to select the target ePackage
+						Combo combo = new Combo(containerGroup, SWT.BORDER);
+						{
+							GridData data = new GridData();
+							data.horizontalAlignment = GridData.FILL;
+							data.horizontalSpan = 3;
+							data.grabExcessHorizontalSpace = true;
+							combo.setLayoutData(data);
+						}
+						
+						combo.addModifyListener(new ModifyListener() {
+							@Override
+							public void modifyText(ModifyEvent e) {
+								// TODO save the selected stuff to the metadata of the libentry
+								getWizard().getContainer().updateButtons();
+							}
+						});
+						
+						// get all eObjects from the target model that have a valid type and add them
+						// to both combo boxes
+						updateCombo(combo, getValidElements(mapper.eClass().getEAllGenericSuperTypes().get(0).getETypeArguments().get(1).getEClassifier()).keySet());
+						
+						// realize auto-completion for both combo viewers
+						new AutoCompleteField(combo, new ComboContentAdapter(), combo.getItems());
+						
 						Text containerText = new Text(containerGroup, SWT.BORDER);
 						containerText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 					}
@@ -172,9 +206,39 @@ public class EditMetaDataWizardPage extends WizardPage {
 		super.setVisible(visible);
 	}
 	
+	private HashMap<String, EObject> getValidElements(EClassifier eClassifier) {
+		HashMap<String, EObject> map = new HashMap<String, EObject>();
+		
+		// TODO get valid Elements
+		TreeIterator<EObject> it = data.geteObject().eResource().getAllContents();
+
+		
+		while (it.hasNext()) {
+			EObject object = (EObject) it.next();
+			if (eClassifier.getClass().isInstance(object)) {
+//				map.put(object, object);	
+				
+				// TODO need generic way to find a name / id to display
+			}
+		}
+		
+		
+		return null;
+	}
+
 	private void disposeChildren(Composite container) {
 		for (Control c : container.getChildren()) {
 			c.dispose();
+		}
+	}
+	
+	private void updateCombo(Combo combo, Set<String> nsUris) {
+		combo.removeAll();
+		for (String nsUri : nsUris) {
+			combo.add(nsUri);
+		}
+		if(combo.getItemCount() == 1) {
+			combo.select(0);
 		}
 	}
 	
