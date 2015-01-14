@@ -6,6 +6,7 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
@@ -19,6 +20,7 @@ import org.eclipse.swt.widgets.Composite;
 
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeMapper;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerMapper;
+import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceMapper;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.Resource;
 
 import org.eclipse.swt.custom.CTabFolder;
@@ -119,6 +121,8 @@ public class EditMetaDataWizardPage extends WizardPage {
 					
 					Text attributeText = new Text(attributeContainer, SWT.BORDER);
 					attributeText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+					
+					attributeText.setText(attrMapper.getSource().eGet(attrMapper.getAttribute()).toString());
 				}
 			}
 			// Container
@@ -138,16 +142,13 @@ public class EditMetaDataWizardPage extends WizardPage {
 					for (AbstractContainerMapper<EObject, EObject> mapper : mapperList) {
 						Label lblNewContainerLabel = new Label(containerGroup, SWT.NONE);
 						lblNewContainerLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-	//					lblNewContainerLabel.setText(containerMapper.eClass().getName());
 						lblNewContainerLabel.setText(mapper.eClass().getEAllGenericSuperTypes().get(0).getETypeArguments().get(1).getEClassifier().getName());
 						
-						// TODO change this to a Combo Box with proposals
 						// a combo box to select the target ePackage
 						Combo combo = new Combo(containerGroup, SWT.BORDER);
 						{
 							GridData data = new GridData();
 							data.horizontalAlignment = GridData.FILL;
-							data.horizontalSpan = 3;
 							data.grabExcessHorizontalSpace = true;
 							combo.setLayoutData(data);
 						}
@@ -162,19 +163,59 @@ public class EditMetaDataWizardPage extends WizardPage {
 						
 						// get all eObjects from the target model that have a valid type and add them
 						// to both combo boxes
-						updateCombo(combo, getValidElements(mapper.eClass().getEAllGenericSuperTypes().get(0).getETypeArguments().get(1).getEClassifier()).keySet());
+						EClassifier targetClass = mapper.eClass().getEAllGenericSuperTypes().get(0).getETypeArguments().get(1).getEClassifier();
+						updateCombo(combo, getValidElements(targetClass));
 						
 						// realize auto-completion for both combo viewers
 						new AutoCompleteField(combo, new ComboContentAdapter(), combo.getItems());
-						
-						Text containerText = new Text(containerGroup, SWT.BORDER);
-						containerText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 					}
 				}
 			}
 			// ExternalReference
 			if (data.getLibEntry().getMetaData().getExternalReferenceMappers() != null) {
 				// TODO create the same weird stuff that has been started for the ContainerMapper
+				// get a HashMap of (eClass, ArrayList{Mapperinstances}) to allow the creation of groups for each type of mapper
+				ExtRefMapperHashMap mapperHashMap = new ExtRefMapperHashMap(data.getLibEntry().getMetaData().getExternalReferenceMappers());
+				
+				// iterate over the different concrete ContainerMapperTypes
+				for (EClass key : mapperHashMap.getExtRefMapperHashMap().keySet()) {
+					Group extRefGroup = new Group(externalReferencesContainer, SWT.NONE);
+					extRefGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
+					extRefGroup.setText(key.getName() + " - " + key.getEAllGenericSuperTypes().get(0).getETypeArguments().get(1).getEClassifier().getName());
+					extRefGroup.setLayout(new GridLayout(2, false));
+					
+					ArrayList<AbstractExternalReferenceMapper<EObject, EObject>> mapperList = mapperHashMap.getExtRefMapperHashMap().get(key);
+					for (AbstractExternalReferenceMapper<EObject, EObject> mapper : mapperList) {
+						Label lblExtRefLabel = new Label(extRefGroup, SWT.NONE);
+						lblExtRefLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+						lblExtRefLabel.setText(getEObjectText(mapper.getSource()));
+						
+						// a combo box to select the target ePackage
+						Combo combo = new Combo(extRefGroup, SWT.BORDER);
+						{
+							GridData data = new GridData();
+							data.horizontalAlignment = GridData.FILL;
+							data.grabExcessHorizontalSpace = true;
+							combo.setLayoutData(data);
+						}
+						
+						combo.addModifyListener(new ModifyListener() {
+							@Override
+							public void modifyText(ModifyEvent e) {
+								// TODO save the selected stuff to the metadata of the libentry
+								getWizard().getContainer().updateButtons();
+							}
+						});
+						
+						// get all eObjects from the target model that have a valid type and add them
+						// to both combo boxes
+						EClassifier targetClass = mapper.eClass().getEAllGenericSuperTypes().get(0).getETypeArguments().get(1).getEClassifier();
+						updateCombo(combo, getValidElements(targetClass));
+						
+						// realize auto-completion for both combo viewers
+						new AutoCompleteField(combo, new ComboContentAdapter(), combo.getItems());
+					}
+				}
 			}
 			
 			// Resources
@@ -215,15 +256,24 @@ public class EditMetaDataWizardPage extends WizardPage {
 		
 		while (it.hasNext()) {
 			EObject object = (EObject) it.next();
-			if (eClassifier.getClass().isInstance(object)) {
+			if (eClassifier.isInstance(object)) {
 //				map.put(object, object);	
-				
+				map.put(getEObjectText(object), object);
 				// TODO need generic way to find a name / id to display
 			}
 		}
 		
+		return map;
+	}
+
+	private String getEObjectText(EObject object) {
+		for (EAttribute attr : object.eClass().getEAllAttributes()) {
+			if(attr.getName().equalsIgnoreCase("name") || attr.getName().equalsIgnoreCase("id")) {
+				return object.eGet(attr).toString();
+			}
+		}
 		
-		return null;
+		return object.toString();
 	}
 
 	private void disposeChildren(Composite container) {
@@ -232,14 +282,12 @@ public class EditMetaDataWizardPage extends WizardPage {
 		}
 	}
 	
-	private void updateCombo(Combo combo, Set<String> nsUris) {
+	private void updateCombo(Combo combo, HashMap<String, EObject> hashMap) {
 		combo.removeAll();
-		for (String nsUri : nsUris) {
-			combo.add(nsUri);
+		for (String o : hashMap.keySet()) {
+			combo.add(o);
 		}
-		if(combo.getItemCount() == 1) {
-			combo.select(0);
-		}
+		combo.select(combo.indexOf(getEObjectText(data.geteObject())));
 	}
 	
 	class ContainerMapperHashMap {
@@ -263,6 +311,30 @@ public class EditMetaDataWizardPage extends WizardPage {
 		
 		public HashMap<EClass, ArrayList<AbstractContainerMapper<EObject, EObject>>> getContainerMapperHashMap() {
 			return containerMapperHashMap;
+		}
+	}
+	
+	class ExtRefMapperHashMap {
+		HashMap<EClass, ArrayList<AbstractExternalReferenceMapper<EObject, EObject>>> extRefMapperHashMap;
+		
+		/**
+		 * Creates a HashMap of (eClass, ArrayList{Mapperinstances}) for each type of external reference mapper specified in the meta data
+		 * 
+		 * @param extRefMapperList {@link EList} of container mappers
+		 */
+		public ExtRefMapperHashMap(EList<AbstractExternalReferenceMapper<EObject, EObject>> extRefMapperList) {
+			this.extRefMapperHashMap = new HashMap<EClass, ArrayList<AbstractExternalReferenceMapper<EObject, EObject>>>();
+			
+			for (AbstractExternalReferenceMapper<EObject, EObject> mapper : extRefMapperList) {
+				if (!extRefMapperHashMap.containsKey(mapper.eClass())) {
+					extRefMapperHashMap.put(mapper.eClass(), new ArrayList<AbstractExternalReferenceMapper<EObject,EObject>>());
+				}
+				extRefMapperHashMap.get(mapper.eClass()).add(mapper);
+			}
+		}
+		
+		public HashMap<EClass, ArrayList<AbstractExternalReferenceMapper<EObject, EObject>>> getExtRefMapperHashMap() {
+			return extRefMapperHashMap;
 		}
 	}
 }
