@@ -58,22 +58,22 @@ public interface GenLibraryFactory extends EFactory {
 	LibraryItem createLibraryItem();
 
 	/**
-	 * Returns a new object of class '<em>Meta Data</em>'.
+	 * Returns a new object of class '<em>Parameter Description</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Meta Data</em>'.
+	 * @return a new object of class '<em>Parameter Description</em>'.
 	 * @generated
 	 */
-	MetaData createMetaData();
+	ParameterDescription createParameterDescription();
 
 	/**
-	 * Returns a new object of class '<em>Resource</em>'.
+	 * Returns a new object of class '<em>Resource Parameter</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Resource</em>'.
+	 * @return a new object of class '<em>Resource Parameter</em>'.
 	 * @generated
 	 */
-	Resource createResource();
+	ResourceParameter createResourceParameter();
 
 	/**
 	 * Returns the package supported by this factory.

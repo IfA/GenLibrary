@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry#getVersion <em>Version</em>}</li>
  *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry#getLibraryItem <em>Library Item</em>}</li>
- *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry#getMetaData <em>Meta Data</em>}</li>
+ *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry#getParameterDescription <em>Parameter Description</em>}</li>
  *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry#getDescription <em>Description</em>}</li>
  *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry#getThumbnail <em>Thumbnail</em>}</li>
  * </ul>
@@ -78,30 +78,30 @@ public interface LibraryEntry extends EObject {
 	void setLibraryItem(LibraryItem value);
 
 	/**
-	 * Returns the value of the '<em><b>Meta Data</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Parameter Description</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Meta Data</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Meta Data</em>' containment reference.
-	 * @see #setMetaData(MetaData)
-	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.GenLibraryPackage#getLibraryEntry_MetaData()
+	 * @return the value of the '<em>Parameter Description</em>' containment reference.
+	 * @see #setParameterDescription(ParameterDescription)
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.GenLibraryPackage#getLibraryEntry_ParameterDescription()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	MetaData getMetaData();
+	ParameterDescription getParameterDescription();
 
 	/**
-	 * Sets the value of the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry#getMetaData <em>Meta Data</em>}' containment reference.
+	 * Sets the value of the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry#getParameterDescription <em>Parameter Description</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Meta Data</em>' containment reference.
-	 * @see #getMetaData()
+	 * @param value the new value of the '<em>Parameter Description</em>' containment reference.
+	 * @see #getParameterDescription()
 	 * @generated
 	 */
-	void setMetaData(MetaData value);
+	void setParameterDescription(ParameterDescription value);
 
 	/**
 	 * Returns the value of the '<em><b>Description</b></em>' attribute.

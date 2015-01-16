@@ -23,8 +23,8 @@ import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.Item;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.Library;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryItem;
-import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.MetaData;
-import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.Resource;
+import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ParameterDescription;
+import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ResourceParameter;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.GenLibraryFactoryImpl;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.GenLibraryPackageImpl;
 import de.tud.et.ifa.agtele.genlibrary.processor.interfaces.LibraryContext;
@@ -131,18 +131,18 @@ public class LibraryPluginImpl implements LibraryPlugin {
 		}
 
 		// fix the name/path of the resources
-		entry.getMetaData().getResources().clear();
+		entry.getParameterDescription().getResourceParameters().clear();
 		LibraryFileEntry fileentry = getLibraryFileEntry(item);
 		GenLibraryFactoryImpl lf = (GenLibraryFactoryImpl) GenLibraryFactoryImpl.eINSTANCE;
 		try {
 			List<String> respathes = fileentry.getResourceNameList();
 			for (int i = 0; i < respathes.size(); i++) {
 
-				Resource resource = lf.createResource();
+				ResourceParameter resourceParameter = lf.createResourceParameter();
 
-				resource.setName(getFilename(respathes.get(i), getResultingElementLibraryPath(item.getKey())));
+				resourceParameter.setName(getFilename(respathes.get(i), getResultingElementLibraryPath(item.getKey())));
 
-				entry.getMetaData().getResources().add(resource);
+				entry.getParameterDescription().getResourceParameters().add(resourceParameter);
 			}
 
 		} catch (IOException e) {
@@ -164,12 +164,12 @@ public class LibraryPluginImpl implements LibraryPlugin {
 
 		// Last, the resource are handled.
 		// TODO This might have to be moved to 'applyMetaData'
-		MetaData metaData = libraryEntry.getMetaData();
-		List<Resource> resources = metaData.getResources();
+		ParameterDescription parameterDescription = libraryEntry.getParameterDescription();
+		List<ResourceParameter> resourceParameters = parameterDescription.getResourceParameters();
 
 		Item item = getItem(parser.parse(path), false);
 		LibraryFileEntry fileitem = getLibraryFileEntry(item);
-		for (Resource res : resources) {
+		for (ResourceParameter res : resourceParameters) {
 			if (res.getNewPath() != null && !res.getNewPath().isEmpty()) {
 				LibraryPath newrespath = libpathparser.parse(res.getNewPath());
 				copyResourceTo(item, fileitem, res.getName(), newrespath);
@@ -180,7 +180,7 @@ public class LibraryPluginImpl implements LibraryPlugin {
 
 	@Override
 	@Deprecated
-	public LibraryItem getElement(EObject targetModel, String path, MetaData metadata, boolean usehigher) {
+	public LibraryItem getElement(EObject targetModel, String path, ParameterDescription metadata, boolean usehigher) {
 		LibraryPath libpath = parser.parse(path);
 		Item item = getItem(libpath, usehigher);
 		if (item == null) {
@@ -196,9 +196,9 @@ public class LibraryPluginImpl implements LibraryPlugin {
 
 		libraryContext.applyMetaData(libitem, entry, path);
 
-		List<Resource> resources = metadata.getResources();
+		List<ResourceParameter> resourceParameters = metadata.getResourceParameters();
 
-		for (Resource res : resources) {
+		for (ResourceParameter res : resourceParameters) {
 			if (res.getNewPath() != null && !res.getNewPath().isEmpty()) {
 				LibraryPath newrespath = libpathparser.parse(res.getNewPath());
 				copyResourceTo(item, fileitem, res.getName(), newrespath);
@@ -223,7 +223,7 @@ public class LibraryPluginImpl implements LibraryPlugin {
 
 	@Override
 	@Deprecated
-	public MetaData getMetaData(String path, boolean usehigher) {
+	public ParameterDescription getMetaData(String path, boolean usehigher) {
 		LibraryPath libpath = parser.parse(path);
 		Item item = getItem(libpath, usehigher);
 		if (item == null) {
@@ -234,10 +234,10 @@ public class LibraryPluginImpl implements LibraryPlugin {
 			return null;
 		}
 
-		MetaData md = entry.getMetaData();
+		ParameterDescription md = entry.getParameterDescription();
 
 		if (md != null) {
-			md.getResources().clear();
+			md.getResourceParameters().clear();
 		} else {
 			md = libraryContext.getNewMetaData();
 		}
@@ -248,11 +248,11 @@ public class LibraryPluginImpl implements LibraryPlugin {
 			List<String> respathes = fileentry.getResourceNameList();
 			for (int i = 0; i < respathes.size(); i++) {
 
-				Resource resource = lf.createResource();
+				ResourceParameter resourceParameter = lf.createResourceParameter();
 
-				resource.setName(getFilename(respathes.get(i), getResultingElementLibraryPath(item.getKey())));
+				resourceParameter.setName(getFilename(respathes.get(i), getResultingElementLibraryPath(item.getKey())));
 
-				md.getResources().add(resource);
+				md.getResourceParameters().add(resourceParameter);
 			}
 
 		} catch (IOException e) {

@@ -10,9 +10,9 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeMapper;
-import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerMapper;
-import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceMapper;
+import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeParameter;
+import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerParameter;
+import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceParameter;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry;
 import de.tud.et.ifa.agtele.genlibrary.processor.interfaces.LibraryContext;
 
@@ -63,13 +63,13 @@ public abstract class AbstractLibraryContext implements LibraryContext {
 	public void applyMetaData(EObject targetModel, LibraryEntry libraryEntry, String path) {
 
 		// handle the container mappers
-		applyContainerMappers(libraryEntry.getMetaData().getContainerMappers());
+		applyContainerMappers(libraryEntry.getParameterDescription().getContainerParameters());
 
 		// handle the external reference mappers
-		applyExternalReferenceMappers(libraryEntry.getMetaData().getExternalReferenceMappers(), targetModel, libraryEntry);
+		applyExternalReferenceMappers(libraryEntry.getParameterDescription().getExternalReferenceParameters(), targetModel, libraryEntry);
 
 		// handle the attribute mappers
-		applyAttributeMappers(libraryEntry.getMetaData().getAttributeMappers());
+		applyAttributeMappers(libraryEntry.getParameterDescription().getAttributeParameters());
 
 	}
 
@@ -81,9 +81,9 @@ public abstract class AbstractLibraryContext implements LibraryContext {
 	 * @param containerMappers
 	 *            The container mappers to be applied.
 	 */
-	protected void applyContainerMappers(EList<AbstractContainerMapper<EObject, EObject>> containerMappers) {
+	protected void applyContainerMappers(EList<AbstractContainerParameter<EObject, EObject>> containerMappers) {
 
-		for (AbstractContainerMapper<EObject, EObject> containerMapper : containerMappers) {
+		for (AbstractContainerParameter<EObject, EObject> containerMapper : containerMappers) {
 
 			applyContainerMapper(containerMapper);
 		}
@@ -101,9 +101,9 @@ public abstract class AbstractLibraryContext implements LibraryContext {
 	 * @param libraryEntry
 	 *            The library entry.
 	 */
-	protected void applyExternalReferenceMappers(EList<AbstractExternalReferenceMapper<EObject, EObject>> referenceMappers, EObject targetModel, LibraryEntry libraryEntry) {
+	protected void applyExternalReferenceMappers(EList<AbstractExternalReferenceParameter<EObject, EObject>> referenceMappers, EObject targetModel, LibraryEntry libraryEntry) {
 
-		for (AbstractExternalReferenceMapper<EObject, EObject> referenceMapper : referenceMappers) {
+		for (AbstractExternalReferenceParameter<EObject, EObject> referenceMapper : referenceMappers) {
 
 			applyExternalReferenceMapper(targetModel, libraryEntry, referenceMapper);
 		}
@@ -117,9 +117,9 @@ public abstract class AbstractLibraryContext implements LibraryContext {
 	 * @param attributeMappers
 	 *            The attribute mappers to be applied.
 	 */
-	protected void applyAttributeMappers(EList<AbstractAttributeMapper<EObject>> attributeMappers) {
+	protected void applyAttributeMappers(EList<AbstractAttributeParameter<EObject>> attributeMappers) {
 
-		for (AbstractAttributeMapper<EObject> attributeMapper : attributeMappers) {
+		for (AbstractAttributeParameter<EObject> attributeMapper : attributeMappers) {
 
 			applyAttributeMapper(attributeMapper);
 		}
@@ -132,7 +132,7 @@ public abstract class AbstractLibraryContext implements LibraryContext {
 	 * @param containerMapper
 	 *            The container mapper to be applied.
 	 */
-	final protected void applyContainerMapper(AbstractContainerMapper<EObject, EObject> containerMapper) {
+	final protected void applyContainerMapper(AbstractContainerParameter<EObject, EObject> containerMapper) {
 		// this is the object that we want to use as new container
 		EObject container = containerMapper.getContainer();
 
@@ -172,7 +172,7 @@ public abstract class AbstractLibraryContext implements LibraryContext {
 	 * @param referenceMapper
 	 *            The reference mapper to be applied.
 	 */
-	final protected void applyExternalReferenceMapper(EObject targetModel, LibraryEntry libraryEntry, AbstractExternalReferenceMapper<EObject, EObject> referenceMapper) {
+	final protected void applyExternalReferenceMapper(EObject targetModel, LibraryEntry libraryEntry, AbstractExternalReferenceParameter<EObject, EObject> referenceMapper) {
 		// this is the object that we want to use as new target
 		EObject target = referenceMapper.getTarget();
 
@@ -199,7 +199,7 @@ public abstract class AbstractLibraryContext implements LibraryContext {
 	 * @param attributeMapper
 	 *            The attribute mapper to be applied.
 	 */
-	final protected void applyAttributeMapper(AbstractAttributeMapper<EObject> attributeMapper) {
+	final protected void applyAttributeMapper(AbstractAttributeParameter<EObject> attributeMapper) {
 		// this is the new attribute value to be set
 		String newValue = attributeMapper.getNewValue();
 

@@ -92,33 +92,33 @@ public class GenLibrarySwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case GenLibraryPackage.META_DATA: {
-				MetaData metaData = (MetaData)theEObject;
-				T result = caseMetaData(metaData);
+			case GenLibraryPackage.PARAMETER_DESCRIPTION: {
+				ParameterDescription parameterDescription = (ParameterDescription)theEObject;
+				T result = caseParameterDescription(parameterDescription);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case GenLibraryPackage.RESOURCE: {
-				Resource resource = (Resource)theEObject;
-				T result = caseResource(resource);
+			case GenLibraryPackage.RESOURCE_PARAMETER: {
+				ResourceParameter resourceParameter = (ResourceParameter)theEObject;
+				T result = caseResourceParameter(resourceParameter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case GenLibraryPackage.ABSTRACT_EXTERNAL_REFERENCE_MAPPER: {
-				AbstractExternalReferenceMapper<?, ?> abstractExternalReferenceMapper = (AbstractExternalReferenceMapper<?, ?>)theEObject;
-				T result = caseAbstractExternalReferenceMapper(abstractExternalReferenceMapper);
+			case GenLibraryPackage.ABSTRACT_EXTERNAL_REFERENCE_PARAMETER: {
+				AbstractExternalReferenceParameter<?, ?> abstractExternalReferenceParameter = (AbstractExternalReferenceParameter<?, ?>)theEObject;
+				T result = caseAbstractExternalReferenceParameter(abstractExternalReferenceParameter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case GenLibraryPackage.ABSTRACT_CONTAINER_MAPPER: {
-				AbstractContainerMapper<?, ?> abstractContainerMapper = (AbstractContainerMapper<?, ?>)theEObject;
-				T result = caseAbstractContainerMapper(abstractContainerMapper);
+			case GenLibraryPackage.ABSTRACT_CONTAINER_PARAMETER: {
+				AbstractContainerParameter<?, ?> abstractContainerParameter = (AbstractContainerParameter<?, ?>)theEObject;
+				T result = caseAbstractContainerParameter(abstractContainerParameter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case GenLibraryPackage.ABSTRACT_ATTRIBUTE_MAPPER: {
-				AbstractAttributeMapper<?> abstractAttributeMapper = (AbstractAttributeMapper<?>)theEObject;
-				T result = caseAbstractAttributeMapper(abstractAttributeMapper);
+			case GenLibraryPackage.ABSTRACT_ATTRIBUTE_PARAMETER: {
+				AbstractAttributeParameter<?> abstractAttributeParameter = (AbstractAttributeParameter<?>)theEObject;
+				T result = caseAbstractAttributeParameter(abstractAttributeParameter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -187,77 +187,77 @@ public class GenLibrarySwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Meta Data</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Parameter Description</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Meta Data</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Parameter Description</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseMetaData(MetaData object) {
+	public T caseParameterDescription(ParameterDescription object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Resource</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Resource Parameter</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Resource</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Resource Parameter</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseResource(Resource object) {
+	public T caseResourceParameter(ResourceParameter object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Abstract External Reference Mapper</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract External Reference Parameter</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Abstract External Reference Mapper</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract External Reference Parameter</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public <ExternalReferenceMapperSourceType, ExternalReferenceMapperTargetType> T caseAbstractExternalReferenceMapper(AbstractExternalReferenceMapper<ExternalReferenceMapperSourceType, ExternalReferenceMapperTargetType> object) {
+	public <ExternalReferenceParameterSourceType, ExternalReferenceParameterTargetType> T caseAbstractExternalReferenceParameter(AbstractExternalReferenceParameter<ExternalReferenceParameterSourceType, ExternalReferenceParameterTargetType> object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Abstract Container Mapper</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Container Parameter</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Abstract Container Mapper</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Container Parameter</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public <ContainerMapperSourceType, ContainerMapperTargetType> T caseAbstractContainerMapper(AbstractContainerMapper<ContainerMapperSourceType, ContainerMapperTargetType> object) {
+	public <ContainerParameterSourceType, ContainerParameterTargetType> T caseAbstractContainerParameter(AbstractContainerParameter<ContainerParameterSourceType, ContainerParameterTargetType> object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Abstract Attribute Mapper</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Attribute Parameter</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Abstract Attribute Mapper</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Attribute Parameter</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public <AttributeMapperSourceType> T caseAbstractAttributeMapper(AbstractAttributeMapper<AttributeMapperSourceType> object) {
+	public <AttributeParameterSourceType> T caseAbstractAttributeParameter(AbstractAttributeParameter<AttributeParameterSourceType> object) {
 		return null;
 	}
 

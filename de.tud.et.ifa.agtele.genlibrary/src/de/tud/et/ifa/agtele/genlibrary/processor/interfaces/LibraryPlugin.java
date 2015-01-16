@@ -8,7 +8,7 @@ import org.eclipse.emf.ecore.EObject;
 
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryItem;
-import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.MetaData;
+import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ParameterDescription;
 
 public interface LibraryPlugin {
 
@@ -82,7 +82,7 @@ public interface LibraryPlugin {
 	 * @return The library item after evaluating the metadata.
 	 */
 	@Deprecated
-	public LibraryItem getElement(EObject targetModel, String path, MetaData metadata, boolean usehigher);
+	public LibraryItem getElement(EObject targetModel, String path, ParameterDescription metadata, boolean usehigher);
 
 	/**
 	 * Returns the interfaces (the metadata) for a library element represented
@@ -97,7 +97,7 @@ public interface LibraryPlugin {
 	 *         otherwise.
 	 */
 	@Deprecated
-	public MetaData getMetaData(String path, boolean usehigher);
+	public ParameterDescription getMetaData(String path, boolean usehigher);
 
 	/**
 	 * Returns the selected List of {@link LibraryPath} as Strings.

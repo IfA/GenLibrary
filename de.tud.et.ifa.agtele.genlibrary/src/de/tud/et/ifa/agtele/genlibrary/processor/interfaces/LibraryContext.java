@@ -6,7 +6,7 @@ import org.eclipse.emf.ecore.EObject;
 
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryItem;
-import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.MetaData;
+import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ParameterDescription;
 
 public interface LibraryContext {
 
@@ -64,9 +64,9 @@ public interface LibraryContext {
 	public void defaultInsertIntoTargetModel(EObject targetModel, LibraryEntry libraryEntry, String path);
 
 	@Deprecated
-	public MetaData transformMetaData(LibraryItem libraryitem, MetaData metadata);
+	public ParameterDescription transformMetaData(LibraryItem libraryitem, ParameterDescription metadata);
 
 	@Deprecated
-	public MetaData getNewMetaData();
+	public ParameterDescription getNewMetaData();
 
 }

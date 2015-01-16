@@ -83,24 +83,24 @@ public class GenLibraryAdapterFactory extends AdapterFactoryImpl {
 				return createLibraryItemAdapter();
 			}
 			@Override
-			public Adapter caseMetaData(MetaData object) {
-				return createMetaDataAdapter();
+			public Adapter caseParameterDescription(ParameterDescription object) {
+				return createParameterDescriptionAdapter();
 			}
 			@Override
-			public Adapter caseResource(Resource object) {
-				return createResourceAdapter();
+			public Adapter caseResourceParameter(ResourceParameter object) {
+				return createResourceParameterAdapter();
 			}
 			@Override
-			public <ExternalReferenceMapperSourceType, ExternalReferenceMapperTargetType> Adapter caseAbstractExternalReferenceMapper(AbstractExternalReferenceMapper<ExternalReferenceMapperSourceType, ExternalReferenceMapperTargetType> object) {
-				return createAbstractExternalReferenceMapperAdapter();
+			public <ExternalReferenceParameterSourceType, ExternalReferenceParameterTargetType> Adapter caseAbstractExternalReferenceParameter(AbstractExternalReferenceParameter<ExternalReferenceParameterSourceType, ExternalReferenceParameterTargetType> object) {
+				return createAbstractExternalReferenceParameterAdapter();
 			}
 			@Override
-			public <ContainerMapperSourceType, ContainerMapperTargetType> Adapter caseAbstractContainerMapper(AbstractContainerMapper<ContainerMapperSourceType, ContainerMapperTargetType> object) {
-				return createAbstractContainerMapperAdapter();
+			public <ContainerParameterSourceType, ContainerParameterTargetType> Adapter caseAbstractContainerParameter(AbstractContainerParameter<ContainerParameterSourceType, ContainerParameterTargetType> object) {
+				return createAbstractContainerParameterAdapter();
 			}
 			@Override
-			public <AttributeMapperSourceType> Adapter caseAbstractAttributeMapper(AbstractAttributeMapper<AttributeMapperSourceType> object) {
-				return createAbstractAttributeMapperAdapter();
+			public <AttributeParameterSourceType> Adapter caseAbstractAttributeParameter(AbstractAttributeParameter<AttributeParameterSourceType> object) {
+				return createAbstractAttributeParameterAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -179,72 +179,72 @@ public class GenLibraryAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.MetaData <em>Meta Data</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ParameterDescription <em>Parameter Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.MetaData
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ParameterDescription
 	 * @generated
 	 */
-	public Adapter createMetaDataAdapter() {
+	public Adapter createParameterDescriptionAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.Resource <em>Resource</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ResourceParameter <em>Resource Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.Resource
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ResourceParameter
 	 * @generated
 	 */
-	public Adapter createResourceAdapter() {
+	public Adapter createResourceParameterAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceMapper <em>Abstract External Reference Mapper</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceParameter <em>Abstract External Reference Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceMapper
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceParameter
 	 * @generated
 	 */
-	public Adapter createAbstractExternalReferenceMapperAdapter() {
+	public Adapter createAbstractExternalReferenceParameterAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerMapper <em>Abstract Container Mapper</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerParameter <em>Abstract Container Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerMapper
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerParameter
 	 * @generated
 	 */
-	public Adapter createAbstractContainerMapperAdapter() {
+	public Adapter createAbstractContainerParameterAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeMapper <em>Abstract Attribute Mapper</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeParameter <em>Abstract Attribute Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeMapper
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeParameter
 	 * @generated
 	 */
-	public Adapter createAbstractAttributeMapperAdapter() {
+	public Adapter createAbstractAttributeParameterAdapter() {
 		return null;
 	}
 

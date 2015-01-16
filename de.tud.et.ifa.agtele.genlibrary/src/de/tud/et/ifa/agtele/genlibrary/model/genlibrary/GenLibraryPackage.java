@@ -84,13 +84,13 @@ public interface GenLibraryPackage extends EPackage {
 	int LIBRARY_ENTRY__LIBRARY_ITEM = 1;
 
 	/**
-	 * The feature id for the '<em><b>Meta Data</b></em>' containment reference.
+	 * The feature id for the '<em><b>Parameter Description</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIBRARY_ENTRY__META_DATA = 2;
+	int LIBRARY_ENTRY__PARAMETER_DESCRIPTION = 2;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -222,23 +222,23 @@ public interface GenLibraryPackage extends EPackage {
 	int LIBRARY_ITEM_FEATURE_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.MetaDataImpl <em>Meta Data</em>}' class.
+	 * The meta object id for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.ParameterDescriptionImpl <em>Parameter Description</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.MetaDataImpl
-	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.GenLibraryPackageImpl#getMetaData()
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.ParameterDescriptionImpl
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.GenLibraryPackageImpl#getParameterDescription()
 	 * @generated
 	 */
-	int META_DATA = 4;
+	int PARAMETER_DESCRIPTION = 4;
 
 	/**
-	 * The feature id for the '<em><b>Resources</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Resource Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int META_DATA__RESOURCES = 0;
+	int PARAMETER_DESCRIPTION__RESOURCE_PARAMETERS = 0;
 
 	/**
 	 * The feature id for the '<em><b>ID</b></em>' attribute.
@@ -247,26 +247,26 @@ public interface GenLibraryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int META_DATA__ID = 1;
+	int PARAMETER_DESCRIPTION__ID = 1;
 
 	/**
-	 * The number of structural features of the '<em>Meta Data</em>' class.
+	 * The number of structural features of the '<em>Parameter Description</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int META_DATA_FEATURE_COUNT = 2;
+	int PARAMETER_DESCRIPTION_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.ResourceImpl <em>Resource</em>}' class.
+	 * The meta object id for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.ResourceParameterImpl <em>Resource Parameter</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.ResourceImpl
-	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.GenLibraryPackageImpl#getResource()
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.ResourceParameterImpl
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.GenLibraryPackageImpl#getResourceParameter()
 	 * @generated
 	 */
-	int RESOURCE = 5;
+	int RESOURCE_PARAMETER = 5;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -275,7 +275,7 @@ public interface GenLibraryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESOURCE__NAME = 0;
+	int RESOURCE_PARAMETER__NAME = 0;
 
 	/**
 	 * The feature id for the '<em><b>New Path</b></em>' attribute.
@@ -284,27 +284,26 @@ public interface GenLibraryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESOURCE__NEW_PATH = 1;
+	int RESOURCE_PARAMETER__NEW_PATH = 1;
 
 	/**
-	 * The number of structural features of the '<em>Resource</em>' class.
+	 * The number of structural features of the '<em>Resource Parameter</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RESOURCE_FEATURE_COUNT = 2;
-
+	int RESOURCE_PARAMETER_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceMapper <em>Abstract External Reference Mapper</em>}' class.
+	 * The meta object id for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceParameter <em>Abstract External Reference Parameter</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceMapper
-	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.GenLibraryPackageImpl#getAbstractExternalReferenceMapper()
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceParameter
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.GenLibraryPackageImpl#getAbstractExternalReferenceParameter()
 	 * @generated
 	 */
-	int ABSTRACT_EXTERNAL_REFERENCE_MAPPER = 6;
+	int ABSTRACT_EXTERNAL_REFERENCE_PARAMETER = 6;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' containment reference.
@@ -313,7 +312,7 @@ public interface GenLibraryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_EXTERNAL_REFERENCE_MAPPER__SOURCE = 0;
+	int ABSTRACT_EXTERNAL_REFERENCE_PARAMETER__SOURCE = 0;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' reference.
@@ -322,26 +321,26 @@ public interface GenLibraryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_EXTERNAL_REFERENCE_MAPPER__TARGET = 1;
+	int ABSTRACT_EXTERNAL_REFERENCE_PARAMETER__TARGET = 1;
 
 	/**
-	 * The number of structural features of the '<em>Abstract External Reference Mapper</em>' class.
+	 * The number of structural features of the '<em>Abstract External Reference Parameter</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_EXTERNAL_REFERENCE_MAPPER_FEATURE_COUNT = 2;
+	int ABSTRACT_EXTERNAL_REFERENCE_PARAMETER_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerMapper <em>Abstract Container Mapper</em>}' class.
+	 * The meta object id for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerParameter <em>Abstract Container Parameter</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerMapper
-	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.GenLibraryPackageImpl#getAbstractContainerMapper()
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerParameter
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.GenLibraryPackageImpl#getAbstractContainerParameter()
 	 * @generated
 	 */
-	int ABSTRACT_CONTAINER_MAPPER = 7;
+	int ABSTRACT_CONTAINER_PARAMETER = 7;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' reference.
@@ -350,7 +349,7 @@ public interface GenLibraryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_CONTAINER_MAPPER__SOURCE = 0;
+	int ABSTRACT_CONTAINER_PARAMETER__SOURCE = 0;
 
 	/**
 	 * The feature id for the '<em><b>Container</b></em>' reference.
@@ -359,27 +358,26 @@ public interface GenLibraryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_CONTAINER_MAPPER__CONTAINER = 1;
+	int ABSTRACT_CONTAINER_PARAMETER__CONTAINER = 1;
 
 	/**
-	 * The number of structural features of the '<em>Abstract Container Mapper</em>' class.
+	 * The number of structural features of the '<em>Abstract Container Parameter</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_CONTAINER_MAPPER_FEATURE_COUNT = 2;
-
+	int ABSTRACT_CONTAINER_PARAMETER_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeMapper <em>Abstract Attribute Mapper</em>}' class.
+	 * The meta object id for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeParameter <em>Abstract Attribute Parameter</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeMapper
-	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.GenLibraryPackageImpl#getAbstractAttributeMapper()
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeParameter
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.GenLibraryPackageImpl#getAbstractAttributeParameter()
 	 * @generated
 	 */
-	int ABSTRACT_ATTRIBUTE_MAPPER = 8;
+	int ABSTRACT_ATTRIBUTE_PARAMETER = 8;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' reference.
@@ -388,7 +386,7 @@ public interface GenLibraryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_ATTRIBUTE_MAPPER__SOURCE = 0;
+	int ABSTRACT_ATTRIBUTE_PARAMETER__SOURCE = 0;
 
 	/**
 	 * The feature id for the '<em><b>New Value</b></em>' attribute.
@@ -397,17 +395,16 @@ public interface GenLibraryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_ATTRIBUTE_MAPPER__NEW_VALUE = 1;
+	int ABSTRACT_ATTRIBUTE_PARAMETER__NEW_VALUE = 1;
 
 	/**
-	 * The number of structural features of the '<em>Abstract Attribute Mapper</em>' class.
+	 * The number of structural features of the '<em>Abstract Attribute Parameter</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_ATTRIBUTE_MAPPER_FEATURE_COUNT = 2;
-
+	int ABSTRACT_ATTRIBUTE_PARAMETER_FEATURE_COUNT = 2;
 
 	/**
 	 * Returns the meta object for class '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry <em>Library Entry</em>}'.
@@ -442,15 +439,15 @@ public interface GenLibraryPackage extends EPackage {
 	EReference getLibraryEntry_LibraryItem();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry#getMetaData <em>Meta Data</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry#getParameterDescription <em>Parameter Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Meta Data</em>'.
-	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry#getMetaData()
+	 * @return the meta object for the containment reference '<em>Parameter Description</em>'.
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry#getParameterDescription()
 	 * @see #getLibraryEntry()
 	 * @generated
 	 */
-	EReference getLibraryEntry_MetaData();
+	EReference getLibraryEntry_ParameterDescription();
 
 	/**
 	 * Returns the meta object for the attribute '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry#getDescription <em>Description</em>}'.
@@ -560,164 +557,164 @@ public interface GenLibraryPackage extends EPackage {
 	EClass getLibraryItem();
 
 	/**
-	 * Returns the meta object for class '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.MetaData <em>Meta Data</em>}'.
+	 * Returns the meta object for class '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ParameterDescription <em>Parameter Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Meta Data</em>'.
-	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.MetaData
+	 * @return the meta object for class '<em>Parameter Description</em>'.
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ParameterDescription
 	 * @generated
 	 */
-	EClass getMetaData();
+	EClass getParameterDescription();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.MetaData#getResources <em>Resources</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ParameterDescription#getResourceParameters <em>Resource Parameters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Resources</em>'.
-	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.MetaData#getResources()
-	 * @see #getMetaData()
+	 * @return the meta object for the containment reference list '<em>Resource Parameters</em>'.
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ParameterDescription#getResourceParameters()
+	 * @see #getParameterDescription()
 	 * @generated
 	 */
-	EReference getMetaData_Resources();
+	EReference getParameterDescription_ResourceParameters();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.MetaData#getID <em>ID</em>}'.
+	 * Returns the meta object for the attribute '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ParameterDescription#getID <em>ID</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>ID</em>'.
-	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.MetaData#getID()
-	 * @see #getMetaData()
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ParameterDescription#getID()
+	 * @see #getParameterDescription()
 	 * @generated
 	 */
-	EAttribute getMetaData_ID();
+	EAttribute getParameterDescription_ID();
 
 	/**
-	 * Returns the meta object for class '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.Resource <em>Resource</em>}'.
+	 * Returns the meta object for class '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ResourceParameter <em>Resource Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Resource</em>'.
-	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.Resource
+	 * @return the meta object for class '<em>Resource Parameter</em>'.
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ResourceParameter
 	 * @generated
 	 */
-	EClass getResource();
+	EClass getResourceParameter();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.Resource#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ResourceParameter#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.Resource#getName()
-	 * @see #getResource()
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ResourceParameter#getName()
+	 * @see #getResourceParameter()
 	 * @generated
 	 */
-	EAttribute getResource_Name();
+	EAttribute getResourceParameter_Name();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.Resource#getNewPath <em>New Path</em>}'.
+	 * Returns the meta object for the attribute '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ResourceParameter#getNewPath <em>New Path</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>New Path</em>'.
-	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.Resource#getNewPath()
-	 * @see #getResource()
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ResourceParameter#getNewPath()
+	 * @see #getResourceParameter()
 	 * @generated
 	 */
-	EAttribute getResource_NewPath();
+	EAttribute getResourceParameter_NewPath();
 
 	/**
-	 * Returns the meta object for class '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceMapper <em>Abstract External Reference Mapper</em>}'.
+	 * Returns the meta object for class '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceParameter <em>Abstract External Reference Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Abstract External Reference Mapper</em>'.
-	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceMapper
+	 * @return the meta object for class '<em>Abstract External Reference Parameter</em>'.
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceParameter
 	 * @generated
 	 */
-	EClass getAbstractExternalReferenceMapper();
+	EClass getAbstractExternalReferenceParameter();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceMapper#getSource <em>Source</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceParameter#getSource <em>Source</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Source</em>'.
-	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceMapper#getSource()
-	 * @see #getAbstractExternalReferenceMapper()
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceParameter#getSource()
+	 * @see #getAbstractExternalReferenceParameter()
 	 * @generated
 	 */
-	EReference getAbstractExternalReferenceMapper_Source();
+	EReference getAbstractExternalReferenceParameter_Source();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceMapper#getTarget <em>Target</em>}'.
+	 * Returns the meta object for the reference '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceParameter#getTarget <em>Target</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Target</em>'.
-	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceMapper#getTarget()
-	 * @see #getAbstractExternalReferenceMapper()
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceParameter#getTarget()
+	 * @see #getAbstractExternalReferenceParameter()
 	 * @generated
 	 */
-	EReference getAbstractExternalReferenceMapper_Target();
+	EReference getAbstractExternalReferenceParameter_Target();
 
 	/**
-	 * Returns the meta object for class '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerMapper <em>Abstract Container Mapper</em>}'.
+	 * Returns the meta object for class '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerParameter <em>Abstract Container Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Abstract Container Mapper</em>'.
-	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerMapper
+	 * @return the meta object for class '<em>Abstract Container Parameter</em>'.
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerParameter
 	 * @generated
 	 */
-	EClass getAbstractContainerMapper();
+	EClass getAbstractContainerParameter();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerMapper#getSource <em>Source</em>}'.
+	 * Returns the meta object for the reference '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerParameter#getSource <em>Source</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Source</em>'.
-	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerMapper#getSource()
-	 * @see #getAbstractContainerMapper()
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerParameter#getSource()
+	 * @see #getAbstractContainerParameter()
 	 * @generated
 	 */
-	EReference getAbstractContainerMapper_Source();
+	EReference getAbstractContainerParameter_Source();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerMapper#getContainer <em>Container</em>}'.
+	 * Returns the meta object for the reference '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerParameter#getContainer <em>Container</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Container</em>'.
-	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerMapper#getContainer()
-	 * @see #getAbstractContainerMapper()
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerParameter#getContainer()
+	 * @see #getAbstractContainerParameter()
 	 * @generated
 	 */
-	EReference getAbstractContainerMapper_Container();
+	EReference getAbstractContainerParameter_Container();
 
 	/**
-	 * Returns the meta object for class '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeMapper <em>Abstract Attribute Mapper</em>}'.
+	 * Returns the meta object for class '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeParameter <em>Abstract Attribute Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Abstract Attribute Mapper</em>'.
-	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeMapper
+	 * @return the meta object for class '<em>Abstract Attribute Parameter</em>'.
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeParameter
 	 * @generated
 	 */
-	EClass getAbstractAttributeMapper();
+	EClass getAbstractAttributeParameter();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeMapper#getSource <em>Source</em>}'.
+	 * Returns the meta object for the reference '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeParameter#getSource <em>Source</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Source</em>'.
-	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeMapper#getSource()
-	 * @see #getAbstractAttributeMapper()
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeParameter#getSource()
+	 * @see #getAbstractAttributeParameter()
 	 * @generated
 	 */
-	EReference getAbstractAttributeMapper_Source();
+	EReference getAbstractAttributeParameter_Source();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeMapper#getNewValue <em>New Value</em>}'.
+	 * Returns the meta object for the attribute '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeParameter#getNewValue <em>New Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>New Value</em>'.
-	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeMapper#getNewValue()
-	 * @see #getAbstractAttributeMapper()
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeParameter#getNewValue()
+	 * @see #getAbstractAttributeParameter()
 	 * @generated
 	 */
-	EAttribute getAbstractAttributeMapper_NewValue();
+	EAttribute getAbstractAttributeParameter_NewValue();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -768,12 +765,12 @@ public interface GenLibraryPackage extends EPackage {
 		EReference LIBRARY_ENTRY__LIBRARY_ITEM = eINSTANCE.getLibraryEntry_LibraryItem();
 
 		/**
-		 * The meta object literal for the '<em><b>Meta Data</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Parameter Description</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference LIBRARY_ENTRY__META_DATA = eINSTANCE.getLibraryEntry_MetaData();
+		EReference LIBRARY_ENTRY__PARAMETER_DESCRIPTION = eINSTANCE.getLibraryEntry_ParameterDescription();
 
 		/**
 		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
@@ -862,22 +859,22 @@ public interface GenLibraryPackage extends EPackage {
 		EClass LIBRARY_ITEM = eINSTANCE.getLibraryItem();
 
 		/**
-		 * The meta object literal for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.MetaDataImpl <em>Meta Data</em>}' class.
+		 * The meta object literal for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.ParameterDescriptionImpl <em>Parameter Description</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.MetaDataImpl
-		 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.GenLibraryPackageImpl#getMetaData()
+		 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.ParameterDescriptionImpl
+		 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.GenLibraryPackageImpl#getParameterDescription()
 		 * @generated
 		 */
-		EClass META_DATA = eINSTANCE.getMetaData();
+		EClass PARAMETER_DESCRIPTION = eINSTANCE.getParameterDescription();
 
 		/**
-		 * The meta object literal for the '<em><b>Resources</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Resource Parameters</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference META_DATA__RESOURCES = eINSTANCE.getMetaData_Resources();
+		EReference PARAMETER_DESCRIPTION__RESOURCE_PARAMETERS = eINSTANCE.getParameterDescription_ResourceParameters();
 
 		/**
 		 * The meta object literal for the '<em><b>ID</b></em>' attribute feature.
@@ -885,17 +882,17 @@ public interface GenLibraryPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute META_DATA__ID = eINSTANCE.getMetaData_ID();
+		EAttribute PARAMETER_DESCRIPTION__ID = eINSTANCE.getParameterDescription_ID();
 
 		/**
-		 * The meta object literal for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.ResourceImpl <em>Resource</em>}' class.
+		 * The meta object literal for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.ResourceParameterImpl <em>Resource Parameter</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.ResourceImpl
-		 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.GenLibraryPackageImpl#getResource()
+		 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.ResourceParameterImpl
+		 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.GenLibraryPackageImpl#getResourceParameter()
 		 * @generated
 		 */
-		EClass RESOURCE = eINSTANCE.getResource();
+		EClass RESOURCE_PARAMETER = eINSTANCE.getResourceParameter();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -903,7 +900,7 @@ public interface GenLibraryPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute RESOURCE__NAME = eINSTANCE.getResource_Name();
+		EAttribute RESOURCE_PARAMETER__NAME = eINSTANCE.getResourceParameter_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>New Path</b></em>' attribute feature.
@@ -911,17 +908,17 @@ public interface GenLibraryPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute RESOURCE__NEW_PATH = eINSTANCE.getResource_NewPath();
+		EAttribute RESOURCE_PARAMETER__NEW_PATH = eINSTANCE.getResourceParameter_NewPath();
 
 		/**
-		 * The meta object literal for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceMapper <em>Abstract External Reference Mapper</em>}' class.
+		 * The meta object literal for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceParameter <em>Abstract External Reference Parameter</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceMapper
-		 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.GenLibraryPackageImpl#getAbstractExternalReferenceMapper()
+		 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceParameter
+		 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.GenLibraryPackageImpl#getAbstractExternalReferenceParameter()
 		 * @generated
 		 */
-		EClass ABSTRACT_EXTERNAL_REFERENCE_MAPPER = eINSTANCE.getAbstractExternalReferenceMapper();
+		EClass ABSTRACT_EXTERNAL_REFERENCE_PARAMETER = eINSTANCE.getAbstractExternalReferenceParameter();
 
 		/**
 		 * The meta object literal for the '<em><b>Source</b></em>' containment reference feature.
@@ -929,7 +926,7 @@ public interface GenLibraryPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ABSTRACT_EXTERNAL_REFERENCE_MAPPER__SOURCE = eINSTANCE.getAbstractExternalReferenceMapper_Source();
+		EReference ABSTRACT_EXTERNAL_REFERENCE_PARAMETER__SOURCE = eINSTANCE.getAbstractExternalReferenceParameter_Source();
 
 		/**
 		 * The meta object literal for the '<em><b>Target</b></em>' reference feature.
@@ -937,17 +934,17 @@ public interface GenLibraryPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ABSTRACT_EXTERNAL_REFERENCE_MAPPER__TARGET = eINSTANCE.getAbstractExternalReferenceMapper_Target();
+		EReference ABSTRACT_EXTERNAL_REFERENCE_PARAMETER__TARGET = eINSTANCE.getAbstractExternalReferenceParameter_Target();
 
 		/**
-		 * The meta object literal for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerMapper <em>Abstract Container Mapper</em>}' class.
+		 * The meta object literal for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerParameter <em>Abstract Container Parameter</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerMapper
-		 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.GenLibraryPackageImpl#getAbstractContainerMapper()
+		 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerParameter
+		 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.GenLibraryPackageImpl#getAbstractContainerParameter()
 		 * @generated
 		 */
-		EClass ABSTRACT_CONTAINER_MAPPER = eINSTANCE.getAbstractContainerMapper();
+		EClass ABSTRACT_CONTAINER_PARAMETER = eINSTANCE.getAbstractContainerParameter();
 
 		/**
 		 * The meta object literal for the '<em><b>Source</b></em>' reference feature.
@@ -955,7 +952,7 @@ public interface GenLibraryPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ABSTRACT_CONTAINER_MAPPER__SOURCE = eINSTANCE.getAbstractContainerMapper_Source();
+		EReference ABSTRACT_CONTAINER_PARAMETER__SOURCE = eINSTANCE.getAbstractContainerParameter_Source();
 
 		/**
 		 * The meta object literal for the '<em><b>Container</b></em>' reference feature.
@@ -963,17 +960,17 @@ public interface GenLibraryPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ABSTRACT_CONTAINER_MAPPER__CONTAINER = eINSTANCE.getAbstractContainerMapper_Container();
+		EReference ABSTRACT_CONTAINER_PARAMETER__CONTAINER = eINSTANCE.getAbstractContainerParameter_Container();
 
 		/**
-		 * The meta object literal for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeMapper <em>Abstract Attribute Mapper</em>}' class.
+		 * The meta object literal for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeParameter <em>Abstract Attribute Parameter</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeMapper
-		 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.GenLibraryPackageImpl#getAbstractAttributeMapper()
+		 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeParameter
+		 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.GenLibraryPackageImpl#getAbstractAttributeParameter()
 		 * @generated
 		 */
-		EClass ABSTRACT_ATTRIBUTE_MAPPER = eINSTANCE.getAbstractAttributeMapper();
+		EClass ABSTRACT_ATTRIBUTE_PARAMETER = eINSTANCE.getAbstractAttributeParameter();
 
 		/**
 		 * The meta object literal for the '<em><b>Source</b></em>' reference feature.
@@ -981,7 +978,7 @@ public interface GenLibraryPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ABSTRACT_ATTRIBUTE_MAPPER__SOURCE = eINSTANCE.getAbstractAttributeMapper_Source();
+		EReference ABSTRACT_ATTRIBUTE_PARAMETER__SOURCE = eINSTANCE.getAbstractAttributeParameter_Source();
 
 		/**
 		 * The meta object literal for the '<em><b>New Value</b></em>' attribute feature.
@@ -989,7 +986,7 @@ public interface GenLibraryPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ABSTRACT_ATTRIBUTE_MAPPER__NEW_VALUE = eINSTANCE.getAbstractAttributeMapper_NewValue();
+		EAttribute ABSTRACT_ATTRIBUTE_PARAMETER__NEW_VALUE = eINSTANCE.getAbstractAttributeParameter_NewValue();
 
 	}
 

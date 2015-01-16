@@ -5,7 +5,7 @@ package de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.GenLibraryPackage;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryItem;
-import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.MetaData;
+import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ParameterDescription;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <ul>
  *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.LibraryEntryImpl#getVersion <em>Version</em>}</li>
  *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.LibraryEntryImpl#getLibraryItem <em>Library Item</em>}</li>
- *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.LibraryEntryImpl#getMetaData <em>Meta Data</em>}</li>
+ *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.LibraryEntryImpl#getParameterDescription <em>Parameter Description</em>}</li>
  *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.LibraryEntryImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.LibraryEntryImpl#getThumbnail <em>Thumbnail</em>}</li>
  * </ul>
@@ -63,14 +63,14 @@ public class LibraryEntryImpl extends EObjectImpl implements LibraryEntry {
 	protected LibraryItem libraryItem;
 
 	/**
-	 * The cached value of the '{@link #getMetaData() <em>Meta Data</em>}' containment reference.
+	 * The cached value of the '{@link #getParameterDescription() <em>Parameter Description</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getMetaData()
+	 * @see #getParameterDescription()
 	 * @generated
 	 * @ordered
 	 */
-	protected MetaData metaData;
+	protected ParameterDescription parameterDescription;
 
 	/**
 	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
@@ -200,8 +200,8 @@ public class LibraryEntryImpl extends EObjectImpl implements LibraryEntry {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public MetaData getMetaData() {
-		return metaData;
+	public ParameterDescription getParameterDescription() {
+		return parameterDescription;
 	}
 
 	/**
@@ -209,11 +209,11 @@ public class LibraryEntryImpl extends EObjectImpl implements LibraryEntry {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetMetaData(MetaData newMetaData, NotificationChain msgs) {
-		MetaData oldMetaData = metaData;
-		metaData = newMetaData;
+	public NotificationChain basicSetParameterDescription(ParameterDescription newParameterDescription, NotificationChain msgs) {
+		ParameterDescription oldParameterDescription = parameterDescription;
+		parameterDescription = newParameterDescription;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, GenLibraryPackage.LIBRARY_ENTRY__META_DATA, oldMetaData, newMetaData);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, GenLibraryPackage.LIBRARY_ENTRY__PARAMETER_DESCRIPTION, oldParameterDescription, newParameterDescription);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -224,18 +224,18 @@ public class LibraryEntryImpl extends EObjectImpl implements LibraryEntry {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setMetaData(MetaData newMetaData) {
-		if (newMetaData != metaData) {
+	public void setParameterDescription(ParameterDescription newParameterDescription) {
+		if (newParameterDescription != parameterDescription) {
 			NotificationChain msgs = null;
-			if (metaData != null)
-				msgs = ((InternalEObject)metaData).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - GenLibraryPackage.LIBRARY_ENTRY__META_DATA, null, msgs);
-			if (newMetaData != null)
-				msgs = ((InternalEObject)newMetaData).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - GenLibraryPackage.LIBRARY_ENTRY__META_DATA, null, msgs);
-			msgs = basicSetMetaData(newMetaData, msgs);
+			if (parameterDescription != null)
+				msgs = ((InternalEObject)parameterDescription).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - GenLibraryPackage.LIBRARY_ENTRY__PARAMETER_DESCRIPTION, null, msgs);
+			if (newParameterDescription != null)
+				msgs = ((InternalEObject)newParameterDescription).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - GenLibraryPackage.LIBRARY_ENTRY__PARAMETER_DESCRIPTION, null, msgs);
+			msgs = basicSetParameterDescription(newParameterDescription, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, GenLibraryPackage.LIBRARY_ENTRY__META_DATA, newMetaData, newMetaData));
+			eNotify(new ENotificationImpl(this, Notification.SET, GenLibraryPackage.LIBRARY_ENTRY__PARAMETER_DESCRIPTION, newParameterDescription, newParameterDescription));
 	}
 
 	/**
@@ -290,8 +290,8 @@ public class LibraryEntryImpl extends EObjectImpl implements LibraryEntry {
 		switch (featureID) {
 			case GenLibraryPackage.LIBRARY_ENTRY__LIBRARY_ITEM:
 				return basicSetLibraryItem(null, msgs);
-			case GenLibraryPackage.LIBRARY_ENTRY__META_DATA:
-				return basicSetMetaData(null, msgs);
+			case GenLibraryPackage.LIBRARY_ENTRY__PARAMETER_DESCRIPTION:
+				return basicSetParameterDescription(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -308,8 +308,8 @@ public class LibraryEntryImpl extends EObjectImpl implements LibraryEntry {
 				return getVersion();
 			case GenLibraryPackage.LIBRARY_ENTRY__LIBRARY_ITEM:
 				return getLibraryItem();
-			case GenLibraryPackage.LIBRARY_ENTRY__META_DATA:
-				return getMetaData();
+			case GenLibraryPackage.LIBRARY_ENTRY__PARAMETER_DESCRIPTION:
+				return getParameterDescription();
 			case GenLibraryPackage.LIBRARY_ENTRY__DESCRIPTION:
 				return getDescription();
 			case GenLibraryPackage.LIBRARY_ENTRY__THUMBNAIL:
@@ -332,8 +332,8 @@ public class LibraryEntryImpl extends EObjectImpl implements LibraryEntry {
 			case GenLibraryPackage.LIBRARY_ENTRY__LIBRARY_ITEM:
 				setLibraryItem((LibraryItem)newValue);
 				return;
-			case GenLibraryPackage.LIBRARY_ENTRY__META_DATA:
-				setMetaData((MetaData)newValue);
+			case GenLibraryPackage.LIBRARY_ENTRY__PARAMETER_DESCRIPTION:
+				setParameterDescription((ParameterDescription)newValue);
 				return;
 			case GenLibraryPackage.LIBRARY_ENTRY__DESCRIPTION:
 				setDescription((String)newValue);
@@ -359,8 +359,8 @@ public class LibraryEntryImpl extends EObjectImpl implements LibraryEntry {
 			case GenLibraryPackage.LIBRARY_ENTRY__LIBRARY_ITEM:
 				setLibraryItem((LibraryItem)null);
 				return;
-			case GenLibraryPackage.LIBRARY_ENTRY__META_DATA:
-				setMetaData((MetaData)null);
+			case GenLibraryPackage.LIBRARY_ENTRY__PARAMETER_DESCRIPTION:
+				setParameterDescription((ParameterDescription)null);
 				return;
 			case GenLibraryPackage.LIBRARY_ENTRY__DESCRIPTION:
 				setDescription(DESCRIPTION_EDEFAULT);
@@ -384,8 +384,8 @@ public class LibraryEntryImpl extends EObjectImpl implements LibraryEntry {
 				return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
 			case GenLibraryPackage.LIBRARY_ENTRY__LIBRARY_ITEM:
 				return libraryItem != null;
-			case GenLibraryPackage.LIBRARY_ENTRY__META_DATA:
-				return metaData != null;
+			case GenLibraryPackage.LIBRARY_ENTRY__PARAMETER_DESCRIPTION:
+				return parameterDescription != null;
 			case GenLibraryPackage.LIBRARY_ENTRY__DESCRIPTION:
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 			case GenLibraryPackage.LIBRARY_ENTRY__THUMBNAIL:
