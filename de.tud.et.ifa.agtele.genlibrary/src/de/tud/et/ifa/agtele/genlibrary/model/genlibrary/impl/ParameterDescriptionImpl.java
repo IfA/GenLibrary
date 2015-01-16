@@ -31,8 +31,12 @@ import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ResourceParameter;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.ParameterDescriptionImpl#getResourceParameters <em>Resource Parameters</em>}</li>
- *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.ParameterDescriptionImpl#getID <em>ID</em>}</li>
+ * <li>
+ * {@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.ParameterDescriptionImpl#getResourceParameters
+ * <em>Resource Parameters</em>}</li>
+ * <li>
+ * {@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.ParameterDescriptionImpl#getID
+ * <em>ID</em>}</li>
  * </ul>
  * </p>
  *
@@ -72,6 +76,7 @@ public class ParameterDescriptionImpl extends EObjectImpl implements ParameterDe
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected ParameterDescriptionImpl() {
@@ -80,6 +85,7 @@ public class ParameterDescriptionImpl extends EObjectImpl implements ParameterDe
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -89,6 +95,7 @@ public class ParameterDescriptionImpl extends EObjectImpl implements ParameterDe
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -101,6 +108,7 @@ public class ParameterDescriptionImpl extends EObjectImpl implements ParameterDe
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -110,6 +118,7 @@ public class ParameterDescriptionImpl extends EObjectImpl implements ParameterDe
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -122,14 +131,14 @@ public class ParameterDescriptionImpl extends EObjectImpl implements ParameterDe
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public EList<AbstractExternalReferenceParameter<EObject, EObject>> getExternalReferenceParameters() {
-		EList<AbstractExternalReferenceParameter<EObject, EObject>> abstractParameters = 
-				new BasicEList<AbstractExternalReferenceParameter<EObject, EObject>>();
-		
-		// recursively iterate over all children of the metadata and collect
+		EList<AbstractExternalReferenceParameter<EObject, EObject>> abstractParameters = new BasicEList<AbstractExternalReferenceParameter<EObject, EObject>>();
+
+		// recursively iterate over all children of the parameters and collect
 		// all objects that are of type 'AbstractParameter'
 		Iterator<Object> it = EcoreUtil.getAllContents(this, true);
 		while (it.hasNext()) {
@@ -138,20 +147,20 @@ public class ParameterDescriptionImpl extends EObjectImpl implements ParameterDe
 				abstractParameters.add((AbstractExternalReferenceParameter<EObject, EObject>) object);
 			}
 		}
-		
+
 		return abstractParameters;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public EList<AbstractContainerParameter<EObject, EObject>> getContainerParameters() {
-		EList<AbstractContainerParameter<EObject, EObject>> abstractParameters = 
-				new BasicEList<AbstractContainerParameter<EObject, EObject>>();
-		
-		// recursively iterate over all children of the metadata and collect
+		EList<AbstractContainerParameter<EObject, EObject>> abstractParameters = new BasicEList<AbstractContainerParameter<EObject, EObject>>();
+
+		// recursively iterate over all children of the parameters and collect
 		// all objects that are of type 'AbstractParameter'
 		Iterator<Object> it = EcoreUtil.getAllContents(this, true);
 		while (it.hasNext()) {
@@ -160,20 +169,20 @@ public class ParameterDescriptionImpl extends EObjectImpl implements ParameterDe
 				abstractParameters.add((AbstractContainerParameter<EObject, EObject>) object);
 			}
 		}
-		
+
 		return abstractParameters;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public EList<AbstractAttributeParameter<EObject>> getAttributeParameters() {
-		EList<AbstractAttributeParameter<EObject>> abstractParameters = 
-				new BasicEList<AbstractAttributeParameter<EObject>>();
-		
-		// recursively iterate over all children of the metadata and collect
+		EList<AbstractAttributeParameter<EObject>> abstractParameters = new BasicEList<AbstractAttributeParameter<EObject>>();
+
+		// recursively iterate over all children of the parameters and collect
 		// all objects that are of type 'AbstractParameter'
 		Iterator<Object> it = EcoreUtil.getAllContents(this, true);
 		while (it.hasNext()) {
@@ -182,96 +191,103 @@ public class ParameterDescriptionImpl extends EObjectImpl implements ParameterDe
 				abstractParameters.add((AbstractAttributeParameter<EObject>) object);
 			}
 		}
-		
+
 		return abstractParameters;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case GenLibraryPackage.PARAMETER_DESCRIPTION__RESOURCE_PARAMETERS:
-				return ((InternalEList<?>)getResourceParameters()).basicRemove(otherEnd, msgs);
+		case GenLibraryPackage.PARAMETER_DESCRIPTION__RESOURCE_PARAMETERS:
+			return ((InternalEList<?>) getResourceParameters()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case GenLibraryPackage.PARAMETER_DESCRIPTION__RESOURCE_PARAMETERS:
-				return getResourceParameters();
-			case GenLibraryPackage.PARAMETER_DESCRIPTION__ID:
-				return getID();
+		case GenLibraryPackage.PARAMETER_DESCRIPTION__RESOURCE_PARAMETERS:
+			return getResourceParameters();
+		case GenLibraryPackage.PARAMETER_DESCRIPTION__ID:
+			return getID();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case GenLibraryPackage.PARAMETER_DESCRIPTION__RESOURCE_PARAMETERS:
-				getResourceParameters().clear();
-				getResourceParameters().addAll((Collection<? extends ResourceParameter>)newValue);
-				return;
-			case GenLibraryPackage.PARAMETER_DESCRIPTION__ID:
-				setID((String)newValue);
-				return;
+		case GenLibraryPackage.PARAMETER_DESCRIPTION__RESOURCE_PARAMETERS:
+			getResourceParameters().clear();
+			getResourceParameters().addAll((Collection<? extends ResourceParameter>) newValue);
+			return;
+		case GenLibraryPackage.PARAMETER_DESCRIPTION__ID:
+			setID((String) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case GenLibraryPackage.PARAMETER_DESCRIPTION__RESOURCE_PARAMETERS:
-				getResourceParameters().clear();
-				return;
-			case GenLibraryPackage.PARAMETER_DESCRIPTION__ID:
-				setID(ID_EDEFAULT);
-				return;
+		case GenLibraryPackage.PARAMETER_DESCRIPTION__RESOURCE_PARAMETERS:
+			getResourceParameters().clear();
+			return;
+		case GenLibraryPackage.PARAMETER_DESCRIPTION__ID:
+			setID(ID_EDEFAULT);
+			return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case GenLibraryPackage.PARAMETER_DESCRIPTION__RESOURCE_PARAMETERS:
-				return resourceParameters != null && !resourceParameters.isEmpty();
-			case GenLibraryPackage.PARAMETER_DESCRIPTION__ID:
-				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
+		case GenLibraryPackage.PARAMETER_DESCRIPTION__RESOURCE_PARAMETERS:
+			return resourceParameters != null && !resourceParameters.isEmpty();
+		case GenLibraryPackage.PARAMETER_DESCRIPTION__ID:
+			return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy())
+			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (ID: ");

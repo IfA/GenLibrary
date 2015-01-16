@@ -156,14 +156,15 @@ public class LibraryPluginImpl implements LibraryPlugin {
 	public void insertIntoTargetModel(EObject targetModel, LibraryEntry libraryEntry, String path) {
 
 		// At first, we give clients the chance to insert anything that is not
-		// covered by metadata into the target model.
+		// covered by Parameters into the target model.
 		libraryContext.defaultInsertIntoTargetModel(targetModel, libraryEntry, path);
 
-		// Second, we apply the metadata so that all mappers are evaluated.
-		libraryContext.applyMetaData(targetModel, libraryEntry, path);
+		// Second, we apply the ParameterDescription so that all parameters are
+		// evaluated.
+		libraryContext.applyParameters(targetModel, libraryEntry, path);
 
 		// Last, the resource are handled.
-		// TODO This might have to be moved to 'applyMetaData'
+		// TODO This might have to be moved to 'applyParameters'
 		ParameterDescription parameterDescription = libraryEntry.getParameterDescription();
 		List<ResourceParameter> resourceParameters = parameterDescription.getResourceParameters();
 
@@ -180,7 +181,7 @@ public class LibraryPluginImpl implements LibraryPlugin {
 
 	@Override
 	@Deprecated
-	public LibraryItem getElement(EObject targetModel, String path, ParameterDescription metadata, boolean usehigher) {
+	public LibraryItem getElement(EObject targetModel, String path, ParameterDescription parameterDescription, boolean usehigher) {
 		LibraryPath libpath = parser.parse(path);
 		Item item = getItem(libpath, usehigher);
 		if (item == null) {
@@ -194,9 +195,9 @@ public class LibraryPluginImpl implements LibraryPlugin {
 
 		LibraryFileEntry fileitem = getLibraryFileEntry(item);
 
-		libraryContext.applyMetaData(libitem, entry, path);
+		libraryContext.applyParameters(libitem, entry, path);
 
-		List<ResourceParameter> resourceParameters = metadata.getResourceParameters();
+		List<ResourceParameter> resourceParameters = parameterDescription.getResourceParameters();
 
 		for (ResourceParameter res : resourceParameters) {
 			if (res.getNewPath() != null && !res.getNewPath().isEmpty()) {

@@ -33,9 +33,9 @@ public interface LibraryContext {
 	public boolean isValid(LibraryEntry entry, List<String> resources);
 
 	/**
-	 * This applies the metadata to a library item that are both part of a
+	 * This applies the parameters to a library item that are both part of a
 	 * library entry. Implementations of this function have to take the
-	 * different mappers into account and are responsible for correctly
+	 * different parameters into account and are responsible for correctly
 	 * inserting the library item into the target model.
 	 * 
 	 * @param targetModel
@@ -43,14 +43,14 @@ public interface LibraryContext {
 	 *            inserted.
 	 * @param libraryEntry
 	 *            The library entry containing the meta data to be applied and
-	 *            the library item referenced by the metadata.
+	 *            the library item referenced by the parameters.
 	 * @param path
 	 *            The classpath of the library item.
 	 */
-	public void applyMetaData(EObject targetModel, LibraryEntry entry, String path);
+	public void applyParameters(EObject targetModel, LibraryEntry entry, String path);
 
 	/**
-	 * This method is called before 'applyMetaData' and should be used to add
+	 * This method is called before 'applyParameters' and should be used to add
 	 * elements to the target model that are not covered by the meta data.
 	 * 
 	 * @param targetModel

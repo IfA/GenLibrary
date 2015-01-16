@@ -43,7 +43,7 @@ public interface LibraryPlugin {
 	public boolean elementExists(String path, boolean usehigher);
 
 	/**
-	 * This returns the library entry without evaluating the metadata.
+	 * This returns the library entry without evaluating the Parameters.
 	 * 
 	 * @param path
 	 *            The classpath for the library entry to be checked.
@@ -70,7 +70,7 @@ public interface LibraryPlugin {
 	public String getResultingElementLibraryPath(String path);
 
 	/**
-	 * This returns the library item after evaluating the metadata.
+	 * This returns the library item after evaluating the Parameters.
 	 * 
 	 * @param targetModel
 	 *            The target model into that the library item shall be inserted.
@@ -79,13 +79,13 @@ public interface LibraryPlugin {
 	 * @param usehigher
 	 *            Whether the algorithm shall check for alternative elements at
 	 *            a higher (more abstract) level in the classpath.
-	 * @return The library item after evaluating the metadata.
+	 * @return The library item after evaluating the Parameters.
 	 */
 	@Deprecated
-	public LibraryItem getElement(EObject targetModel, String path, ParameterDescription metadata, boolean usehigher);
+	public LibraryItem getElement(EObject targetModel, String path, ParameterDescription parameterDescription, boolean usehigher);
 
 	/**
-	 * Returns the interfaces (the metadata) for a library element represented
+	 * Returns the interfaces (the Parameters) for a library element represented
 	 * by a given classpath.
 	 * 
 	 * @param path
@@ -93,8 +93,8 @@ public interface LibraryPlugin {
 	 * @param usehigher
 	 *            Whether the algorithm shall check for alternative elements at
 	 *            a higher (more abstract) level in the classpath.
-	 * @return The metadata for the library item if everything worked well, null
-	 *         otherwise.
+	 * @return The Parameters for the library item if everything worked well,
+	 *         null otherwise.
 	 */
 	@Deprecated
 	public ParameterDescription getMetaData(String path, boolean usehigher);
@@ -133,7 +133,7 @@ public interface LibraryPlugin {
 
 	/**
 	 * This inserts the given library item into the given target model while
-	 * taking the given metadata into account. This is done by calling the
+	 * taking the given Parameters into account. This is done by calling the
 	 * function 'insertIntoTargetModel(...)' of the library context passed in
 	 * the 'init' function of the library plugin.
 	 * 
@@ -142,7 +142,7 @@ public interface LibraryPlugin {
 	 *            inserted.
 	 * @param libraryEntry
 	 *            The library entry that includes the libary item to be inserted
-	 *            into the target model and the metadata that shall be taken
+	 *            into the target model and the Parameters that shall be taken
 	 *            into account.
 	 * @param path
 	 *            The classpath of the library item.
