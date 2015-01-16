@@ -26,69 +26,59 @@ import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ResourceParameter;
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Package</b>. <!--
  * end-user-doc -->
- * 
  * @generated
  */
 public class GenLibraryPackageImpl extends EPackageImpl implements GenLibraryPackage {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass libraryEntryEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass libraryEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass itemEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass libraryItemEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass parameterDescriptionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass resourceParameterEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass abstractExternalReferenceParameterEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass abstractContainerParameterEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass abstractAttributeParameterEClass = null;
@@ -114,7 +104,6 @@ public class GenLibraryPackageImpl extends EPackageImpl implements GenLibraryPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private static boolean isInited = false;
@@ -135,12 +124,10 @@ public class GenLibraryPackageImpl extends EPackageImpl implements GenLibraryPac
 	 * @generated
 	 */
 	public static GenLibraryPackage init() {
-		if (isInited)
-			return (GenLibraryPackage) EPackage.Registry.INSTANCE.getEPackage(GenLibraryPackage.eNS_URI);
+		if (isInited) return (GenLibraryPackage)EPackage.Registry.INSTANCE.getEPackage(GenLibraryPackage.eNS_URI);
 
 		// Obtain or create and register package
-		GenLibraryPackageImpl theGenLibraryPackage = (GenLibraryPackageImpl) (EPackage.Registry.INSTANCE.get(eNS_URI) instanceof GenLibraryPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI)
-				: new GenLibraryPackageImpl());
+		GenLibraryPackageImpl theGenLibraryPackage = (GenLibraryPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof GenLibraryPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new GenLibraryPackageImpl());
 
 		isInited = true;
 
@@ -153,6 +140,7 @@ public class GenLibraryPackageImpl extends EPackageImpl implements GenLibraryPac
 		// Mark meta-data to indicate it can't be changed
 		theGenLibraryPackage.freeze();
 
+  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(GenLibraryPackage.eNS_URI, theGenLibraryPackage);
 		return theGenLibraryPackage;
@@ -160,7 +148,6 @@ public class GenLibraryPackageImpl extends EPackageImpl implements GenLibraryPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -170,57 +157,51 @@ public class GenLibraryPackageImpl extends EPackageImpl implements GenLibraryPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EAttribute getLibraryEntry_Version() {
-		return (EAttribute) libraryEntryEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)libraryEntryEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EReference getLibraryEntry_LibraryItem() {
-		return (EReference) libraryEntryEClass.getEStructuralFeatures().get(1);
+		return (EReference)libraryEntryEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EReference getLibraryEntry_ParameterDescription() {
-		return (EReference) libraryEntryEClass.getEStructuralFeatures().get(2);
+		return (EReference)libraryEntryEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EAttribute getLibraryEntry_Description() {
-		return (EAttribute) libraryEntryEClass.getEStructuralFeatures().get(3);
+		return (EAttribute)libraryEntryEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EAttribute getLibraryEntry_Thumbnail() {
-		return (EAttribute) libraryEntryEClass.getEStructuralFeatures().get(4);
+		return (EAttribute)libraryEntryEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -230,27 +211,24 @@ public class GenLibraryPackageImpl extends EPackageImpl implements GenLibraryPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EAttribute getLibrary_Checksum() {
-		return (EAttribute) libraryEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)libraryEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EReference getLibrary_Items() {
-		return (EReference) libraryEClass.getEStructuralFeatures().get(1);
+		return (EReference)libraryEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -260,37 +238,33 @@ public class GenLibraryPackageImpl extends EPackageImpl implements GenLibraryPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EAttribute getItem_Key() {
-		return (EAttribute) itemEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)itemEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EAttribute getItem_Path() {
-		return (EAttribute) itemEClass.getEStructuralFeatures().get(1);
+		return (EAttribute)itemEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EAttribute getItem_Version() {
-		return (EAttribute) itemEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)itemEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -300,7 +274,6 @@ public class GenLibraryPackageImpl extends EPackageImpl implements GenLibraryPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -310,27 +283,24 @@ public class GenLibraryPackageImpl extends EPackageImpl implements GenLibraryPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EReference getParameterDescription_ResourceParameters() {
-		return (EReference) parameterDescriptionEClass.getEStructuralFeatures().get(0);
+		return (EReference)parameterDescriptionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EAttribute getParameterDescription_ID() {
-		return (EAttribute) parameterDescriptionEClass.getEStructuralFeatures().get(1);
+		return (EAttribute)parameterDescriptionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -340,27 +310,24 @@ public class GenLibraryPackageImpl extends EPackageImpl implements GenLibraryPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EAttribute getResourceParameter_Name() {
-		return (EAttribute) resourceParameterEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)resourceParameterEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EAttribute getResourceParameter_NewPath() {
-		return (EAttribute) resourceParameterEClass.getEStructuralFeatures().get(1);
+		return (EAttribute)resourceParameterEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -370,27 +337,24 @@ public class GenLibraryPackageImpl extends EPackageImpl implements GenLibraryPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EReference getAbstractExternalReferenceParameter_Source() {
-		return (EReference) abstractExternalReferenceParameterEClass.getEStructuralFeatures().get(0);
+		return (EReference)abstractExternalReferenceParameterEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EReference getAbstractExternalReferenceParameter_Target() {
-		return (EReference) abstractExternalReferenceParameterEClass.getEStructuralFeatures().get(1);
+		return (EReference)abstractExternalReferenceParameterEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -400,27 +364,24 @@ public class GenLibraryPackageImpl extends EPackageImpl implements GenLibraryPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EReference getAbstractContainerParameter_Source() {
-		return (EReference) abstractContainerParameterEClass.getEStructuralFeatures().get(0);
+		return (EReference)abstractContainerParameterEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EReference getAbstractContainerParameter_Container() {
-		return (EReference) abstractContainerParameterEClass.getEStructuralFeatures().get(1);
+		return (EReference)abstractContainerParameterEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -430,51 +391,46 @@ public class GenLibraryPackageImpl extends EPackageImpl implements GenLibraryPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EReference getAbstractAttributeParameter_Source() {
-		return (EReference) abstractAttributeParameterEClass.getEStructuralFeatures().get(0);
+		return (EReference)abstractAttributeParameterEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EAttribute getAbstractAttributeParameter_NewValue() {
-		return (EAttribute) abstractAttributeParameterEClass.getEStructuralFeatures().get(1);
+		return (EAttribute)abstractAttributeParameterEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public GenLibraryFactory getGenLibraryFactory() {
-		return (GenLibraryFactory) getEFactoryInstance();
+		return (GenLibraryFactory)getEFactoryInstance();
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private boolean isCreated = false;
 
 	/**
-	 * Creates the meta-model objects for the package. This method is guarded to
-	 * have no affect on any invocation but its first. <!-- begin-user-doc -->
+	 * Creates the meta-model objects for the package.  This method is
+	 * guarded to have no affect on any invocation but its first.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void createPackageContents() {
-		if (isCreated)
-			return;
+		if (isCreated) return;
 		isCreated = true;
 
 		// Create classes and their features
@@ -519,7 +475,6 @@ public class GenLibraryPackageImpl extends EPackageImpl implements GenLibraryPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private boolean isInitialized = false;
@@ -532,8 +487,7 @@ public class GenLibraryPackageImpl extends EPackageImpl implements GenLibraryPac
 	 * @generated
 	 */
 	public void initializePackageContents() {
-		if (isInitialized)
-			return;
+		if (isInitialized) return;
 		isInitialized = true;
 
 		// Initialize package
@@ -542,10 +496,8 @@ public class GenLibraryPackageImpl extends EPackageImpl implements GenLibraryPac
 		setNsURI(eNS_URI);
 
 		// Create type parameters
-		ETypeParameter abstractExternalReferenceParameterEClass_ExternalReferenceParameterSourceType = addETypeParameter(abstractExternalReferenceParameterEClass,
-				"ExternalReferenceParameterSourceType");
-		ETypeParameter abstractExternalReferenceParameterEClass_ExternalReferenceParameterTargetType = addETypeParameter(abstractExternalReferenceParameterEClass,
-				"ExternalReferenceParameterTargetType");
+		ETypeParameter abstractExternalReferenceParameterEClass_ExternalReferenceParameterSourceType = addETypeParameter(abstractExternalReferenceParameterEClass, "ExternalReferenceParameterSourceType");
+		ETypeParameter abstractExternalReferenceParameterEClass_ExternalReferenceParameterTargetType = addETypeParameter(abstractExternalReferenceParameterEClass, "ExternalReferenceParameterTargetType");
 		ETypeParameter abstractContainerParameterEClass_ContainerParameterSourceType = addETypeParameter(abstractContainerParameterEClass, "ContainerParameterSourceType");
 		ETypeParameter abstractContainerParameterEClass_ContainerParameterTargetType = addETypeParameter(abstractContainerParameterEClass, "ContainerParameterTargetType");
 		ETypeParameter abstractAttributeParameterEClass_AttributeParameterSourceType = addETypeParameter(abstractAttributeParameterEClass, "AttributeParameterSourceType");
@@ -556,37 +508,26 @@ public class GenLibraryPackageImpl extends EPackageImpl implements GenLibraryPac
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(libraryEntryEClass, LibraryEntry.class, "LibraryEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getLibraryEntry_Version(), ecorePackage.getEString(), "Version", null, 1, 1, LibraryEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEReference(getLibraryEntry_LibraryItem(), this.getLibraryItem(), null, "LibraryItem", null, 1, 1, LibraryEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getLibraryEntry_ParameterDescription(), this.getParameterDescription(), null, "parameterDescription", null, 1, 1, LibraryEntry.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLibraryEntry_Description(), ecorePackage.getEString(), "description", null, 0, 1, LibraryEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLibraryEntry_Thumbnail(), ecorePackage.getEString(), "thumbnail", null, 0, 1, LibraryEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLibraryEntry_Version(), ecorePackage.getEString(), "Version", null, 1, 1, LibraryEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLibraryEntry_LibraryItem(), this.getLibraryItem(), null, "LibraryItem", null, 1, 1, LibraryEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLibraryEntry_ParameterDescription(), this.getParameterDescription(), null, "parameterDescription", null, 1, 1, LibraryEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLibraryEntry_Description(), ecorePackage.getEString(), "description", null, 0, 1, LibraryEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLibraryEntry_Thumbnail(), ecorePackage.getEString(), "thumbnail", null, 0, 1, LibraryEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(libraryEClass, Library.class, "Library", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getLibrary_Checksum(), ecorePackage.getEString(), "Checksum", null, 1, 1, Library.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEReference(getLibrary_Items(), this.getItem(), null, "Items", null, 0, -1, Library.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLibrary_Checksum(), ecorePackage.getEString(), "Checksum", null, 1, 1, Library.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLibrary_Items(), this.getItem(), null, "Items", null, 0, -1, Library.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(itemEClass, Item.class, "Item", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getItem_Key(), ecorePackage.getEString(), "Key", null, 1, 1, Item.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getItem_Path(), ecorePackage.getEString(), "Path", null, 1, 1, Item.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEAttribute(getItem_Version(), ecorePackage.getEString(), "Version", null, 1, 1, Item.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
+		initEAttribute(getItem_Path(), ecorePackage.getEString(), "Path", null, 1, 1, Item.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getItem_Version(), ecorePackage.getEString(), "Version", null, 1, 1, Item.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(libraryItemEClass, LibraryItem.class, "LibraryItem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(parameterDescriptionEClass, ParameterDescription.class, "ParameterDescription", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getParameterDescription_ResourceParameters(), this.getResourceParameter(), null, "resourceParameters", null, 0, -1, ParameterDescription.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getParameterDescription_ID(), ecorePackage.getEString(), "ID", null, 1, 1, ParameterDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getParameterDescription_ResourceParameters(), this.getResourceParameter(), null, "resourceParameters", null, 0, -1, ParameterDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getParameterDescription_ID(), ecorePackage.getEString(), "ID", null, 1, 1, ParameterDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(parameterDescriptionEClass, null, "getExternalReferenceParameters", 1, 1, IS_UNIQUE, IS_ORDERED);
 		EGenericType g1 = createEGenericType(ecorePackage.getEEList());
@@ -617,35 +558,27 @@ public class GenLibraryPackageImpl extends EPackageImpl implements GenLibraryPac
 		initEOperation(op, g1);
 
 		initEClass(resourceParameterEClass, ResourceParameter.class, "ResourceParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getResourceParameter_Name(), ecorePackage.getEString(), "Name", null, 1, 1, ResourceParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getResourceParameter_NewPath(), ecorePackage.getEString(), "newPath", null, 1, 1, ResourceParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getResourceParameter_Name(), ecorePackage.getEString(), "Name", null, 1, 1, ResourceParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getResourceParameter_NewPath(), ecorePackage.getEString(), "newPath", null, 1, 1, ResourceParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(abstractExternalReferenceParameterEClass, AbstractExternalReferenceParameter.class, "AbstractExternalReferenceParameter", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		g1 = createEGenericType(abstractExternalReferenceParameterEClass_ExternalReferenceParameterSourceType);
-		initEReference(getAbstractExternalReferenceParameter_Source(), g1, null, "source", null, 1, 1, AbstractExternalReferenceParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractExternalReferenceParameter_Source(), g1, null, "source", null, 1, 1, AbstractExternalReferenceParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		g1 = createEGenericType(abstractExternalReferenceParameterEClass_ExternalReferenceParameterTargetType);
-		initEReference(getAbstractExternalReferenceParameter_Target(), g1, null, "target", null, 0, 1, AbstractExternalReferenceParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractExternalReferenceParameter_Target(), g1, null, "target", null, 0, 1, AbstractExternalReferenceParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(abstractContainerParameterEClass, AbstractContainerParameter.class, "AbstractContainerParameter", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		g1 = createEGenericType(abstractContainerParameterEClass_ContainerParameterSourceType);
-		initEReference(getAbstractContainerParameter_Source(), g1, null, "source", null, 1, 1, AbstractContainerParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractContainerParameter_Source(), g1, null, "source", null, 1, 1, AbstractContainerParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		g1 = createEGenericType(abstractContainerParameterEClass_ContainerParameterTargetType);
-		initEReference(getAbstractContainerParameter_Container(), g1, null, "container", null, 0, 1, AbstractContainerParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractContainerParameter_Container(), g1, null, "container", null, 0, 1, AbstractContainerParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(abstractContainerParameterEClass, ecorePackage.getEReference(), "getReference", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(abstractAttributeParameterEClass, AbstractAttributeParameter.class, "AbstractAttributeParameter", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		g1 = createEGenericType(abstractAttributeParameterEClass_AttributeParameterSourceType);
-		initEReference(getAbstractAttributeParameter_Source(), g1, null, "source", null, 1, 1, AbstractAttributeParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAbstractAttributeParameter_NewValue(), ecorePackage.getEString(), "newValue", null, 0, 1, AbstractAttributeParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractAttributeParameter_Source(), g1, null, "source", null, 1, 1, AbstractAttributeParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAbstractAttributeParameter_NewValue(), ecorePackage.getEString(), "newValue", null, 0, 1, AbstractAttributeParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(abstractAttributeParameterEClass, ecorePackage.getEAttribute(), "getAttribute", 1, 1, IS_UNIQUE, IS_ORDERED);
 
