@@ -43,7 +43,7 @@ import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.SaveAsDialog;
 
-public class EditMetaDataWizardPage extends WizardPage {
+public class EditParametersWizardPage extends WizardPage {
 
 	private Composite attributeContainer;
 	private AddGenlibraryEntryWizardData data;
@@ -52,10 +52,10 @@ public class EditMetaDataWizardPage extends WizardPage {
 	private Composite resourcesContainer;
 	private Composite externalReferencesContainer;
 	
-	protected EditMetaDataWizardPage(AddGenlibraryEntryWizardData data) {
-		super("Edit Library Meta Data");
-		setTitle("Edit Library Meta Data");
-		setDescription("Add all necessary information for inserting the library item by editing the MetaData...");
+	protected EditParametersWizardPage(AddGenlibraryEntryWizardData data) {
+		super("Edit Library Parameters");
+		setTitle("Edit Library Parameters");
+		setDescription("Add all necessary information for inserting the library item by editing the Library Parameters...");
 		
 		this.data = data;
 	}
