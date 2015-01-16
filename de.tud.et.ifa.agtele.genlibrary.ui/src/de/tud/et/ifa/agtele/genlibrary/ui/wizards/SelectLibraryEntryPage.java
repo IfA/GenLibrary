@@ -64,7 +64,7 @@ public class SelectLibraryEntryPage extends WizardPage {
 		 */
 		
 		if((genlibViewer.getLibPath() != "") && (selectedLibraryEntry != null)) {
-			if ((selectedLibraryEntry.getMetaData() != null) && (selectedLibraryEntry.getLibraryItem() != null)) {
+			if ((selectedLibraryEntry.getParameterDescription() != null) && (selectedLibraryEntry.getLibraryItem() != null)) {
 				return true;
 			}
 		}

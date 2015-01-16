@@ -21,10 +21,10 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 
-import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeMapper;
-import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerMapper;
-import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceMapper;
-import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.Resource;
+import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeParameter;
+import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerParameter;
+import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceParameter;
+import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ResourceParameter;
 
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.widgets.Button;
@@ -121,8 +121,8 @@ public class EditMetaDataWizardPage extends WizardPage {
 	public void setVisible(boolean visible) {
 		if (visible) {
 			// Attributes
-			if (data.getLibEntry().getMetaData().getAttributeMappers() != null) {
-				for (AbstractAttributeMapper<EObject> attrMapper : data.getLibEntry().getMetaData().getAttributeMappers()) {
+			if (data.getLibEntry().getParameterDescription().getAttributeParameters() != null) {
+				for (AbstractAttributeParameter<EObject> attrMapper : data.getLibEntry().getParameterDescription().getAttributeParameters()) {
 					Label lblNewAttributeLabel = new Label(attributeContainer, SWT.NONE);
 					lblNewAttributeLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
 					lblNewAttributeLabel.setText(attrMapper.eClass().getName());
@@ -134,10 +134,10 @@ public class EditMetaDataWizardPage extends WizardPage {
 				}
 			}
 			// Container
-			if (data.getLibEntry().getMetaData().getContainerMappers() != null) {
+			if (data.getLibEntry().getParameterDescription().getContainerParameters() != null) {
 				
 				// get a HashMap of (eClass, ArrayList{Mapperinstances}) to allow the creation of groups for each type of mapper
-				ContainerMapperHashMap mapperHashMap = new ContainerMapperHashMap(data.getLibEntry().getMetaData().getContainerMappers());
+				ContainerMapperHashMap mapperHashMap = new ContainerMapperHashMap(data.getLibEntry().getParameterDescription().getContainerParameters());
 				
 				// iterate over the different concrete ContainerMapperTypes
 				for (EClass key : mapperHashMap.getContainerMapperHashMap().keySet()) {
@@ -146,8 +146,8 @@ public class EditMetaDataWizardPage extends WizardPage {
 					containerGroup.setText(key.getName());
 					containerGroup.setLayout(new GridLayout(2, false));
 					
-					ArrayList<AbstractContainerMapper<EObject, EObject>> mapperList = mapperHashMap.getContainerMapperHashMap().get(key);
-					for (AbstractContainerMapper<EObject, EObject> mapper : mapperList) {
+					ArrayList<AbstractContainerParameter<EObject, EObject>> mapperList = mapperHashMap.getContainerMapperHashMap().get(key);
+					for (AbstractContainerParameter<EObject, EObject> mapper : mapperList) {
 						Label lblNewContainerLabel = new Label(containerGroup, SWT.NONE);
 						lblNewContainerLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
 						lblNewContainerLabel.setText(mapper.eClass().getEAllGenericSuperTypes().get(0).getETypeArguments().get(1).getEClassifier().getName());
@@ -180,9 +180,9 @@ public class EditMetaDataWizardPage extends WizardPage {
 				}
 			}
 			// ExternalReference
-			if (data.getLibEntry().getMetaData().getExternalReferenceMappers() != null) {
+			if (data.getLibEntry().getParameterDescription().getExternalReferenceParameters() != null) {
 				// get a HashMap of (eClass, ArrayList{Mapperinstances}) to allow the creation of groups for each type of mapper
-				ExtRefMapperHashMap mapperHashMap = new ExtRefMapperHashMap(data.getLibEntry().getMetaData().getExternalReferenceMappers());
+				ExtRefMapperHashMap mapperHashMap = new ExtRefMapperHashMap(data.getLibEntry().getParameterDescription().getExternalReferenceParameters());
 				
 				// iterate over the different concrete ContainerMapperTypes
 				for (EClass key : mapperHashMap.getExtRefMapperHashMap().keySet()) {
@@ -191,8 +191,8 @@ public class EditMetaDataWizardPage extends WizardPage {
 					extRefGroup.setText(key.getName() + " - " + key.getEAllGenericSuperTypes().get(0).getETypeArguments().get(1).getEClassifier().getName());
 					extRefGroup.setLayout(new GridLayout(2, false));
 					
-					ArrayList<AbstractExternalReferenceMapper<EObject, EObject>> mapperList = mapperHashMap.getExtRefMapperHashMap().get(key);
-					for (AbstractExternalReferenceMapper<EObject, EObject> mapper : mapperList) {
+					ArrayList<AbstractExternalReferenceParameter<EObject, EObject>> mapperList = mapperHashMap.getExtRefMapperHashMap().get(key);
+					for (AbstractExternalReferenceParameter<EObject, EObject> mapper : mapperList) {
 						Label lblExtRefLabel = new Label(extRefGroup, SWT.NONE);
 						lblExtRefLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
 						lblExtRefLabel.setText(getEObjectText(mapper.getSource()));
@@ -226,8 +226,8 @@ public class EditMetaDataWizardPage extends WizardPage {
 			}
 			
 			// Resources
-			if (data.getLibEntry().getMetaData().getResources() != null) {
-				for (Resource resMapper : data.getLibEntry().getMetaData().getResources()) {
+			if (data.getLibEntry().getParameterDescription().getResourceParameters() != null) {
+				for (ResourceParameter resMapper : data.getLibEntry().getParameterDescription().getResourceParameters()) {
 					Label lblNewResLabel = new Label(resourcesContainer, SWT.NONE);
 					lblNewResLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
 					lblNewResLabel.setText(resMapper.getName());
@@ -329,49 +329,49 @@ public class EditMetaDataWizardPage extends WizardPage {
 	}
 	
 	class ContainerMapperHashMap {
-		HashMap<EClass, ArrayList<AbstractContainerMapper<EObject, EObject>>> containerMapperHashMap;
+		HashMap<EClass, ArrayList<AbstractContainerParameter<EObject, EObject>>> containerMapperHashMap;
 		
 		/**
 		 * Creates a HashMap of (eClass, ArrayList{Mapperinstances}) for each type of container mapper specified in the meta data
 		 * 
 		 * @param containerMapperList {@link EList} of container mappers
 		 */
-		public ContainerMapperHashMap(EList<AbstractContainerMapper<EObject, EObject>> containerMapperList) {
-			this.containerMapperHashMap = new HashMap<EClass, ArrayList<AbstractContainerMapper<EObject, EObject>>>();
+		public ContainerMapperHashMap(EList<AbstractContainerParameter<EObject, EObject>> containerMapperList) {
+			this.containerMapperHashMap = new HashMap<EClass, ArrayList<AbstractContainerParameter<EObject, EObject>>>();
 			
-			for (AbstractContainerMapper<EObject, EObject> mapper : containerMapperList) {
+			for (AbstractContainerParameter<EObject, EObject> mapper : containerMapperList) {
 				if (!containerMapperHashMap.containsKey(mapper.eClass())) {
-					containerMapperHashMap.put(mapper.eClass(), new ArrayList<AbstractContainerMapper<EObject,EObject>>());
+					containerMapperHashMap.put(mapper.eClass(), new ArrayList<AbstractContainerParameter<EObject,EObject>>());
 				}
 				containerMapperHashMap.get(mapper.eClass()).add(mapper);
 			}
 		}
 		
-		public HashMap<EClass, ArrayList<AbstractContainerMapper<EObject, EObject>>> getContainerMapperHashMap() {
+		public HashMap<EClass, ArrayList<AbstractContainerParameter<EObject, EObject>>> getContainerMapperHashMap() {
 			return containerMapperHashMap;
 		}
 	}
 	
 	class ExtRefMapperHashMap {
-		HashMap<EClass, ArrayList<AbstractExternalReferenceMapper<EObject, EObject>>> extRefMapperHashMap;
+		HashMap<EClass, ArrayList<AbstractExternalReferenceParameter<EObject, EObject>>> extRefMapperHashMap;
 		
 		/**
 		 * Creates a HashMap of (eClass, ArrayList{Mapperinstances}) for each type of external reference mapper specified in the meta data
 		 * 
 		 * @param extRefMapperList {@link EList} of container mappers
 		 */
-		public ExtRefMapperHashMap(EList<AbstractExternalReferenceMapper<EObject, EObject>> extRefMapperList) {
-			this.extRefMapperHashMap = new HashMap<EClass, ArrayList<AbstractExternalReferenceMapper<EObject, EObject>>>();
+		public ExtRefMapperHashMap(EList<AbstractExternalReferenceParameter<EObject, EObject>> extRefMapperList) {
+			this.extRefMapperHashMap = new HashMap<EClass, ArrayList<AbstractExternalReferenceParameter<EObject, EObject>>>();
 			
-			for (AbstractExternalReferenceMapper<EObject, EObject> mapper : extRefMapperList) {
+			for (AbstractExternalReferenceParameter<EObject, EObject> mapper : extRefMapperList) {
 				if (!extRefMapperHashMap.containsKey(mapper.eClass())) {
-					extRefMapperHashMap.put(mapper.eClass(), new ArrayList<AbstractExternalReferenceMapper<EObject,EObject>>());
+					extRefMapperHashMap.put(mapper.eClass(), new ArrayList<AbstractExternalReferenceParameter<EObject,EObject>>());
 				}
 				extRefMapperHashMap.get(mapper.eClass()).add(mapper);
 			}
 		}
 		
-		public HashMap<EClass, ArrayList<AbstractExternalReferenceMapper<EObject, EObject>>> getExtRefMapperHashMap() {
+		public HashMap<EClass, ArrayList<AbstractExternalReferenceParameter<EObject, EObject>>> getExtRefMapperHashMap() {
 			return extRefMapperHashMap;
 		}
 	}
