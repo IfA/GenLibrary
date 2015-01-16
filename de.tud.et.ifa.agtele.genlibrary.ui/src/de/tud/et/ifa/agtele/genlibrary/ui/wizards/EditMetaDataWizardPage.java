@@ -2,17 +2,20 @@ package de.tud.et.ifa.agtele.genlibrary.ui.wizards;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.fieldassist.AutoCompleteField;
 import org.eclipse.jface.fieldassist.ComboContentAdapter;
+import org.eclipse.jface.window.Window;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
@@ -24,6 +27,7 @@ import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenc
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.Resource;
 
 import org.eclipse.swt.custom.CTabFolder;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
@@ -34,7 +38,10 @@ import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.dialogs.SaveAsDialog;
 
 public class EditMetaDataWizardPage extends WizardPage {
 
@@ -86,6 +93,7 @@ public class EditMetaDataWizardPage extends WizardPage {
 		tbtmResources.setText("Resources");
 		
 		resourcesContainer = createScrolledTabContainer(tbtmResources);
+		resourcesContainer.setLayout(new GridLayout(3, false));
 		
 		//tabFolder.setSelection(0);
 	}
@@ -116,7 +124,7 @@ public class EditMetaDataWizardPage extends WizardPage {
 			if (data.getLibEntry().getMetaData().getAttributeMappers() != null) {
 				for (AbstractAttributeMapper<EObject> attrMapper : data.getLibEntry().getMetaData().getAttributeMappers()) {
 					Label lblNewAttributeLabel = new Label(attributeContainer, SWT.NONE);
-					lblNewAttributeLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+					lblNewAttributeLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
 					lblNewAttributeLabel.setText(attrMapper.eClass().getName());
 					
 					Text attributeText = new Text(attributeContainer, SWT.BORDER);
@@ -134,14 +142,14 @@ public class EditMetaDataWizardPage extends WizardPage {
 				// iterate over the different concrete ContainerMapperTypes
 				for (EClass key : mapperHashMap.getContainerMapperHashMap().keySet()) {
 					Group containerGroup = new Group(containerEObjectContainer, SWT.NONE);
-					containerGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
+					containerGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 2, 1));
 					containerGroup.setText(key.getName());
 					containerGroup.setLayout(new GridLayout(2, false));
 					
 					ArrayList<AbstractContainerMapper<EObject, EObject>> mapperList = mapperHashMap.getContainerMapperHashMap().get(key);
 					for (AbstractContainerMapper<EObject, EObject> mapper : mapperList) {
 						Label lblNewContainerLabel = new Label(containerGroup, SWT.NONE);
-						lblNewContainerLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+						lblNewContainerLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
 						lblNewContainerLabel.setText(mapper.eClass().getEAllGenericSuperTypes().get(0).getETypeArguments().get(1).getEClassifier().getName());
 						
 						// a combo box to select the target ePackage
@@ -173,21 +181,20 @@ public class EditMetaDataWizardPage extends WizardPage {
 			}
 			// ExternalReference
 			if (data.getLibEntry().getMetaData().getExternalReferenceMappers() != null) {
-				// TODO create the same weird stuff that has been started for the ContainerMapper
 				// get a HashMap of (eClass, ArrayList{Mapperinstances}) to allow the creation of groups for each type of mapper
 				ExtRefMapperHashMap mapperHashMap = new ExtRefMapperHashMap(data.getLibEntry().getMetaData().getExternalReferenceMappers());
 				
 				// iterate over the different concrete ContainerMapperTypes
 				for (EClass key : mapperHashMap.getExtRefMapperHashMap().keySet()) {
 					Group extRefGroup = new Group(externalReferencesContainer, SWT.NONE);
-					extRefGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
+					extRefGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 2, 1));
 					extRefGroup.setText(key.getName() + " - " + key.getEAllGenericSuperTypes().get(0).getETypeArguments().get(1).getEClassifier().getName());
 					extRefGroup.setLayout(new GridLayout(2, false));
 					
 					ArrayList<AbstractExternalReferenceMapper<EObject, EObject>> mapperList = mapperHashMap.getExtRefMapperHashMap().get(key);
 					for (AbstractExternalReferenceMapper<EObject, EObject> mapper : mapperList) {
 						Label lblExtRefLabel = new Label(extRefGroup, SWT.NONE);
-						lblExtRefLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+						lblExtRefLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
 						lblExtRefLabel.setText(getEObjectText(mapper.getSource()));
 						
 						// a combo box to select the target ePackage
@@ -222,12 +229,44 @@ public class EditMetaDataWizardPage extends WizardPage {
 			if (data.getLibEntry().getMetaData().getResources() != null) {
 				for (Resource resMapper : data.getLibEntry().getMetaData().getResources()) {
 					Label lblNewResLabel = new Label(resourcesContainer, SWT.NONE);
-					lblNewResLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+					lblNewResLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
 					lblNewResLabel.setText(resMapper.getName());
 					
-					// TODO insert predifined locations in the project and create project folder selector
+					// TODO insert predefined locations in the project and create project folder selector
 					Text resText = new Text(resourcesContainer, SWT.BORDER);
 					resText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+					
+					Button selectDir = new Button(resourcesContainer, SWT.PUSH);
+					selectDir.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+					selectDir.setText("Select Dir...");
+					
+					selectDir.addSelectionListener(new SelectionListener() {
+						
+						@Override
+						public void widgetSelected(SelectionEvent e) {
+							SaveAsDialog dirDialog = new SaveAsDialog(getShell());
+//							dirDialog.setOriginalName(resMapper.getName());
+							IFile res = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(data.geteObject().eResource().getURI().toPlatformString(true))).getParent().getFile(new Path(resMapper.getName()));
+							dirDialog.setOriginalFile(res);
+							
+							if(dirDialog.open() == Window.OK){
+								IPath path= dirDialog.getResult();
+								resText.setText(path.toString());
+							}
+						}
+						
+						@Override
+						public void widgetDefaultSelected(SelectionEvent e) {
+							// TODO Auto-generated method stub
+							
+						}
+					});
+					
+//					DirectoryFieldEditor selectDir = new DirectoryFieldEditor("selectDir", resMapper.getName(), resourcesContainer);
+//					File source = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(data.geteObject().eResource().getURI().toPlatformString(true))).getParent().getLocation().toFile();
+//					selectDir.setFilterPath(source);
+
+					
 				}
 			}
 			
@@ -250,16 +289,15 @@ public class EditMetaDataWizardPage extends WizardPage {
 	private HashMap<String, EObject> getValidElements(EClassifier eClassifier) {
 		HashMap<String, EObject> map = new HashMap<String, EObject>();
 		
-		// TODO get valid Elements
+		// get valid Elements
 		TreeIterator<EObject> it = data.geteObject().eResource().getAllContents();
 
 		
 		while (it.hasNext()) {
 			EObject object = (EObject) it.next();
 			if (eClassifier.isInstance(object)) {
-//				map.put(object, object);	
+				// add {generatedName, eobject} to the map of valid elements
 				map.put(getEObjectText(object), object);
-				// TODO need generic way to find a name / id to display
 			}
 		}
 		
