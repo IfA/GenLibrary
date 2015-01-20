@@ -298,7 +298,7 @@ public class GenlibraryViewer extends Composite {
 		grpDetails = new Group(libEntrySelectionContainer, SWT.NONE);
 		grpDetails.setLayout(new GridLayout(1, false));
 		GridData gd_grpDetails = new GridData(SWT.LEFT, SWT.FILL, false, true, 1, 1);
-		gd_grpDetails.widthHint = 180;
+		gd_grpDetails.widthHint = 200;
 		grpDetails.setLayoutData(gd_grpDetails);
 		grpDetails.setText("Details");
 		
@@ -324,10 +324,10 @@ public class GenlibraryViewer extends Composite {
 		lblVersionValue = new Label(composite, SWT.NONE);
 		lblVersionValue.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
 		
-		// Details: Description
-		Label lblDescription = new Label(composite, SWT.NONE);
-		lblDescription.setText("Description:");
-		new Label(composite, SWT.NONE);
+//		// Details: Description
+//		Label lblDescription = new Label(composite, SWT.NONE);
+//		lblDescription.setText("Description:");
+//		new Label(composite, SWT.NONE);
 		
 		lblDescriptionvalue = new Label(composite, SWT.WRAP);
 		GridData gd = new GridData(SWT.LEFT, SWT.TOP, true, false, 2, 1);

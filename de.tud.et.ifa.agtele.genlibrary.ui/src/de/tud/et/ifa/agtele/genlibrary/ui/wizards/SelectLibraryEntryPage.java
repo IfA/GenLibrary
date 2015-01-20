@@ -23,7 +23,7 @@ public class SelectLibraryEntryPage extends WizardPage {
 	protected SelectLibraryEntryPage(AddGenlibraryEntryWizardData data) {
 		super("Select LibraryEntry");
 		setTitle("Select LibraryEntry");
-		setDescription("Select the library entry that should be added to target model...");
+		setDescription("Select the library entry that should be added to the target model...");
 		
 		this.data = data;
 	}
