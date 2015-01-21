@@ -67,6 +67,8 @@ public class GenlibraryViewer extends Composite {
 	private LibraryContext libraryContext;
 	private LibraryPathParser libraryPathParser;
 	private LibraryPlugin library;
+	private Label lblAuthor;
+	private Label lblAuthorValue;
 	
 	/**
 	 * Creates a Widget that allows the selection of a genlibrary Path and displays the {@link LibraryEntry}s of the library located at this path
@@ -249,6 +251,7 @@ public class GenlibraryViewer extends Composite {
 				lblNamevalue.setText("");
 				lblNamevalue.setToolTipText("");
 				lblVersionValue.setText("");
+				lblAuthorValue.setText("");
 				lblDescriptionvalue.setText("");
 				lblThumb.setImage(null);
 				if (thumbnail != null) thumbnail.dispose();
@@ -263,6 +266,7 @@ public class GenlibraryViewer extends Composite {
 							lblNamevalue.setText(td.getName());
 							lblNamevalue.setToolTipText(td.getClassPath());
 							lblVersionValue.setText(libEntry.getVersion());
+							lblAuthorValue.setText(libEntry.getAuthor());
 							if (libEntry.getDescription() != null) {
 								lblDescriptionvalue.setText(libEntry.getDescription());
 							}
@@ -323,6 +327,12 @@ public class GenlibraryViewer extends Composite {
 		
 		lblVersionValue = new Label(composite, SWT.NONE);
 		lblVersionValue.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
+		
+		lblAuthor = new Label(composite, SWT.NONE);
+		lblAuthor.setText("Author:");
+		
+		lblAuthorValue = new Label(composite, SWT.NONE);
+		lblAuthorValue.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
 		
 //		// Details: Description
 //		Label lblDescription = new Label(composite, SWT.NONE);
