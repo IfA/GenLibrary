@@ -111,13 +111,22 @@ public interface GenLibraryPackage extends EPackage {
 	int LIBRARY_ENTRY__THUMBNAIL = 4;
 
 	/**
+	 * The feature id for the '<em><b>Author</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIBRARY_ENTRY__AUTHOR = 5;
+
+	/**
 	 * The number of structural features of the '<em>Library Entry</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIBRARY_ENTRY_FEATURE_COUNT = 5;
+	int LIBRARY_ENTRY_FEATURE_COUNT = 6;
 
 	/**
 	 * The meta object id for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.LibraryImpl <em>Library</em>}' class.
@@ -472,6 +481,17 @@ public interface GenLibraryPackage extends EPackage {
 	EAttribute getLibraryEntry_Thumbnail();
 
 	/**
+	 * Returns the meta object for the attribute '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry#getAuthor <em>Author</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Author</em>'.
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry#getAuthor()
+	 * @see #getLibraryEntry()
+	 * @generated
+	 */
+	EAttribute getLibraryEntry_Author();
+
+	/**
 	 * Returns the meta object for class '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.Library <em>Library</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -787,6 +807,14 @@ public interface GenLibraryPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute LIBRARY_ENTRY__THUMBNAIL = eINSTANCE.getLibraryEntry_Thumbnail();
+
+		/**
+		 * The meta object literal for the '<em><b>Author</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LIBRARY_ENTRY__AUTHOR = eINSTANCE.getLibraryEntry_Author();
 
 		/**
 		 * The meta object literal for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.LibraryImpl <em>Library</em>}' class.

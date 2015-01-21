@@ -12,12 +12,8 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>
- * {@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeParameter#getSource
- * <em>Source</em>}</li>
- * <li>
- * {@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeParameter#getNewValue
- * <em>New Value</em>}</li>
+ *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeParameter#getSource <em>Source</em>}</li>
+ *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeParameter#getNewValue <em>New Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -88,7 +84,6 @@ public interface AbstractAttributeParameter<AttributeParameterSourceType> extend
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model kind="operation" required="true"
 	 * @generated
 	 */

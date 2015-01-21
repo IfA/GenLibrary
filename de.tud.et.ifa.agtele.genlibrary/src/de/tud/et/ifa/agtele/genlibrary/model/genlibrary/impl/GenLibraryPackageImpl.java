@@ -201,6 +201,15 @@ public class GenLibraryPackageImpl extends EPackageImpl implements GenLibraryPac
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getLibraryEntry_Author() {
+		return (EAttribute)libraryEntryEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -440,6 +449,7 @@ public class GenLibraryPackageImpl extends EPackageImpl implements GenLibraryPac
 		createEReference(libraryEntryEClass, LIBRARY_ENTRY__PARAMETER_DESCRIPTION);
 		createEAttribute(libraryEntryEClass, LIBRARY_ENTRY__DESCRIPTION);
 		createEAttribute(libraryEntryEClass, LIBRARY_ENTRY__THUMBNAIL);
+		createEAttribute(libraryEntryEClass, LIBRARY_ENTRY__AUTHOR);
 
 		libraryEClass = createEClass(LIBRARY);
 		createEAttribute(libraryEClass, LIBRARY__CHECKSUM);
@@ -513,6 +523,7 @@ public class GenLibraryPackageImpl extends EPackageImpl implements GenLibraryPac
 		initEReference(getLibraryEntry_ParameterDescription(), this.getParameterDescription(), null, "parameterDescription", null, 1, 1, LibraryEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLibraryEntry_Description(), ecorePackage.getEString(), "description", null, 0, 1, LibraryEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLibraryEntry_Thumbnail(), ecorePackage.getEString(), "thumbnail", null, 0, 1, LibraryEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLibraryEntry_Author(), ecorePackage.getEString(), "author", "unknown", 1, 1, LibraryEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(libraryEClass, Library.class, "Library", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getLibrary_Checksum(), ecorePackage.getEString(), "Checksum", null, 1, 1, Library.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

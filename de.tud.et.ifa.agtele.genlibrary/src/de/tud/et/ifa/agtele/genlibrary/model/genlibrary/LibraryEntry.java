@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry#getParameterDescription <em>Parameter Description</em>}</li>
  *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry#getDescription <em>Description</em>}</li>
  *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry#getThumbnail <em>Thumbnail</em>}</li>
+ *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry#getAuthor <em>Author</em>}</li>
  * </ul>
  * </p>
  *
@@ -154,5 +155,32 @@ public interface LibraryEntry extends EObject {
 	 * @generated
 	 */
 	void setThumbnail(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Author</b></em>' attribute.
+	 * The default value is <code>"unknown"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Author</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Author</em>' attribute.
+	 * @see #setAuthor(String)
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.GenLibraryPackage#getLibraryEntry_Author()
+	 * @model default="unknown" required="true"
+	 * @generated
+	 */
+	String getAuthor();
+
+	/**
+	 * Sets the value of the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry#getAuthor <em>Author</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Author</em>' attribute.
+	 * @see #getAuthor()
+	 * @generated
+	 */
+	void setAuthor(String value);
 
 } // LibraryEntry

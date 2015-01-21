@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.LibraryEntryImpl#getParameterDescription <em>Parameter Description</em>}</li>
  *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.LibraryEntryImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.LibraryEntryImpl#getThumbnail <em>Thumbnail</em>}</li>
+ *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.LibraryEntryImpl#getAuthor <em>Author</em>}</li>
  * </ul>
  * </p>
  *
@@ -111,6 +112,26 @@ public class LibraryEntryImpl extends EObjectImpl implements LibraryEntry {
 	 * @ordered
 	 */
 	protected String thumbnail = THUMBNAIL_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getAuthor() <em>Author</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAuthor()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String AUTHOR_EDEFAULT = "unknown";
+
+	/**
+	 * The cached value of the '{@link #getAuthor() <em>Author</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAuthor()
+	 * @generated
+	 * @ordered
+	 */
+	protected String author = AUTHOR_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -285,6 +306,27 @@ public class LibraryEntryImpl extends EObjectImpl implements LibraryEntry {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getAuthor() {
+		return author;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAuthor(String newAuthor) {
+		String oldAuthor = author;
+		author = newAuthor;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, GenLibraryPackage.LIBRARY_ENTRY__AUTHOR, oldAuthor, author));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -314,6 +356,8 @@ public class LibraryEntryImpl extends EObjectImpl implements LibraryEntry {
 				return getDescription();
 			case GenLibraryPackage.LIBRARY_ENTRY__THUMBNAIL:
 				return getThumbnail();
+			case GenLibraryPackage.LIBRARY_ENTRY__AUTHOR:
+				return getAuthor();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -340,6 +384,9 @@ public class LibraryEntryImpl extends EObjectImpl implements LibraryEntry {
 				return;
 			case GenLibraryPackage.LIBRARY_ENTRY__THUMBNAIL:
 				setThumbnail((String)newValue);
+				return;
+			case GenLibraryPackage.LIBRARY_ENTRY__AUTHOR:
+				setAuthor((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -368,6 +415,9 @@ public class LibraryEntryImpl extends EObjectImpl implements LibraryEntry {
 			case GenLibraryPackage.LIBRARY_ENTRY__THUMBNAIL:
 				setThumbnail(THUMBNAIL_EDEFAULT);
 				return;
+			case GenLibraryPackage.LIBRARY_ENTRY__AUTHOR:
+				setAuthor(AUTHOR_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -390,6 +440,8 @@ public class LibraryEntryImpl extends EObjectImpl implements LibraryEntry {
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 			case GenLibraryPackage.LIBRARY_ENTRY__THUMBNAIL:
 				return THUMBNAIL_EDEFAULT == null ? thumbnail != null : !THUMBNAIL_EDEFAULT.equals(thumbnail);
+			case GenLibraryPackage.LIBRARY_ENTRY__AUTHOR:
+				return AUTHOR_EDEFAULT == null ? author != null : !AUTHOR_EDEFAULT.equals(author);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -410,6 +462,8 @@ public class LibraryEntryImpl extends EObjectImpl implements LibraryEntry {
 		result.append(description);
 		result.append(", thumbnail: ");
 		result.append(thumbnail);
+		result.append(", author: ");
+		result.append(author);
 		result.append(')');
 		return result.toString();
 	}
