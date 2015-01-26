@@ -47,5 +47,14 @@ public class AddGenlibraryEntryWizard extends Wizard {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	@Override
+	public boolean canFinish() {
+		if((getContainer().getCurrentPage() == two) && two.canFlipToNextPage()) {
+			return true;
+		}
+		return false;
+//		return (getContainer().getCurrentPage() == two);
+	}
 
 }
