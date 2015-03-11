@@ -13,11 +13,30 @@ import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ParameterDescription;
 public interface LibraryPlugin {
 
 	/**
-	 * This initializes the library by setting the path to the library folder,
-	 * the context of the library and the path parser of the library.
-	 * Furthermore, it checks an existing/creates a new 'lib.xmi' file that
-	 * holds the index of the contents of the library. \n This function has to
-	 * be called once before using the library.
+	 * This performs a basic initialization of the library by setting the
+	 * {@link LibraryContext} of the library and its {@link LibraryPathParser}.
+	 * While this allows for the insertion of a {@link LibraryEntry} into a
+	 * target model, the retrieving of {@link LibraryEntry}s is only supported
+	 * if the method {@link #init(String, LibraryContext, LibraryPathParser)} is
+	 * called instead.</br></br>
+	 * 
+	 * @param librarycontext
+	 *            The context of the library providing method implementations
+	 *            that are custom to the used genlib plugin.
+	 * @param parser
+	 *            The parser used for library paths.
+	 */
+	public void init(LibraryContext librarycontext, LibraryPathParser parser);
+
+	/**
+	 * This performs a complete initialization of the library by setting the
+	 * path to the library folder, the context of the library and the path
+	 * parser of the library. Furthermore, it checks an existing/creates a new
+	 * 'lib.xmi' file that holds the index of the contents of the
+	 * library.</br></br>
+	 * 
+	 * <b>This function has to be called once before the complete functionality
+	 * of the library can be used.</b>
 	 * 
 	 * @param libpath
 	 *            The absolute path of the library folder to be used.

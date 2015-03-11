@@ -54,24 +54,52 @@ public class LibraryPluginImpl implements LibraryPlugin {
 
 	}
 
+	/**
+	 * This holds the initialization algorithms that are common to
+	 * {@link #init(LibraryContext, LibraryPathParser)} and
+	 * {@link #init(String, LibraryContext, LibraryPathParser)}.
+	 * 
+	 * @param librarycontext
+	 *            The context of the library providing method implementations
+	 *            that are custom to the used genlib plugin.
+	 * @param parser
+	 *            The parser used for library paths.
+	 */
+	private void basicInit(LibraryContext librarycontext, LibraryPathParser parser) {
+
+		this.libraryContext = librarycontext;
+		this.parser = parser;
+
+		GenLibraryPackageImpl.init();
+		GenLibraryFactoryImpl.init();
+
+		this.libraryContext.init();
+	}
+
+	@Override
+	public void init(LibraryContext librarycontext, LibraryPathParser parser) {
+		System.out.println("Init Library without a LibraryPath! ");
+		System.out.println("Version: " + version);
+
+		basicInit(librarycontext, parser);
+
+		System.out.println("Initialisation complete...");
+	}
+
 	@Override
 	public void init(String libpath, LibraryContext librarycontext, LibraryPathParser parser) {
 		System.out.println("Init Library! " + libpath);
 		System.out.println("Version: " + version);
 
-		this.libraryContext = librarycontext;
-		this.parser = parser;
 		this.fileparser = new FileParserImpl();
+
+		basicInit(librarycontext, parser);
+
+		GenLibraryFactoryImpl lf = (GenLibraryFactoryImpl) GenLibraryFactoryImpl.eINSTANCE;
 
 		libpathparser = new LibraryPathParserImpl();
 		LibraryPath librarypath = libpathparser.parse(libpath);
 		Path pathToLibrary = new File(librarypath.getPath()).toPath();
-
-		GenLibraryPackageImpl.init();
-		GenLibraryFactoryImpl.init();
-		GenLibraryFactoryImpl lf = (GenLibraryFactoryImpl) GenLibraryFactoryImpl.eINSTANCE;
-
-		this.libraryContext.init();
 
 		URI libXMI = URI.createFileURI(librarypath.getPath() + File.separator + "lib.xmi");
 		XMIResource resource = new XMIResourceImpl(libXMI);
