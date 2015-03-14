@@ -35,8 +35,9 @@ public interface LibraryPlugin {
 	 * 'lib.xmi' file that holds the index of the contents of the
 	 * library.</br></br>
 	 * 
-	 * <b>This function has to be called once before the complete functionality
-	 * of the library can be used.</b>
+	 * A call to this function is equal to subsequent calls of
+	 * {@link #init(LibraryContext, LibraryPathParser)} and
+	 * {@link #setLibPath(String)}.
 	 * 
 	 * @param libpath
 	 *            The absolute path of the library folder to be used.
@@ -47,6 +48,16 @@ public interface LibraryPlugin {
 	 *            The parser used for library paths.
 	 */
 	public void init(String libpath, LibraryContext librarycontext, LibraryPathParser parser);
+
+	/**
+	 * This sets the active path to the library folder. Furthermore, it checks
+	 * an existing/creates a new 'lib.xmi' file that holds the index of the
+	 * contents of the library.</br></br>
+	 * 
+	 * @param libpath
+	 *            The absolute path of the library folder to be used.
+	 */
+	public void setLibPath(String libpath);
 
 	/**
 	 * This function checks if an element exists in the library (resp. in its

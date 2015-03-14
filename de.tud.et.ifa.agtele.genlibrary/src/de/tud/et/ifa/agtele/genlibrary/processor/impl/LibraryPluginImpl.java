@@ -69,6 +69,7 @@ public class LibraryPluginImpl implements LibraryPlugin {
 
 		this.libraryContext = librarycontext;
 		this.parser = parser;
+		this.fileparser = new FileParserImpl();
 
 		GenLibraryPackageImpl.init();
 		GenLibraryFactoryImpl.init();
@@ -91,10 +92,15 @@ public class LibraryPluginImpl implements LibraryPlugin {
 		System.out.println("Init Library! " + libpath);
 		System.out.println("Version: " + version);
 
-		this.fileparser = new FileParserImpl();
-
 		basicInit(librarycontext, parser);
 
+		setLibPath(libpath);
+
+		System.out.println("Initialisation complete...");
+	}
+
+	@Override
+	public void setLibPath(String libpath) {
 		GenLibraryFactoryImpl lf = (GenLibraryFactoryImpl) GenLibraryFactoryImpl.eINSTANCE;
 
 		libpathparser = new LibraryPathParserImpl();
@@ -133,7 +139,6 @@ public class LibraryPluginImpl implements LibraryPlugin {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("Initialisation complete...");
 	}
 
 	@Override
