@@ -68,7 +68,7 @@ public class LibraryPluginImpl implements LibraryPlugin {
 	private void basicInit(LibraryContext librarycontext, LibraryPathParser parser) {
 
 		this.libraryContext = librarycontext;
-		this.parser = parser;
+		this.parser = parser != null ? parser : new DefaultLibraryPathParser();
 		this.fileparser = new FileParserImpl();
 
 		GenLibraryPackageImpl.init();
