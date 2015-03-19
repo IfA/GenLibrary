@@ -14,7 +14,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.emf.ecore.xmi;bundle-version="2.7.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
-Export-Package: de.tud.et.ifa.agtele.genlibrary.model.genlibrary,
+Export-Package: de.tud.et.ifa.agtele.genlibrary,
+ de.tud.et.ifa.agtele.genlibrary.model.genlibrary,
  de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl,
  de.tud.et.ifa.agtele.genlibrary.model.genlibrary.util,
  de.tud.et.ifa.agtele.genlibrary.processor.impl,
