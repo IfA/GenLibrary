@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: de.tud.et.ifa.agtele.genlibrary.edit;singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 1.0.10.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: de.tud.et.ifa.agtele.genlibrary.provider.GenLibraryEditPlugin$Implementation
 Bundle-Vendor: %providerName
