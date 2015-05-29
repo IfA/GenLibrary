@@ -24,6 +24,7 @@ import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenc
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.GenLibraryPackage;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ParameterDescription;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ResourceParameter;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -263,6 +264,24 @@ public class ParameterDescriptionImpl extends EObjectImpl implements ParameterDe
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case GenLibraryPackage.PARAMETER_DESCRIPTION___GET_EXTERNAL_REFERENCE_PARAMETERS:
+				return getExternalReferenceParameters();
+			case GenLibraryPackage.PARAMETER_DESCRIPTION___GET_CONTAINER_PARAMETERS:
+				return getContainerParameters();
+			case GenLibraryPackage.PARAMETER_DESCRIPTION___GET_ATTRIBUTE_PARAMETERS:
+				return getAttributeParameters();
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

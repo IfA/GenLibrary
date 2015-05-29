@@ -4,6 +4,7 @@ package de.tud.et.ifa.agtele.genlibrary.model.genlibrary;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -129,6 +130,15 @@ public interface GenLibraryPackage extends EPackage {
 	int LIBRARY_ENTRY_FEATURE_COUNT = 6;
 
 	/**
+	 * The number of operations of the '<em>Library Entry</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIBRARY_ENTRY_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.LibraryImpl <em>Library</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -164,6 +174,15 @@ public interface GenLibraryPackage extends EPackage {
 	 * @ordered
 	 */
 	int LIBRARY_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Library</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIBRARY_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.ItemImpl <em>Item</em>}' class.
@@ -212,6 +231,15 @@ public interface GenLibraryPackage extends EPackage {
 	int ITEM_FEATURE_COUNT = 3;
 
 	/**
+	 * The number of operations of the '<em>Item</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITEM_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.LibraryItemImpl <em>Library Item</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -229,6 +257,15 @@ public interface GenLibraryPackage extends EPackage {
 	 * @ordered
 	 */
 	int LIBRARY_ITEM_FEATURE_COUNT = 0;
+
+	/**
+	 * The number of operations of the '<em>Library Item</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIBRARY_ITEM_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.ParameterDescriptionImpl <em>Parameter Description</em>}' class.
@@ -268,6 +305,42 @@ public interface GenLibraryPackage extends EPackage {
 	int PARAMETER_DESCRIPTION_FEATURE_COUNT = 2;
 
 	/**
+	 * The operation id for the '<em>Get External Reference Parameters</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER_DESCRIPTION___GET_EXTERNAL_REFERENCE_PARAMETERS = 0;
+
+	/**
+	 * The operation id for the '<em>Get Container Parameters</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER_DESCRIPTION___GET_CONTAINER_PARAMETERS = 1;
+
+	/**
+	 * The operation id for the '<em>Get Attribute Parameters</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER_DESCRIPTION___GET_ATTRIBUTE_PARAMETERS = 2;
+
+	/**
+	 * The number of operations of the '<em>Parameter Description</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER_DESCRIPTION_OPERATION_COUNT = 3;
+
+	/**
 	 * The meta object id for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.ResourceParameterImpl <em>Resource Parameter</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -303,6 +376,15 @@ public interface GenLibraryPackage extends EPackage {
 	 * @ordered
 	 */
 	int RESOURCE_PARAMETER_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Resource Parameter</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESOURCE_PARAMETER_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceParameter <em>Abstract External Reference Parameter</em>}' class.
@@ -342,6 +424,15 @@ public interface GenLibraryPackage extends EPackage {
 	int ABSTRACT_EXTERNAL_REFERENCE_PARAMETER_FEATURE_COUNT = 2;
 
 	/**
+	 * The number of operations of the '<em>Abstract External Reference Parameter</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_EXTERNAL_REFERENCE_PARAMETER_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerParameter <em>Abstract Container Parameter</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -379,6 +470,24 @@ public interface GenLibraryPackage extends EPackage {
 	int ABSTRACT_CONTAINER_PARAMETER_FEATURE_COUNT = 2;
 
 	/**
+	 * The operation id for the '<em>Get Reference</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_CONTAINER_PARAMETER___GET_REFERENCE = 0;
+
+	/**
+	 * The number of operations of the '<em>Abstract Container Parameter</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_CONTAINER_PARAMETER_OPERATION_COUNT = 1;
+
+	/**
 	 * The meta object id for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeParameter <em>Abstract Attribute Parameter</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -414,6 +523,24 @@ public interface GenLibraryPackage extends EPackage {
 	 * @ordered
 	 */
 	int ABSTRACT_ATTRIBUTE_PARAMETER_FEATURE_COUNT = 2;
+
+	/**
+	 * The operation id for the '<em>Get Attribute</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_ATTRIBUTE_PARAMETER___GET_ATTRIBUTE = 0;
+
+	/**
+	 * The number of operations of the '<em>Abstract Attribute Parameter</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_ATTRIBUTE_PARAMETER_OPERATION_COUNT = 1;
 
 	/**
 	 * Returns the meta object for class '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry <em>Library Entry</em>}'.
@@ -609,6 +736,36 @@ public interface GenLibraryPackage extends EPackage {
 	EAttribute getParameterDescription_ID();
 
 	/**
+	 * Returns the meta object for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ParameterDescription#getExternalReferenceParameters() <em>Get External Reference Parameters</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get External Reference Parameters</em>' operation.
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ParameterDescription#getExternalReferenceParameters()
+	 * @generated
+	 */
+	EOperation getParameterDescription__GetExternalReferenceParameters();
+
+	/**
+	 * Returns the meta object for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ParameterDescription#getContainerParameters() <em>Get Container Parameters</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Container Parameters</em>' operation.
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ParameterDescription#getContainerParameters()
+	 * @generated
+	 */
+	EOperation getParameterDescription__GetContainerParameters();
+
+	/**
+	 * Returns the meta object for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ParameterDescription#getAttributeParameters() <em>Get Attribute Parameters</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Attribute Parameters</em>' operation.
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ParameterDescription#getAttributeParameters()
+	 * @generated
+	 */
+	EOperation getParameterDescription__GetAttributeParameters();
+
+	/**
 	 * Returns the meta object for class '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ResourceParameter <em>Resource Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -705,6 +862,16 @@ public interface GenLibraryPackage extends EPackage {
 	EReference getAbstractContainerParameter_Container();
 
 	/**
+	 * Returns the meta object for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerParameter#getReference() <em>Get Reference</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Reference</em>' operation.
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerParameter#getReference()
+	 * @generated
+	 */
+	EOperation getAbstractContainerParameter__GetReference();
+
+	/**
 	 * Returns the meta object for class '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeParameter <em>Abstract Attribute Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -735,6 +902,16 @@ public interface GenLibraryPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAbstractAttributeParameter_NewValue();
+
+	/**
+	 * Returns the meta object for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeParameter#getAttribute() <em>Get Attribute</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Attribute</em>' operation.
+	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeParameter#getAttribute()
+	 * @generated
+	 */
+	EOperation getAbstractAttributeParameter__GetAttribute();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -913,6 +1090,30 @@ public interface GenLibraryPackage extends EPackage {
 		EAttribute PARAMETER_DESCRIPTION__ID = eINSTANCE.getParameterDescription_ID();
 
 		/**
+		 * The meta object literal for the '<em><b>Get External Reference Parameters</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation PARAMETER_DESCRIPTION___GET_EXTERNAL_REFERENCE_PARAMETERS = eINSTANCE.getParameterDescription__GetExternalReferenceParameters();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Container Parameters</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation PARAMETER_DESCRIPTION___GET_CONTAINER_PARAMETERS = eINSTANCE.getParameterDescription__GetContainerParameters();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Attribute Parameters</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation PARAMETER_DESCRIPTION___GET_ATTRIBUTE_PARAMETERS = eINSTANCE.getParameterDescription__GetAttributeParameters();
+
+		/**
 		 * The meta object literal for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.ResourceParameterImpl <em>Resource Parameter</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -991,6 +1192,14 @@ public interface GenLibraryPackage extends EPackage {
 		EReference ABSTRACT_CONTAINER_PARAMETER__CONTAINER = eINSTANCE.getAbstractContainerParameter_Container();
 
 		/**
+		 * The meta object literal for the '<em><b>Get Reference</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ABSTRACT_CONTAINER_PARAMETER___GET_REFERENCE = eINSTANCE.getAbstractContainerParameter__GetReference();
+
+		/**
 		 * The meta object literal for the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeParameter <em>Abstract Attribute Parameter</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1015,6 +1224,14 @@ public interface GenLibraryPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ABSTRACT_ATTRIBUTE_PARAMETER__NEW_VALUE = eINSTANCE.getAbstractAttributeParameter_NewValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Attribute</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ABSTRACT_ATTRIBUTE_PARAMETER___GET_ATTRIBUTE = eINSTANCE.getAbstractAttributeParameter__GetAttribute();
 
 	}
 
