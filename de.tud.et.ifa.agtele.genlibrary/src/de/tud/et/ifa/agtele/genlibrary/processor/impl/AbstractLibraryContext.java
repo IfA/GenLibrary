@@ -141,6 +141,10 @@ public abstract class AbstractLibraryContext implements LibraryContext {
 		// this is the object that we want to add to the new container
 		EObject source = containerParameter.getSource();
 
+		if (container == null) {
+			throw new RuntimeException("The containerParameter for element '" + source + "' does not specify a container!");
+		}
+
 		// this is the feature that shall be used as container reference
 		EReference reference = containerParameter.getReference();
 		if (!reference.isContainment()) {
