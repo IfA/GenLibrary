@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.emf.common.CommonPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.xmi.XMIResource;
@@ -174,6 +175,7 @@ public class LibraryPluginImpl implements LibraryPlugin {
 				ResourceParameter resourceParameter = lf.createResourceParameter();
 
 				resourceParameter.setName(getFilename(respathes.get(i), getResultingElementLibraryPath(item.getKey())));
+				resourceParameter.setNewPath(libraryContext.getDefaultResourcePath(respathes.get(i)));
 
 				entry.getParameterDescription().getResourceParameters().add(resourceParameter);
 			}
@@ -206,6 +208,9 @@ public class LibraryPluginImpl implements LibraryPlugin {
 		for (ResourceParameter res : resourceParameters) {
 			if (res.getNewPath() != null && !res.getNewPath().isEmpty()) {
 				LibraryPath newrespath = libpathparser.parse(res.getNewPath());
+				if (!new org.eclipse.core.runtime.Path(newrespath.getPath()).isAbsolute()) {
+					newrespath.setPath((new org.eclipse.core.runtime.Path(targetModel.eResource().getURI().trimSegments(1).toString())) + File.separator + newrespath.getPath());
+				}
 				copyResourceTo(item, fileitem, res.getName(), newrespath);
 			}
 
@@ -398,7 +403,16 @@ public class LibraryPluginImpl implements LibraryPlugin {
 		FileOutputStream fos = null;
 		try {
 
-			File outputfile = new File(pathTo.getPath());
+			URI uri = URI.createURI(pathTo.getPath());
+			String fileString;
+			if (uri.isPlatformResource()) {
+				fileString = CommonPlugin.asLocalURI(uri).toFileString();
+			} else if (uri.isFile() || uri.hasAbsolutePath()) {
+				fileString = pathTo.getPath();
+			} else {
+				throw new RuntimeException("Unknown URI scheme: " + pathTo.getPath());
+			}
+			File outputfile = new File(fileString);
 
 			File parent = outputfile.getParentFile();
 			if (!parent.exists()) {

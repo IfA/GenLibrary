@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.EObject;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryItem;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ParameterDescription;
+import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ResourceParameter;
 
 public interface LibraryContext {
 
@@ -68,5 +69,16 @@ public interface LibraryContext {
 
 	@Deprecated
 	public ParameterDescription getNewMetaData();
+
+	/**
+	 * This returns a default value for the path where all resource that are
+	 * referenced by a {@link ResourceParameter} shall be stored.
+	 * 
+	 * @param resourcePathInsideLibrary
+	 *            The path inside a library to the file for which the path shall
+	 *            be returned.
+	 * @return A relative path where the resource shall be stored.
+	 */
+	public String getDefaultResourcePath(String resourcePathInsideLibrary);
 
 }

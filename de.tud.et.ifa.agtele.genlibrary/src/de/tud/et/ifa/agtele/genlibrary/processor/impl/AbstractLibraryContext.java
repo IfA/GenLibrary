@@ -1,5 +1,6 @@
 package de.tud.et.ifa.agtele.genlibrary.processor.impl;
 
+import java.io.File;
 import java.util.Collection;
 
 import org.eclipse.emf.common.util.BasicEList;
@@ -72,6 +73,11 @@ public abstract class AbstractLibraryContext implements LibraryContext {
 		// handle the attribute Parameters
 		applyAttributeParameters(libraryEntry.getParameterDescription().getAttributeParameters());
 
+	}
+
+	@Override
+	public String getDefaultResourcePath(String resourcePathInsideLibrary) {
+		return "res" + File.separator + resourcePathInsideLibrary.replace("/", "_");
 	}
 
 	/**
