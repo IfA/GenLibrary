@@ -1,9 +1,11 @@
 package de.tud.et.ifa.agtele.genlibrary.ui.wizards;
 
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.wizard.Wizard;
 
 import de.tud.et.ifa.agtele.genlibrary.processor.impl.LibraryPluginImpl;
+import de.tud.et.ifa.agtele.resources.ResourceHelper;
 
 /**
  * This wizard handles the import of an {@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry LibraryEntry} into a target model.
@@ -52,6 +54,10 @@ public class AddGenlibraryEntryWizard extends Wizard {
 				EcoreUtil.getRootContainer(data.geteObject()), 
 				data.getLibEntry(), 
 				data.getClassPath());
+		
+		// refresh the workspace
+		//
+		ResourceHelper.refresh(ResourcesPlugin.getWorkspace().getRoot());
 		
 		return true;
 	}
