@@ -1,5 +1,6 @@
 package de.tud.et.ifa.agtele.genlibrary.ui.wizards;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.wizard.Wizard;
 
 import de.tud.et.ifa.agtele.genlibrary.processor.impl.LibraryPluginImpl;
@@ -44,17 +45,25 @@ public class AddGenlibraryEntryWizard extends Wizard {
 	
 	@Override
 	public boolean performFinish() {
-		// TODO Auto-generated method stub
-		return false;
+
+		// insert the library entry
+		//
+		data.getLibrary().insertIntoTargetModel(
+				EcoreUtil.getRootContainer(data.geteObject()), 
+				data.getLibEntry(), 
+				data.getClassPath());
+		
+		return true;
 	}
 	
 	@Override
 	public boolean canFinish() {
-		if((getContainer().getCurrentPage() == two) && two.canFlipToNextPage()) {
+		
+		if((getContainer().getCurrentPage() == two) && two.isPageComplete()) {
 			return true;
 		}
+		
 		return false;
-//		return (getContainer().getCurrentPage() == two);
 	}
 
 }
