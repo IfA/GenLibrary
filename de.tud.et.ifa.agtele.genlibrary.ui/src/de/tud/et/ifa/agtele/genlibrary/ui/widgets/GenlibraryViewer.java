@@ -146,7 +146,7 @@ public class GenlibraryViewer extends Composite {
 					// TODO add some library path checking magic here
 					setLibPath(event.getNewValue().toString());
 					
-					getLibrary().init(getLibPath(), getLibraryContext(), getLibraryPathParser());
+					getLibrary().setLibPath(getLibPath());
 					
 					treeViewer.setInput(getLibrary().getAllElementLibraryPathAsString(0, 0));
 				}
