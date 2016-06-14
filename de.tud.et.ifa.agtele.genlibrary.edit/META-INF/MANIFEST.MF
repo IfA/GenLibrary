@@ -7,7 +7,7 @@ Bundle-ClassPath: .
 Bundle-Activator: de.tud.et.ifa.agtele.genlibrary.provider.GenLibraryEditPlugin$Implementation
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: de.tud.et.ifa.agtele.genlibrary.model.genlibrary.provider,
  de.tud.et.ifa.agtele.genlibrary.provider
 Require-Bundle: org.eclipse.core.runtime,
