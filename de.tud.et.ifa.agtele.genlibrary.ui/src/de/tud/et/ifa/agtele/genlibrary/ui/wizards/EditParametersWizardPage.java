@@ -456,4 +456,62 @@ public class EditParametersWizardPage extends WizardPage {
 			return extRefMapperHashMap;
 		}
 	}
+	
+	@Override
+	public boolean isPageComplete() {
+		
+		if(data.getLibEntry() == null || data.getLibEntry().getParameterDescription() == null) {
+			return false;
+		}
+		
+		ParameterDescription parameterDescription = data.getLibEntry().getParameterDescription();
+		
+		// check if a value has been specified for each attribute parameter
+		//
+		Optional<AbstractAttributeParameter<EObject>> invalidAttributeParameter = 
+				parameterDescription.getAttributeParameters().parallelStream().filter(p -> p.getNewValue() == null).findAny();
+		
+		if(invalidAttributeParameter.isPresent()) {
+			
+			setErrorMessage("Please specify a valid value for the AttributeParameter '" + invalidAttributeParameter.get().eClass().getName() + "'!");
+			return false;
+		}
+		
+		// check if a value has been specified for each container parameter
+		//
+		Optional<AbstractContainerParameter<EObject, EObject>> invalidContainerParameter = 
+				parameterDescription.getContainerParameters().parallelStream().filter(p -> p.getContainer() == null).findAny();
+		
+		if(invalidContainerParameter.isPresent()) {
+			
+			setErrorMessage("Please specify a valid container for the ContainerParameter '" + invalidContainerParameter.get().eClass().getName() + "'!");
+			return false;
+		}
+		
+		// check if a value has been specified for each external reference parameter
+		//
+		Optional<AbstractExternalReferenceParameter<EObject, EObject>> invalidExternalReferenceParameter = 
+				parameterDescription.getExternalReferenceParameters().parallelStream().filter(p -> p.getTarget() == null).findAny();
+		
+		if(invalidExternalReferenceParameter.isPresent()) {
+			
+			setErrorMessage("Please specify a valid target for the ExternalReferenceParameter '" + invalidExternalReferenceParameter.get().eClass().getName() + "'!");
+			return false;
+		}
+		
+		// check if a value has been specified for each resource parameter
+		//
+		Optional<ResourceParameter> invalidResourceParameter = 
+				parameterDescription.getResourceParameters().parallelStream().filter(p -> p.getNewPath() == null).findAny();
+		
+		if(invalidResourceParameter.isPresent()) {
+			
+			setErrorMessage("Please specify a valid path for the ResourceParameter '" + invalidResourceParameter.get().eClass().getName() + "'!");
+			return false;
+		}
+		
+		setErrorMessage(null);
+		return true;
+	}
+	
 }
