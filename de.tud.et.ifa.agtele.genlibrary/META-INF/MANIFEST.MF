@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: de.tud.et.ifa.agtele.genlibrary;singleton:=true
-Bundle-Version: 1.0.12.qualifier
+Bundle-Version: 1.0.13.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: de.tud.et.ifa.agtele.genlibrary.Activator
 Bundle-Vendor: %providerName
@@ -10,7 +10,6 @@ Bundle-Localization: plugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
- org.eclipse.epsilon.common.dt;bundle-version="0.9.1",
  org.eclipse.emf.ecore.xmi;bundle-version="2.7.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
