@@ -17,6 +17,7 @@ public class AddGenlibraryEntryWizardData {
 	private LibraryPathParser libraryPathParser;
 	private LibraryPluginImpl library;
 	private LibraryEntry libEntry;
+	private String classPath;
 	
 	public Bundle getBundle() {
 		return bundle;
@@ -80,5 +81,13 @@ public class AddGenlibraryEntryWizardData {
 		this.libEntry = libEntry;
 		
 		return libEntry;
+	}
+
+	public String getClassPath() {
+		return this.classPath;
+	}
+	
+	public void setClassPath(String classPath) {
+		this.classPath = classPath;
 	}
 }

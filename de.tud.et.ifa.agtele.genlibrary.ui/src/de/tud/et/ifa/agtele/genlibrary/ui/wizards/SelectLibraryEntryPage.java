@@ -47,6 +47,7 @@ public class SelectLibraryEntryPage extends WizardPage {
 					if (((StructuredSelection) event.getSelection()).size() == 1) {						
 						TreeData td = ((TreeData) ((StructuredSelection) event.getSelection()).getFirstElement());
 						if (td.hasLibEntry()) {
+							data.setClassPath(td.getClassPath());
 							selectedLibraryEntry = data.setLibEntry(data.getLibrary().getElement(td.getClassPath(), false));
 							getWizard().getContainer().updateButtons();
 						}

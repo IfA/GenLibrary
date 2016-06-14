@@ -2,6 +2,8 @@ package de.tud.et.ifa.agtele.genlibrary.ui.wizards;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -12,6 +14,7 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.fieldassist.AutoCompleteField;
 import org.eclipse.jface.fieldassist.ComboContentAdapter;
@@ -24,6 +27,7 @@ import org.eclipse.swt.widgets.Composite;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeParameter;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerParameter;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceParameter;
+import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ParameterDescription;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ResourceParameter;
 
 import org.eclipse.swt.custom.CTabFolder;
@@ -36,6 +40,8 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.custom.ScrolledComposite;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionEvent;
@@ -119,20 +125,48 @@ public class EditParametersWizardPage extends WizardPage {
 
 	@Override
 	public void setVisible(boolean visible) {
+		
 		if (visible) {
+			
 			// Attributes
 			if (data.getLibEntry().getParameterDescription().getAttributeParameters() != null) {
-				for (AbstractAttributeParameter<EObject> attrMapper : data.getLibEntry().getParameterDescription().getAttributeParameters()) {
+				for (AbstractAttributeParameter<EObject> attributeParameter : data.getLibEntry().getParameterDescription().getAttributeParameters()) {
 					Label lblNewAttributeLabel = new Label(attributeContainer, SWT.NONE);
 					lblNewAttributeLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
-					lblNewAttributeLabel.setText(attrMapper.eClass().getName());
+					lblNewAttributeLabel.setText(attributeParameter.eClass().getName());
 					
 					Text attributeText = new Text(attributeContainer, SWT.BORDER);
 					attributeText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 					
-					attributeText.setText(attrMapper.getSource().eGet(attrMapper.getAttribute()).toString());
+					attributeText.addKeyListener(new KeyListener() {
+						
+						@Override
+						public void keyReleased(KeyEvent e) {
+							
+							String text = attributeText.getText();
+							EDataType type = attributeParameter.getAttribute().getEAttributeType();
+							
+							try {
+								type.getEPackage().getEFactoryInstance().createFromString(type, text);
+								attributeParameter.setNewValue(text);
+							} catch (IllegalArgumentException e1) {
+								// no valid attribute value has been entered
+								attributeParameter.setNewValue(null);
+								//TODO maybe generate an error marker besides the label (use 'ControlDecoration')
+							}
+							
+							getWizard().getContainer().updateButtons();
+						}
+						
+						@Override
+						public void keyPressed(KeyEvent e) {}
+					});
+					
+					attributeText.setText(attributeParameter.getSource().eGet(attributeParameter.getAttribute()).toString());
+					attributeParameter.setNewValue(attributeText.getText());
 				}
 			}
+			
 			// Container
 			if (data.getLibEntry().getParameterDescription().getContainerParameters() != null) {
 				
@@ -147,10 +181,10 @@ public class EditParametersWizardPage extends WizardPage {
 					containerGroup.setLayout(new GridLayout(2, false));
 					
 					ArrayList<AbstractContainerParameter<EObject, EObject>> mapperList = mapperHashMap.getContainerMapperHashMap().get(key);
-					for (AbstractContainerParameter<EObject, EObject> mapper : mapperList) {
+					for (AbstractContainerParameter<EObject, EObject> containerParameter : mapperList) {
 						Label lblNewContainerLabel = new Label(containerGroup, SWT.NONE);
 						lblNewContainerLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
-						lblNewContainerLabel.setText(mapper.eClass().getEAllGenericSuperTypes().get(0).getETypeArguments().get(1).getEClassifier().getName());
+						lblNewContainerLabel.setText(containerParameter.eClass().getEAllGenericSuperTypes().get(0).getETypeArguments().get(1).getEClassifier().getName());
 						
 						// a combo box to select the target ePackage
 						Combo combo = new Combo(containerGroup, SWT.BORDER);
@@ -161,24 +195,40 @@ public class EditParametersWizardPage extends WizardPage {
 							combo.setLayoutData(data);
 						}
 						
+						// get all eObjects from the target model that have a valid type and add them
+						// to both combo boxes
+						EClassifier targetClass = containerParameter.eClass().getEAllGenericSuperTypes().get(0).getETypeArguments().get(1).getEClassifier();
+						final Map<String, EObject> validContainers = getValidElements(targetClass);
+						updateCombo(combo, validContainers);
+						
 						combo.addModifyListener(new ModifyListener() {
 							@Override
 							public void modifyText(ModifyEvent e) {
-								// TODO save the selected stuff to the metadata of the libentry
+
+								String text = combo.getText();
+								EObject container = validContainers.get(text);
+								
+								if(container != null) {
+									containerParameter.setContainer(container);
+								} else {
+									// no valid attribute value has been entered
+									containerParameter.setContainer(null);
+									//TODO maybe generate an error marker besides the label (use 'ControlDecoration')
+								}
+								
 								getWizard().getContainer().updateButtons();
 							}
 						});
 						
-						// get all eObjects from the target model that have a valid type and add them
-						// to both combo boxes
-						EClassifier targetClass = mapper.eClass().getEAllGenericSuperTypes().get(0).getETypeArguments().get(1).getEClassifier();
-						updateCombo(combo, getValidElements(targetClass));
 						
 						// realize auto-completion for both combo viewers
 						new AutoCompleteField(combo, new ComboContentAdapter(), combo.getItems());
+						
+						containerParameter.setContainer(validContainers.get(combo.getText()));
 					}
 				}
 			}
+			
 			// ExternalReference
 			if (data.getLibEntry().getParameterDescription().getExternalReferenceParameters() != null) {
 				// get a HashMap of (eClass, ArrayList{Mapperinstances}) to allow the creation of groups for each type of mapper
@@ -192,10 +242,10 @@ public class EditParametersWizardPage extends WizardPage {
 					extRefGroup.setLayout(new GridLayout(2, false));
 					
 					ArrayList<AbstractExternalReferenceParameter<EObject, EObject>> mapperList = mapperHashMap.getExtRefMapperHashMap().get(key);
-					for (AbstractExternalReferenceParameter<EObject, EObject> mapper : mapperList) {
+					for (AbstractExternalReferenceParameter<EObject, EObject> externalReferenceParameter : mapperList) {
 						Label lblExtRefLabel = new Label(extRefGroup, SWT.NONE);
 						lblExtRefLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
-						lblExtRefLabel.setText(getEObjectText(mapper.getSource()));
+						lblExtRefLabel.setText(getEObjectText(externalReferenceParameter.getSource()));
 						
 						// a combo box to select the target ePackage
 						Combo combo = new Combo(extRefGroup, SWT.BORDER);
@@ -206,31 +256,45 @@ public class EditParametersWizardPage extends WizardPage {
 							combo.setLayoutData(data);
 						}
 						
+						// get all eObjects from the target model that have a valid type and add them
+						// to both combo boxes
+						EClassifier targetClass = externalReferenceParameter.eClass().getEAllGenericSuperTypes().get(0).getETypeArguments().get(1).getEClassifier();
+						final Map<String, EObject> validReferenceTargets = getValidElements(targetClass);
+						updateCombo(combo, validReferenceTargets);
+						
 						combo.addModifyListener(new ModifyListener() {
 							@Override
 							public void modifyText(ModifyEvent e) {
-								// TODO save the selected stuff to the metadata of the libentry
+
+								String text = combo.getText();
+								EObject referenceTarget = validReferenceTargets.get(text);
+								
+								if(referenceTarget != null) {
+									externalReferenceParameter.setTarget(referenceTarget);
+								} else {
+									// no valid attribute value has been entered
+									externalReferenceParameter.setTarget(null);
+									//TODO maybe generate an error marker besides the label (use 'ControlDecoration')
+								}
+								
 								getWizard().getContainer().updateButtons();
 							}
 						});
 						
-						// get all eObjects from the target model that have a valid type and add them
-						// to both combo boxes
-						EClassifier targetClass = mapper.eClass().getEAllGenericSuperTypes().get(0).getETypeArguments().get(1).getEClassifier();
-						updateCombo(combo, getValidElements(targetClass));
-						
 						// realize auto-completion for both combo viewers
 						new AutoCompleteField(combo, new ComboContentAdapter(), combo.getItems());
+						
+						externalReferenceParameter.setTarget(validReferenceTargets.get(combo.getText()));
 					}
 				}
 			}
 			
 			// Resources
 			if (data.getLibEntry().getParameterDescription().getResourceParameters() != null) {
-				for (ResourceParameter resMapper : data.getLibEntry().getParameterDescription().getResourceParameters()) {
+				for (ResourceParameter resourceParameter : data.getLibEntry().getParameterDescription().getResourceParameters()) {
 					Label lblNewResLabel = new Label(resourcesContainer, SWT.NONE);
 					lblNewResLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
-					lblNewResLabel.setText(resMapper.getName());
+					lblNewResLabel.setText(resourceParameter.getName());
 					
 					// TODO insert predefined locations in the project and create project folder selector
 					Text resText = new Text(resourcesContainer, SWT.BORDER);
@@ -246,7 +310,7 @@ public class EditParametersWizardPage extends WizardPage {
 						public void widgetSelected(SelectionEvent e) {
 							SaveAsDialog dirDialog = new SaveAsDialog(getShell());
 //							dirDialog.setOriginalName(resMapper.getName());
-							IFile res = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(data.geteObject().eResource().getURI().toPlatformString(true))).getParent().getFile(new Path(resMapper.getName()));
+							IFile res = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(data.geteObject().eResource().getURI().toPlatformString(true))).getParent().getFile(new Path(resourceParameter.getName()));
 							dirDialog.setOriginalFile(res);
 							
 							if(dirDialog.open() == Window.OK){
@@ -262,10 +326,27 @@ public class EditParametersWizardPage extends WizardPage {
 						}
 					});
 					
-//					DirectoryFieldEditor selectDir = new DirectoryFieldEditor("selectDir", resMapper.getName(), resourcesContainer);
-//					File source = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(data.geteObject().eResource().getURI().toPlatformString(true))).getParent().getLocation().toFile();
-//					selectDir.setFilterPath(source);
-
+					resText.addKeyListener(new KeyListener() {
+						
+						@Override
+						public void keyReleased(KeyEvent e) {
+							
+							String text = resText.getText();
+							
+							if(text.matches("^((.+)/)?([^/]+)$")) {
+								resourceParameter.setNewPath(text);
+							} else {
+								resourceParameter.setNewPath(null);
+							}
+							
+							getWizard().getContainer().updateButtons();
+						}
+						
+						@Override
+						public void keyPressed(KeyEvent e) {}
+					});
+					
+					resourceParameter.setNewPath(null);
 					
 				}
 			}
@@ -320,7 +401,7 @@ public class EditParametersWizardPage extends WizardPage {
 		}
 	}
 	
-	private void updateCombo(Combo combo, HashMap<String, EObject> hashMap) {
+	private void updateCombo(Combo combo, Map<String, EObject> hashMap) {
 		combo.removeAll();
 		for (String o : hashMap.keySet()) {
 			combo.add(o);
