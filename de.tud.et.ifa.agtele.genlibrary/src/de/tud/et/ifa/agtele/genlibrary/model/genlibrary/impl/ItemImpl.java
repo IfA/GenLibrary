@@ -16,12 +16,12 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.ItemImpl#getKey <em>Key</em>}</li>
  *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.ItemImpl#getPath <em>Path</em>}</li>
  *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.ItemImpl#getVersion <em>Version</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -11,11 +11,11 @@ import org.eclipse.emf.ecore.EReference;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerParameter#getSource <em>Source</em>}</li>
  *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerParameter#getContainer <em>Container</em>}</li>
  * </ul>
- * </p>
  *
  * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.GenLibraryPackage#getAbstractContainerParameter()
  * @model interface="true" abstract="true"

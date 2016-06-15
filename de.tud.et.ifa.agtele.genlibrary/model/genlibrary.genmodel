@@ -5,7 +5,7 @@
     modelName="GenLibrary" editPluginClass="de.tud.et.ifa.agtele.genlibrary.provider.GenLibraryEditPlugin"
     editorPluginClass="de.tud.et.ifa.agtele.genlibrary.presentation.GenLibraryEditorPlugin"
     testSuiteClass="de.tud.et.ifa.agtele.genlibrary.tests.LibAllTests" importerID="org.eclipse.emf.importer.ecore"
-    complianceLevel="6.0" copyrightFields="false" editPluginID="de.tud.et.ifa.agtele.genlibrary.edit"
+    complianceLevel="8.0" copyrightFields="false" editPluginID="de.tud.et.ifa.agtele.genlibrary.edit"
     editorPluginID="de.tud.et.ifa.agtele.genlibrary.editor" operationReflection="true">
   <foreignModel>genlibrary.ecore</foreignModel>
   <genPackages prefix="GenLibrary" basePackage="de.tud.et.ifa.agtele.genlibrary.model"

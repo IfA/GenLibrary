@@ -10,11 +10,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceParameter#getSource <em>Source</em>}</li>
  *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceParameter#getTarget <em>Target</em>}</li>
  * </ul>
- * </p>
  *
  * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.GenLibraryPackage#getAbstractExternalReferenceParameter()
  * @model interface="true" abstract="true"

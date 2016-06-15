@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry#getVersion <em>Version</em>}</li>
  *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry#getLibraryItem <em>Library Item</em>}</li>
@@ -19,7 +20,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry#getThumbnail <em>Thumbnail</em>}</li>
  *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry#getAuthor <em>Author</em>}</li>
  * </ul>
- * </p>
  *
  * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.GenLibraryPackage#getLibraryEntry()
  * @model
