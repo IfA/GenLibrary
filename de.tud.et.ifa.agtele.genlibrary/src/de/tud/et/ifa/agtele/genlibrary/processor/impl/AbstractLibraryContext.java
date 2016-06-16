@@ -14,7 +14,10 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractAttributeParameter;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerParameter;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceParameter;
+import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.GenLibraryFactory;
+import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.GenLibraryPackage;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry;
+import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryItem;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ParameterDescription;
 import de.tud.et.ifa.agtele.genlibrary.processor.interfaces.LibraryContext;
 
@@ -73,6 +76,50 @@ public abstract class AbstractLibraryContext implements LibraryContext {
 		// handle the attribute Parameters
 		applyAttributeParameters(libraryEntry.getParameterDescription().getAttributeParameters());
 
+	}
+
+	/**
+	 * This default implementation of 'createLibraryEntry' function handles the
+	 * creation of a new LibraryEntry by filling in all meta data and calling
+	 * 'createLibraryItem' for the creation of a specific {@link LibraryItem}
+	 * and {@link ParameterDescription}. Clients may override this function to
+	 * add special behavior but should call 'super.createLibraryEntry' to reuse
+	 * the base functionality.
+	 * 
+	 * @return
+	 */
+	@Override
+	public LibraryEntry createLibraryEntry(EObject sourceEObject, String author, String version, String description, String thumbnail) {
+		// Initialize the model
+		GenLibraryPackage.eINSTANCE.eClass();
+		// Retrieve the default factory singleton
+		GenLibraryFactory factory = GenLibraryFactory.eINSTANCE;
+
+		// create the content of the model
+		LibraryEntry libEntry = factory.createLibraryEntry();
+
+		libEntry.setAuthor(author);
+		libEntry.setVersion(version);
+		if (description != null && !description.isEmpty()) {
+			libEntry.setDescription(description);
+		}
+		if (thumbnail != null && !thumbnail.isEmpty()) {
+			libEntry.setThumbnail(thumbnail);
+		}
+
+		libEntry = createLibraryItem(libEntry, sourceEObject);
+
+		return libEntry;
+	}
+
+	/**
+	 * This default implementation of the 'createLibraryItem' function does
+	 * nothing. Clients should override to enable the creation of specific
+	 * {@link LibraryItem} and {@link ParameterDescription}.
+	 */
+	protected LibraryEntry createLibraryItem(LibraryEntry libEntry, EObject eObject) {
+
+		return libEntry;
 	}
 
 	@Override
