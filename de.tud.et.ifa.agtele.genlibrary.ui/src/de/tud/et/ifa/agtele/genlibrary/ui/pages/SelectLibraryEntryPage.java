@@ -1,4 +1,4 @@
-package de.tud.et.ifa.agtele.genlibrary.ui.wizards;
+package de.tud.et.ifa.agtele.genlibrary.ui.pages;
 
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
@@ -10,6 +10,7 @@ import org.eclipse.swt.widgets.Composite;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry;
 import de.tud.et.ifa.agtele.genlibrary.ui.widgets.GenlibraryViewer;
 import de.tud.et.ifa.agtele.genlibrary.ui.widgets.GenlibraryViewer.TreeData;
+import de.tud.et.ifa.agtele.genlibrary.ui.wizards.AddGenlibraryEntryWizardData;
 
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.GridData;
@@ -20,7 +21,7 @@ public class SelectLibraryEntryPage extends WizardPage {
 	private GenlibraryViewer genlibViewer;
 	private LibraryEntry selectedLibraryEntry;
 	
-	protected SelectLibraryEntryPage(AddGenlibraryEntryWizardData data) {
+	public SelectLibraryEntryPage(AddGenlibraryEntryWizardData data) {
 		super("Select LibraryEntry");
 		setTitle("Select LibraryEntry");
 		setDescription("Select the library entry that should be added to the target model...");
