@@ -18,7 +18,6 @@ import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.events.VerifyEvent;
 import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -110,7 +109,7 @@ public class TargetSelectorPage extends GenerateGenlibraryEntryPage {
 						// unset the zip file resource
 						data.setZipFilePath("");
 						// load the new model
-						loadModel(true);
+						checkPath(data.getTargetModelPath());
 						
 					} catch (Exception e) {
 						setErrorMessage(e.getMessage());
@@ -159,12 +158,18 @@ public class TargetSelectorPage extends GenerateGenlibraryEntryPage {
 				
 				if(file instanceof String) {
 					try {
+						// check if a datatype is given, otherwise set it to zip
+						if (!(((String) file).endsWith(".zip") || ((String) file).endsWith(".jar"))) {
+							file = file + ".zip";
+							fileFieldEditor.setStringValue((String) file);
+						}
+						
 						// set the resource of the new model (only for temporary use until zipped)
 						data.setTargetModelPath(data.getSourceModelPath().removeLastSegments(1).append(new Path("temp")).toFile() + File.separator + "data.xmi");
 						// set the zip file resource
 						data.setZipFilePath((String) file);
 						// load the new model
-						loadModel(true);
+						checkPath(data.getTargetModelPath());
 						
 					} catch (Exception e) {
 						setErrorMessage(e.getMessage());
@@ -375,7 +380,7 @@ public class TargetSelectorPage extends GenerateGenlibraryEntryPage {
 				data.setTargetModelPath(directoryFieldEditor.getStringValue());					
 				data.setZipFilePath("");
 				if(!directoryFieldEditor.getStringValue().isEmpty()) {
-					loadModel(true);
+					checkPath(data.getTargetModelPath());
 				}
 				wizContainer.updateButtons();
 			}
@@ -400,7 +405,7 @@ public class TargetSelectorPage extends GenerateGenlibraryEntryPage {
 				}
 				data.setZipFilePath(fileFieldEditor.getStringValue());
 				if(!fileFieldEditor.getStringValue().isEmpty()) {
-					loadModel(true);
+					checkPath(data.getTargetModelPath());
 				}
 				wizContainer.updateButtons();
 			}
@@ -428,7 +433,7 @@ public class TargetSelectorPage extends GenerateGenlibraryEntryPage {
 		 * 3.: a relative path has been entered if a zip file is to be used
 		 */
 		//TODO validate the current path instead of the libItemModel
-		if(data.getVersion() != null && data.getVersion().isEmpty() == false && data.getLibItemModel() != null) {
+		if(data.getVersion() != null && data.getVersion().isEmpty() == false && data.getTargetModelPath() != null && !data.getTargetModelPath().isEmpty()) {
 			if(zipFileButton.getSelection() == true && 
 					(data.getZipFilePath() == null || data.getZipFilePath().isEmpty() ||
 					data.getLibRelPath() == null || data.getLibRelPath().isEmpty())) {
@@ -440,8 +445,8 @@ public class TargetSelectorPage extends GenerateGenlibraryEntryPage {
 		}
 	}
 
-	// load the target model (the PAMTraM instance)
-	private void loadModel(boolean disposeOld) {
+	// Checks if a valid path has been set
+	private void checkPath(String targetModelPath) {
 		//TODO validate the current path
 	}
 	

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.epsilon.emc.emf.EmfModel;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 
@@ -19,12 +18,11 @@ public class ResultPageTreeViewerContentProvider implements ITreeContentProvider
 
 	@Override
     public Object[] getElements(Object inputElement) {
-    	
-    	EmfModel model = (EmfModel) inputElement;
+		
     	// the root object of the model (the library entry)
-    	EObject root = (EObject) model.allContents().toArray()[0];
+//    	EObject root = (Object[]) inputElement[0];
     	// the root object shall be displayed in the tree
-    	return new Object[]{root};
+    	return new Object[]{((Object[]) inputElement)[0]};
     }
 
     @Override
@@ -48,8 +46,8 @@ public class ResultPageTreeViewerContentProvider implements ITreeContentProvider
     		if(obj == null) {
     			continue;
     		} else if(obj instanceof EList) {
-    			for(int i=0; i<((EList) obj).size(); i++){
-    				ret.add(new Object[]{ref, ((EList) obj).get(i)});
+    			for(int i=0; i<((EList<?>) obj).size(); i++){
+    				ret.add(new Object[]{ref, ((EList<?>) obj).get(i)});
     			}
     		} else {
     			ret.add(new Object[]{ref, obj});

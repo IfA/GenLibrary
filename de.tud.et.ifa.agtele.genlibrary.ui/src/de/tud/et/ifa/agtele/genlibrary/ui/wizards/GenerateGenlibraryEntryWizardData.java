@@ -124,7 +124,9 @@ public class GenerateGenlibraryEntryWizardData {
 		return libraryContext;
 	}
 
-	public void setLibraryContext(LibraryContext libraryContext) {
+	public GenerateGenlibraryEntryWizardData setLibraryContext(LibraryContext libraryContext) {
 		this.libraryContext = libraryContext;
+		
+		return this;
 	}
 }

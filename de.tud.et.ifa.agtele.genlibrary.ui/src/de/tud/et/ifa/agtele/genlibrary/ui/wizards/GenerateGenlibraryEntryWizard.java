@@ -75,7 +75,7 @@ public class GenerateGenlibraryEntryWizard extends Wizard {
 				if(!file.isDirectory()) {
 					try {
 						ResourceHelper.copyFile(file, 
-								tempFolder + File.separator + data.getLibRelPath() + File.separator + file.getName());
+								tempFolder + File.separator + data.getLibRelPath());
 						file.delete();
 					} catch (IOException e) {
 						e.printStackTrace();
@@ -97,24 +97,19 @@ public class GenerateGenlibraryEntryWizard extends Wizard {
 	}
 
 	private void saveModel(LibraryEntry libraryEntry, String targetModelPath) {
-//		// Register the XMI resource factory for the .website extension
-//	    Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
-//	    Map<String, Object> m = reg.getExtensionToFactoryMap();
-//	    m.put("website", new XMIResourceFactoryImpl());
-
 	    // Obtain a new resource set
 	    ResourceSet resSet = new ResourceSetImpl();
 
 	    // create a resource
 	    Resource resource = resSet.createResource(URI
-	        .createURI(targetModelPath));
+	        .createFileURI(targetModelPath));
 	    // Get the first model element and cast it to the right type, in my
 	    // example everything is hierarchical included in this first node
 	    resource.getContents().add(libraryEntry);
 
 	    // now save the content.
 	    try {
-	      resource.save(Collections.EMPTY_MAP);
+	      resource.save(Collections.emptyMap());
 	    } catch (IOException e) {
 	      // TODO Auto-generated catch block
 	      e.printStackTrace();
