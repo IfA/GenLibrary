@@ -77,7 +77,7 @@ public class PreviewPage extends GenerateGenlibraryEntryPage {
 			// get the root object of the model
 			viewer.setInput(new Object[]{data.getLibItemModel()});
 			// expand the tree so that the tree item map can be generated
-//			viewer.expandAll();
+			viewer.expandAll();
 			// create a map of the items in the tree that is later used for
 			// jumping to these items
 			populateTreeItemMap(viewer.getTree().getItem(0));
