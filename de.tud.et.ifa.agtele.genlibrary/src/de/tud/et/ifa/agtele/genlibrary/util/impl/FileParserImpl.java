@@ -1,5 +1,6 @@
 package de.tud.et.ifa.agtele.genlibrary.util.impl;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -60,8 +61,8 @@ public class FileParserImpl implements FileParser {
 			entryName = ze.getName();
 			if (getParent(entryName).equals(parent) && !ze.isDirectory()) {
 				zipentrylist.add(ze);
-			} else if ((entryName.contains("/_files/")) && !ze.isDirectory()) {
-				if (entryName.substring(0, entryName.indexOf("/_files/")).equals(parent)) {
+			} else if ((entryName.contains(File.separator + "_files" + File.separator)) && !ze.isDirectory()) {
+				if (entryName.substring(0, entryName.indexOf(File.separator + "_files" + File.separator)).equals(parent)) {
 					zipentrylist.add(ze);
 				}
 			}
@@ -71,7 +72,7 @@ public class FileParserImpl implements FileParser {
 	}
 
 	private String getParent(String zipentryname) {
-		int pos = zipentryname.lastIndexOf("/");
+		int pos = zipentryname.lastIndexOf(File.separator);
 
 		if (pos < 0) {
 			return "";
