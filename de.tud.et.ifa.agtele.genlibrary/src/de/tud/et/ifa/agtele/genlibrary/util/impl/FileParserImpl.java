@@ -44,6 +44,7 @@ public class FileParserImpl implements FileParser {
 				}
 			}
 		}
+		zip.close();
 		return null;
 	}
 
