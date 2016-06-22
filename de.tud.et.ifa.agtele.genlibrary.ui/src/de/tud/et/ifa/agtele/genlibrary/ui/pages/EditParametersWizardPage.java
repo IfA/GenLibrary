@@ -389,7 +389,8 @@ public class EditParametersWizardPage extends WizardPage {
 	private String getEObjectText(EObject object) {
 		for (EAttribute attr : object.eClass().getEAllAttributes()) {
 			if(attr.getName().equalsIgnoreCase("name") || attr.getName().equalsIgnoreCase("id")) {
-				return object.eGet(attr).toString();
+				if(object.eGet(attr) != null && !object.eGet(attr).toString().isEmpty())
+					return object.eGet(attr).toString();
 			}
 		}
 		
