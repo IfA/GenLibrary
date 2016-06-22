@@ -81,4 +81,23 @@ public interface LibraryContext {
 	 */
 	public String getDefaultResourcePath(String resourcePathInsideLibrary);
 
+	/**
+	 * This method is used to assemble a new {@link LibraryEntry} based on a
+	 * source {@link EObject} from an existing model
+	 * 
+	 * @param sourceEObject
+	 *            The EObject that shall be stored in the LibraryEntry
+	 * @param author
+	 *            The name of the author
+	 * @param version
+	 *            The version of the LibraryEntry to be created
+	 * @param description
+	 *            A short description of the LibraryItem, may be null if no
+	 *            description should given.
+	 * @param thumbnail
+	 *            The name of a thumbnail file displaying a preview of the
+	 *            LibraryItem, may be null if no thumbnail should given.
+	 * @return The newly created LibraryEntry
+	 */
+	public LibraryEntry createLibraryEntry(EObject sourceEObject, String author, String version, String description, String thumbnail);
 }

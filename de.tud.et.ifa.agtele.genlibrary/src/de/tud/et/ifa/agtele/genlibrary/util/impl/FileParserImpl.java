@@ -52,12 +52,14 @@ public class FileParserImpl implements FileParser {
 		LibraryFileEntry libraryfileentry = new LibraryFileEntryZip();
 		libraryfileentry.setFile(zip);
 
-		String parent = getParent(zipentry.getName());
+		// replace \ with / in order to also work in some weird windows
+		// situations, e.g., in the amino-ui editor
+		String parent = getParent(zipentry.getName().replace("\\", "/"));
 		libraryfileentry.setKey(KeyGenerator.generateKey(parent));
 
 		List<ZipEntry> zipentrylist = new ArrayList<ZipEntry>();
 		for (ZipEntry ze : zipentries) {
-			entryName = ze.getName();
+			entryName = ze.getName().replace("\\", "/");
 			if (getParent(entryName).equals(parent) && !ze.isDirectory()) {
 				zipentrylist.add(ze);
 			} else if ((entryName.contains("/_files/")) && !ze.isDirectory()) {
