@@ -11,7 +11,10 @@ import de.tud.et.ifa.agtele.genlibrary.processor.interfaces.LibraryPathParser;
  * 
  * @author mfreund
  *
+ * @deprecated This will be removed in the future due to the new
+ *             {@link LibraryImplementationRegistry}.
  */
+@Deprecated
 public class LibraryContextDescriptor {
 
 	/**
@@ -102,8 +105,8 @@ public class LibraryContextDescriptor {
 	 * @throws ClassNotFoundException
 	 */
 	@SuppressWarnings("unchecked")
-	public LibraryContextDescriptor(String libraryPath, String libraryBundle, String libraryContextClass, String libraryPathParserClass) throws RuntimeException, ClassNotFoundException,
-			ClassCastException {
+	public LibraryContextDescriptor(String libraryPath, String libraryBundle, String libraryContextClass, String libraryPathParserClass)
+			throws RuntimeException, ClassNotFoundException, ClassCastException {
 
 		this.libraryPath = libraryPath;
 
