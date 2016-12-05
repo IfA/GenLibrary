@@ -9,8 +9,10 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EPackage;
 
 import de.tud.et.ifa.agtele.genlibrary.processor.impl.DefaultLibraryPathParser;
+import de.tud.et.ifa.agtele.genlibrary.processor.impl.LibraryPluginImpl;
 import de.tud.et.ifa.agtele.genlibrary.processor.interfaces.LibraryContext;
 import de.tud.et.ifa.agtele.genlibrary.processor.interfaces.LibraryPathParser;
+import de.tud.et.ifa.agtele.genlibrary.processor.interfaces.LibraryPlugin;
 
 /**
  * A registry for concrete implementations of the GenLibrary.
@@ -20,11 +22,11 @@ import de.tud.et.ifa.agtele.genlibrary.processor.interfaces.LibraryPathParser;
  * namespace URI.
  * <p />
  * Note: This registry is populated automatically during
- * {@link Activator#createLibraryImplementationRegistry() startup} of this
- * plug-in by all extensions implementing the
- * 'de.tud.et.ifa.agtele.genlibrary.provider' extension point but
- * implementations can also be
- * {@link #registerImplementation(String, Class, Class) registered} manually.
+ * {@link Activator#registerLibraryImplementations() startup} of this plug-in by
+ * all extensions implementing the 'de.tud.et.ifa.agtele.genlibrary.provider'
+ * extension point but implementations can also be
+ * {@link #registerImplementation(String, LibraryContext, LibraryPathParser)
+ * registered} manually.
  * 
  * @author mfreund
  */
@@ -109,6 +111,8 @@ public class LibraryImplementationRegistry {
 	 *            implementation shall be returned.
 	 * @return The registered {@link LibraryContext} or <em>null</em> if no
 	 *         implementation has been registered.
+	 * 
+	 * @see #createLibraryPlugin(String)
 	 */
 	public LibraryContext getLibraryContextImplementation(String nsURI) {
 
@@ -125,10 +129,33 @@ public class LibraryImplementationRegistry {
 	 * @return The registered {@link LibraryPathParser} or an instance of
 	 *         {@link DefaultLibraryPathParser} if no implementation has been
 	 *         registered.
+	 * 
+	 * @see #createLibraryPlugin(String)
 	 */
 	public LibraryPathParser getLibraryPathParserImplementation(String nsURI) {
 
 		return pathParserRegistry.containsKey(nsURI) ? pathParserRegistry.get(nsURI) : new DefaultLibraryPathParser();
+	}
+
+	/**
+	 * Create and {@link LibraryPlugin#init(LibraryContext, LibraryPathParser)
+	 * initialize} a new {@link LibraryPlugin} for the given <em>nsURI</em>.
+	 *
+	 * @param nsURI
+	 *            The namespace URI of an {@link EPackage} for which the
+	 *            LibraryPlugin shall be returned.
+	 * @return The created {@link LibraryPlugin} or <em>null</em> if no library
+	 *         plugin could be created.
+	 */
+	public LibraryPlugin createLibraryPlugin(String nsURI) {
+
+		if (getLibraryContextImplementation(nsURI) == null) {
+			return null;
+		}
+
+		LibraryPlugin plugin = new LibraryPluginImpl();
+		plugin.init(getLibraryContextImplementation(nsURI), getLibraryPathParserImplementation(nsURI));
+		return plugin;
 	}
 
 	/**
