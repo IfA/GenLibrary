@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Schema file written by PDE -->
+<schema targetNamespace="de.tud.et.ifa.agtele.genlibrary" xmlns="http://www.w3.org/2001/XMLSchema">
+<annotation>
+      <appinfo>
+         <meta.schema plugin="de.tud.et.ifa.agtele.genlibrary" id="de.tud.et.ifa.agtele.genlibrary.provider" name="GenLibrary Implementation Provider"/>
+      </appinfo>
+      <documentation>
+         This extension point is used to register a concrete GenLibrary implementation against a namespace URI (Uniform Resource Identifier). When an implementation for a specific metamodel is required, this extension point is used to obtain the correct one.
+      </documentation>
+   </annotation>
+
+   <element name="extension">
+      <annotation>
+         <appinfo>
+            <meta.element />
+         </appinfo>
+      </annotation>
+      <complexType>
+         <choice minOccurs="1" maxOccurs="unbounded">
+            <element ref="descriptor"/>
+         </choice>
+         <attribute name="point" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="id" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="name" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appinfo>
+                  <meta.attribute translatable="true"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="descriptor">
+      <annotation>
+         <appinfo>
+            <meta.element labelAttribute="ePackageURI"/>
+         </appinfo>
+      </annotation>
+      <complexType>
+         <attribute name="ePackageURI" type="string" use="required">
+            <annotation>
+               <documentation>
+                  A URI that uniquely identifies an Ecore package.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="context" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The concrete implementation of &lt;em&gt;LibraryContext&lt;/em&gt; to be used when interacting with the library.
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="java" basedOn=":de.tud.et.ifa.agtele.genlibrary.processor.interfaces.LibraryContext"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+         <attribute name="parser" type="string">
+            <annotation>
+               <documentation>
+                  The concrete implementation of &lt;em&gt;LibraryPathParser&lt;/em&gt; to be used when interacting with the library. Leave empty if the default implementation &apos;DefaultLibraryPathParser&apos; shall be used.
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="java" basedOn=":de.tud.et.ifa.agtele.genlibrary.processor.interfaces.LibraryPathParser"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="since"/>
+      </appinfo>
+      <documentation>
+         [Enter the first release in which this extension point appears.]
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="examples"/>
+      </appinfo>
+      <documentation>
+         [Enter extension point usage example here.]
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="apiinfo"/>
+      </appinfo>
+      <documentation>
+         [Enter API information here.]
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="implementation"/>
+      </appinfo>
+      <documentation>
+         [Enter information about supplied implementation of this extension point.]
+      </documentation>
+   </annotation>
+
+
+</schema>
