@@ -43,6 +43,11 @@ public class LibraryPluginImpl implements LibraryPlugin {
 
 	private Library lib;
 
+	/**
+	 * The current path for this plugin as set by {@link #setLibPath(String)}
+	 */
+	private String currentLibPath;
+
 	private LibraryPathParser parser;
 
 	private LibraryPathParser libpathparser;
@@ -102,6 +107,15 @@ public class LibraryPluginImpl implements LibraryPlugin {
 
 	@Override
 	public void setLibPath(String libpath) {
+
+		// The same path has already been set before
+		//
+		if (currentLibPath != null && currentLibPath.equals(libpath)) {
+			return;
+		}
+
+		this.currentLibPath = libpath;
+
 		GenLibraryFactoryImpl lf = (GenLibraryFactoryImpl) GenLibraryFactoryImpl.eINSTANCE;
 
 		libpathparser = new LibraryPathParserImpl();
