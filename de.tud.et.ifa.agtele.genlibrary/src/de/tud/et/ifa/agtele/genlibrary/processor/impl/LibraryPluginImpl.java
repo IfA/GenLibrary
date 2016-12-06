@@ -140,7 +140,7 @@ public class LibraryPluginImpl implements LibraryPlugin {
 	@Override
 	public void setLibPaths(List<String> libpaths) {
 
-		if (libraries.size() == 1 && libpaths.stream().allMatch(libpath -> libraries.containsKey(libpath))) {
+		if (libraries.size() == 1 && libpaths.stream().allMatch(libraries::containsKey)) {
 			return;
 		}
 
@@ -485,6 +485,10 @@ public class LibraryPluginImpl implements LibraryPlugin {
 			if (item != null || !usehigher || !path.hasHigherPath()) {
 				break;
 			}
+
+			// Move up in the abstraction hierarchy to find a more abstract item
+			//
+			path.toHigherPath();
 		}
 
 		return item;

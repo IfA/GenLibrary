@@ -30,4 +30,17 @@ public interface LibraryPath {
 	 */
 	public boolean hasHigherPath();
 
+	/**
+	 * Convert this path to a <em>higher</em> (more abstract) path by moving up
+	 * one level in the hierarchy.
+	 * <p />
+	 * Note: This will {@link #setPath(String) change} the path represented by
+	 * this {@link LibraryPath}.
+	 *
+	 * @return <em>true</em> if there is a higher (more abstract) path and if
+	 *         the path that this represents was {@link #setPath(String)
+	 *         changed}; <em>false</em> otherwise.
+	 */
+	public boolean toHigherPath();
+
 }

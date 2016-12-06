@@ -43,4 +43,19 @@ public class LibraryPathImpl implements LibraryPath {
 		return parts.length > 1;
 
 	}
+
+	@Override
+	public boolean toHigherPath() {
+
+		if (!hasHigherPath()) {
+			return false;
+		}
+
+		String newPath = path.substring(0, path.lastIndexOf("."));
+
+		setPath(newPath);
+
+		return true;
+
+	}
 }
