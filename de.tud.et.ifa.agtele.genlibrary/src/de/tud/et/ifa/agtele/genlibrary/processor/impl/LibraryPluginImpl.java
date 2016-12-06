@@ -319,49 +319,6 @@ public class LibraryPluginImpl implements LibraryPlugin {
 		return getResourceInputStream(item, libfileentry, resourcename);
 	}
 
-	@Override
-	public boolean copyResourceTo(String path, boolean usehigher, String resourcename, String pathto) {
-		LibraryPath libpath = parser.parse(path);
-		Item item = getItem(libpath, usehigher);
-		if (item == null) {
-			return false;
-		}
-		LibraryFileEntry libfileentry = getLibraryFileEntry(item);
-		if (libfileentry == null) {
-			return false;
-		}
-
-		LibraryPath filepath = libpathparser.parse(pathto);
-
-		return copyResourceTo(item, libfileentry, resourcename, filepath);
-	}
-
-	@Override
-	public List<String> getElementsResources(String path, boolean usehigher) {
-		LibraryPath libpath = parser.parse(path);
-		Item item = getItem(libpath, usehigher);
-		if (item == null) {
-			return null;
-		}
-		LibraryFileEntry libfileentry = getLibraryFileEntry(item);
-		if (libfileentry == null) {
-			return null;
-		}
-
-		try {
-
-			List<String> list = libfileentry.getResourceNameList();
-			List<String> result = new ArrayList<String>();
-			for (String str : list) {
-				result.add(getFilename(str, getResultingElementLibraryPath(item.getKey())));
-			}
-			return result;
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
 	private InputStream getResourceInputStream(Item item, LibraryFileEntry libfileentry, String resourcename) throws IOException, IllegalArgumentException {
 		String fullrespath = getFullResourcePath(item.getKey(), resourcename);
 

@@ -201,10 +201,6 @@ public interface LibraryPlugin {
 	 */
 	public InputStream getResourceInputStream(String path, boolean usehigher, String resourcename) throws IOException;
 
-	public boolean copyResourceTo(String path, boolean usehigher, String resourcename, String pathto);
-
-	public List<String> getElementsResources(String path, boolean usehigher);
-
 	/**
 	 * This inserts the given library item into the given target model while
 	 * taking the given Parameters into account. This is done by calling the
