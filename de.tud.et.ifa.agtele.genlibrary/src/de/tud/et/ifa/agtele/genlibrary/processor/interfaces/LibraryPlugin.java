@@ -13,9 +13,9 @@ import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry;
  * that uses a certain {@link LibraryContext} and a certain
  * {@link LibraryPathParser}.
  * <p />
- * It the contents of one or multiple libraries identified via their
+ * It can manage the contents of one or multiple libraries identified via their
  * <em>libPath</em>.
- *
+ * 
  * @author mfreund
  */
 public interface LibraryPlugin {
@@ -134,8 +134,8 @@ public interface LibraryPlugin {
 	public void addLibPaths(List<String> libpaths);
 
 	/**
-	 * This function checks if an element exists in the library (resp. in its
-	 * index).
+	 * This function checks if an element exists in the libraries currently
+	 * managed by this plugin.
 	 * 
 	 * @param path
 	 *            The classpath for the library item to be checked.
