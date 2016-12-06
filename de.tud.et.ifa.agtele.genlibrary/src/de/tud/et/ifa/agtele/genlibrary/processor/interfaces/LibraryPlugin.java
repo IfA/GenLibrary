@@ -7,8 +7,6 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry;
-import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryItem;
-import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ParameterDescription;
 
 /**
  * This represents one concrete runtime instance of a GenLibrary implementation
@@ -176,39 +174,9 @@ public interface LibraryPlugin {
 	public String getResultingElementLibraryPath(String path);
 
 	/**
-	 * This returns the library item after evaluating the Parameters.
-	 * 
-	 * @param targetModel
-	 *            The target model into that the library item shall be inserted.
-	 * @param path
-	 *            The classpath for the library item to be checked.
-	 * @param usehigher
-	 *            Whether the algorithm shall check for alternative elements at
-	 *            a higher (more abstract) level in the classpath.
-	 * @return The library item after evaluating the Parameters.
-	 */
-	@Deprecated
-	public LibraryItem getElement(EObject targetModel, String path, ParameterDescription parameterDescription, boolean usehigher);
-
-	/**
-	 * Returns the interfaces (the Parameters) for a library element represented
-	 * by a given classpath.
-	 * 
-	 * @param path
-	 *            The classpath of the library item to be checked.
-	 * @param usehigher
-	 *            Whether the algorithm shall check for alternative elements at
-	 *            a higher (more abstract) level in the classpath.
-	 * @return The Parameters for the library item if everything worked well,
-	 *         null otherwise.
-	 */
-	@Deprecated
-	public ParameterDescription getMetaData(String path, boolean usehigher);
-
-	/**
 	 * Returns the selected List of {@link LibraryPath} as Strings.
 	 * 
-	 * @param start
+	 * @param startIndex
 	 *            Index beginning with 0, if smaller then 0 means 0
 	 * @param count
 	 *            smaller or equal 0 means all

@@ -26,7 +26,6 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.Item;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.Library;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry;
-import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryItem;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ParameterDescription;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ResourceParameter;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.GenLibraryFactoryImpl;
@@ -276,38 +275,6 @@ public class LibraryPluginImpl implements LibraryPlugin {
 	}
 
 	@Override
-	@Deprecated
-	public LibraryItem getElement(EObject targetModel, String path, ParameterDescription parameterDescription, boolean usehigher) {
-		LibraryPath libpath = parser.parse(path);
-		Item item = getItem(libpath, usehigher);
-		if (item == null) {
-			return null;
-		}
-		LibraryEntry entry = getLibraryEntry(item);
-		if (entry == null) {
-			return null;
-		}
-		LibraryItem libitem = entry.getLibraryItem();
-
-		LibraryFileEntry fileitem = getLibraryFileEntry(item);
-
-		libraryContext.applyParameters(libitem, entry, path);
-
-		List<ResourceParameter> resourceParameters = parameterDescription.getResourceParameters();
-
-		for (ResourceParameter res : resourceParameters) {
-			if (res.getNewPath() != null && !res.getNewPath().isEmpty()) {
-				LibraryPath newrespath = libpathparser.parse(res.getNewPath());
-				copyResourceTo(item, fileitem, res.getName(), newrespath);
-			}
-
-		}
-
-		return libitem;
-
-	}
-
-	@Override
 	public String getResultingElementLibraryPath(String path) {
 		LibraryPath libpath = parser.parse(path);
 		Item item = getItem(libpath, true);
@@ -316,47 +283,6 @@ public class LibraryPluginImpl implements LibraryPlugin {
 		} else {
 			return item.getKey();
 		}
-	}
-
-	@Override
-	@Deprecated
-	public ParameterDescription getMetaData(String path, boolean usehigher) {
-		LibraryPath libpath = parser.parse(path);
-		Item item = getItem(libpath, usehigher);
-		if (item == null) {
-			return null;
-		}
-		LibraryEntry entry = getLibraryEntry(item);
-		if (entry == null) {
-			return null;
-		}
-
-		ParameterDescription md = entry.getParameterDescription();
-
-		if (md != null) {
-			md.getResourceParameters().clear();
-		} else {
-			md = libraryContext.getNewMetaData();
-		}
-		LibraryFileEntry fileentry = getLibraryFileEntry(item);
-
-		GenLibraryFactoryImpl lf = (GenLibraryFactoryImpl) GenLibraryFactoryImpl.eINSTANCE;
-		try {
-			List<String> respathes = fileentry.getResourceNameList();
-			for (int i = 0; i < respathes.size(); i++) {
-
-				ResourceParameter resourceParameter = lf.createResourceParameter();
-
-				resourceParameter.setName(getFilename(respathes.get(i), getResultingElementLibraryPath(item.getKey())));
-
-				md.getResourceParameters().add(resourceParameter);
-			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		return libraryContext.transformMetaData(entry.getLibraryItem(), md);
 	}
 
 	@Override
