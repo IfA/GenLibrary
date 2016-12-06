@@ -81,7 +81,7 @@
                </appinfo>
             </annotation>
          </attribute>
-         <attribute name="libraryItemType" type="string">
+         <attribute name="libraryItemType" type="string" use="required">
             <annotation>
                <documentation>
                   The concrete sub-class of &lt;em&gt;LibraryItem&lt;/em&gt; that is defined by this library.
