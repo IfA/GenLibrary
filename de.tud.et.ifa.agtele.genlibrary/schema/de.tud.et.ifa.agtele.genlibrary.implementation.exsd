@@ -81,6 +81,16 @@
                </appinfo>
             </annotation>
          </attribute>
+         <attribute name="libraryItemType" type="string">
+            <annotation>
+               <documentation>
+                  The concrete sub-class of &lt;em&gt;LibraryItem&lt;/em&gt; that is defined by this library.
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="java" basedOn="de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.LibraryItemImpl:"/>
+               </appinfo>
+            </annotation>
+         </attribute>
       </complexType>
    </element>
 
