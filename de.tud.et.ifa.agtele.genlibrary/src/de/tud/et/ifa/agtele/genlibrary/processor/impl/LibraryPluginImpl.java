@@ -204,12 +204,10 @@ public class LibraryPluginImpl implements LibraryPlugin {
 
 	@Override
 	public boolean elementExists(String path, boolean usehigher) {
+
 		LibraryPath libpath = parser.parse(path);
 		Item item = getItem(libpath, usehigher);
-		if (item == null) {
-			return false;
-		}
-		return true;
+		return item != null;
 	}
 
 	@Override
@@ -539,11 +537,7 @@ public class LibraryPluginImpl implements LibraryPlugin {
 			}
 
 			// get Element of higher Class
-			if (item != null || !usehigher) {
-				break;
-			}
-
-			if (path.toHigherPath() == 0) {
+			if (item != null || !usehigher || !path.hasHigherPath()) {
 				break;
 			}
 		}
