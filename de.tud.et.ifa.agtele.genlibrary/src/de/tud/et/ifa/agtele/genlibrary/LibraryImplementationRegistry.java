@@ -4,10 +4,14 @@
 package de.tud.et.ifa.agtele.genlibrary;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.eclipse.emf.ecore.EPackage;
 
+import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry;
+import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryItem;
 import de.tud.et.ifa.agtele.genlibrary.processor.impl.DefaultLibraryPathParser;
 import de.tud.et.ifa.agtele.genlibrary.processor.impl.LibraryPluginImpl;
 import de.tud.et.ifa.agtele.genlibrary.processor.interfaces.LibraryContext;
@@ -25,7 +29,7 @@ import de.tud.et.ifa.agtele.genlibrary.processor.interfaces.LibraryPlugin;
  * {@link Activator#registerLibraryImplementations() startup} of this plug-in by
  * all extensions implementing the 'de.tud.et.ifa.agtele.genlibrary.provider'
  * extension point but implementations can also be
- * {@link #registerImplementation(String, LibraryContext, LibraryPathParser)
+ * {@link #registerImplementation(String, LibraryContext, LibraryPathParser, Class)
  * registered} manually.
  * 
  * @author mfreund
@@ -49,11 +53,18 @@ public class LibraryImplementationRegistry {
 	private final Map<String, LibraryPathParser> pathParserRegistry;
 
 	/**
+	 * The map storing the registered concrete types of {@link LibraryItem
+	 * LibraryItems}.
+	 */
+	private final Map<String, String> libraryItemTypeRegistry;
+
+	/**
 	 * This creates an instance.
 	 */
 	private LibraryImplementationRegistry() {
 		contextRegistry = new HashMap<>();
 		pathParserRegistry = new HashMap<>();
+		libraryItemTypeRegistry = new HashMap<>();
 	}
 
 	/**
@@ -80,25 +91,38 @@ public class LibraryImplementationRegistry {
 	 * @param libraryContext
 	 *            The instance of {@link LibraryContext} to be registered for
 	 *            the given <em>nsURI</em>. This may be <em>null</em> if only a
-	 *            <em>libraryPathParser</em> shall be registered..
+	 *            <em>libraryItemType</em> and/or <em>libraryPathParser</em>
+	 *            shall be registered..
 	 * @param libraryPathParser
 	 *            The instance of {@link LibraryPathParser} to be registered for
 	 *            the given <em>nsURI</em>. This may be <em>null</em> if only a
-	 *            <em>libraryContext</em> shall be registered.
+	 *            <em>libraryContext</em> and/or <em>libraryItemType</em> shall
+	 *            be registered.
+	 * @param liraryItemClass
+	 *            The concrete type of {@link LibraryItem} to be registered for
+	 *            the given <em>nsURI</em>. This may be <em>null</em> if only a
+	 *            <em>libraryContext</em> and/or <em>libraryPathParser</em>
+	 *            shall be registered.
 	 * @throws DuplicateImplementationException
 	 */
-	public void registerImplementation(String nsURI, LibraryContext libraryContext, LibraryPathParser libraryPathParser) throws DuplicateImplementationException {
+	public void registerImplementation(String nsURI, LibraryContext libraryContext, LibraryPathParser libraryPathParser, String liraryItemClass) throws DuplicateImplementationException {
 
 		if (contextRegistry.containsKey(nsURI)) {
-			throw new DuplicateImplementationException(nsURI, contextRegistry.get(nsURI), null);
+			throw new DuplicateImplementationException(nsURI, contextRegistry.get(nsURI), null, null);
 		} else if (libraryContext != null) {
 			contextRegistry.put(nsURI, libraryContext);
 		}
 
 		if (pathParserRegistry.containsKey(nsURI)) {
-			throw new DuplicateImplementationException(nsURI, null, pathParserRegistry.get(nsURI));
+			throw new DuplicateImplementationException(nsURI, null, pathParserRegistry.get(nsURI), null);
 		} else if (libraryPathParser != null) {
 			pathParserRegistry.put(nsURI, libraryPathParser);
+		}
+
+		if (libraryItemTypeRegistry.containsKey(nsURI)) {
+			throw new DuplicateImplementationException(nsURI, null, null, libraryItemTypeRegistry.get(nsURI));
+		} else if (liraryItemClass != null) {
+			libraryItemTypeRegistry.put(nsURI, liraryItemClass);
 		}
 	}
 
@@ -135,6 +159,57 @@ public class LibraryImplementationRegistry {
 	public LibraryPathParser getLibraryPathParserImplementation(String nsURI) {
 
 		return pathParserRegistry.containsKey(nsURI) ? pathParserRegistry.get(nsURI) : new DefaultLibraryPathParser();
+	}
+
+	/**
+	 * This can be used to determine the namespace URI for which the library
+	 * located at the given <em>libraryPath</em> defines entries for.
+	 * 
+	 * @param libraryPath
+	 *            The path of a library.
+	 * @return The namespace URI of an {@link EPackage} that the library located
+	 *         at the given <em>libraryPath</em> defines entries for or
+	 *         <em>null</em> if no namespace URI could be determined.
+	 */
+	public String getNamespaceForLibrary(String libraryPath) {
+
+		Optional<String> namespaceOptional = contextRegistry.keySet().stream().filter(nsURI -> isNamespaceForLibrary(nsURI, libraryPath)).findAny();
+
+		return namespaceOptional.isPresent() ? namespaceOptional.get() : null;
+
+	}
+
+	/**
+	 * This can be used to determine if the library located at the given
+	 * <em>libraryPath</em> defines entries for the given EPackage identified by
+	 * the given <em>nsURI</em>.
+	 * 
+	 * @param nsURI
+	 *            The namespace URI of an EPackage.
+	 * @param libraryPath
+	 *            The path of a library.
+	 * @return Whether the library located at the given <em>libraryPath</em>
+	 *         defines entries for the {@link EPackage} identified by the given
+	 *         <em>nsURI</em>.
+	 */
+	public boolean isNamespaceForLibrary(String nsURI, String libraryPath) {
+
+		if (!libraryItemTypeRegistry.containsKey(nsURI)) {
+			return false;
+		}
+
+		LibraryPlugin plugin = new LibraryPluginImpl();
+		plugin.init(libraryPath, contextRegistry.get(nsURI), pathParserRegistry.get(nsURI));
+
+		List<String> entries = plugin.getAllElementLibraryPathAsString(0, 1);
+
+		if (entries.isEmpty()) {
+			return false;
+		}
+
+		LibraryEntry entry = plugin.getElement(entries.get(0), false);
+
+		return entry != null && entry.getLibraryItem() != null && libraryItemTypeRegistry.get(nsURI).equals(entry.getLibraryItem().getClass().getName());
 	}
 
 	/**
@@ -188,13 +263,19 @@ public class LibraryImplementationRegistry {
 		private final LibraryPathParser existingParser;
 
 		/**
+		 * The previously registered concrete type of {@link LibraryItem}.
+		 */
+		private final String existingLibraryItemType;
+
+		/**
 		 * This creates an instance.
 		 *
 		 */
-		DuplicateImplementationException(String nsURI, LibraryContext existingContext, LibraryPathParser existingParser) {
+		DuplicateImplementationException(String nsURI, LibraryContext existingContext, LibraryPathParser existingParser, String existingLibraryItemType) {
 			this.nsURI = nsURI;
 			this.existingContext = existingContext;
 			this.existingParser = existingParser;
+			this.existingLibraryItemType = existingLibraryItemType;
 		}
 
 		/**
@@ -222,6 +303,15 @@ public class LibraryImplementationRegistry {
 		 */
 		public LibraryPathParser getExistingParser() {
 			return this.existingParser;
+		}
+
+		/**
+		 * This is the getter for the {@link #existingLibraryItemType}.
+		 *
+		 * @return the {@link #existingLibraryItemType}.
+		 */
+		public String getExistingLibraryItemType() {
+			return this.existingLibraryItemType;
 		}
 
 	}

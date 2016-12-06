@@ -80,6 +80,7 @@ public class Activator extends AbstractUIPlugin {
 	 *            An {@link IConfigurationElement} for the extension point
 	 *            'de.tud.et.ifa.agtele.genlibrary.provider'.
 	 */
+	@SuppressWarnings("unchecked")
 	private void registerLibraryImplementation(IConfigurationElement element) {
 
 		String ePackageURI = element.getAttribute("ePackageURI");
@@ -96,7 +97,8 @@ public class Activator extends AbstractUIPlugin {
 				context = (LibraryContext) o;
 			}
 		} catch (CoreException e) {
-			e.printStackTrace();
+			System.out.println("Error evaluating extension for extension point 'de.tud.et.ifa.agtele.genlibrary.provider': Attribute 'context' not found!");
+			return;
 		}
 
 		LibraryPathParser parser = null;
@@ -106,11 +108,18 @@ public class Activator extends AbstractUIPlugin {
 				parser = (LibraryPathParser) o;
 			}
 		} catch (CoreException e) {
-			e.printStackTrace();
+			System.out.println("Error evaluating extension for extension point 'de.tud.et.ifa.agtele.genlibrary.provider': Attribute 'parser' not found!");
+			return;
+		}
+
+		String liraryItemClass = element.getAttribute("libraryItemType");
+		if (liraryItemClass == null) {
+			System.out.println("Error evaluating extension for extension point 'de.tud.et.ifa.agtele.genlibrary.provider': Attribute 'parser' not found!");
+			return;
 		}
 
 		try {
-			LibraryImplementationRegistry.getInstance().registerImplementation(ePackageURI, context, parser);
+			LibraryImplementationRegistry.getInstance().registerImplementation(ePackageURI, context, parser, liraryItemClass);
 		} catch (DuplicateImplementationException e) {
 			if (e.getExistingContext() != null) {
 				System.out.println("Cannot register two separate LibraryContext implementations for the namespace URI '" + ePackageURI + "'!");
