@@ -12,7 +12,10 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.CommonPlugin;
 import org.eclipse.emf.common.util.URI;
@@ -41,12 +44,11 @@ public class LibraryPluginImpl implements LibraryPlugin {
 
 	private LibraryContext libraryContext;
 
-	private Library lib;
-
 	/**
-	 * The current path for this plugin as set by {@link #setLibPath(String)}
+	 * The current list of libraries that are managed by this plugin associated
+	 * with their location.
 	 */
-	private String currentLibPath;
+	private final Map<String, Library> libs;
 
 	private LibraryPathParser parser;
 
@@ -56,7 +58,12 @@ public class LibraryPluginImpl implements LibraryPlugin {
 
 	private FileParser fileparser;
 
+	/**
+	 * This creates an instance.
+	 *
+	 */
 	public LibraryPluginImpl() {
+		libs = new HashMap<>();
 
 	}
 
@@ -108,14 +115,46 @@ public class LibraryPluginImpl implements LibraryPlugin {
 	@Override
 	public void setLibPath(String libpath) {
 
-		// The same path has already been set before
-		//
-		if (currentLibPath != null && currentLibPath.equals(libpath)) {
+		if (libs.size() == 1 && libs.containsKey(libpath)) {
 			return;
 		}
 
-		this.currentLibPath = libpath;
+		// Clear the existing list libraries
+		//
+		libs.clear();
 
+		// Add the new library
+		//
+		addLibPath(libpath);
+
+	}
+
+	@Override
+	public void setLibPaths(List<String> libpaths) {
+
+		if (libs.size() == 1 && libpaths.stream().allMatch(libpath -> libs.containsKey(libpath))) {
+			return;
+		}
+
+		// Clear the existing list libraries
+		//
+		libs.clear();
+
+		// Add the new library
+		//
+		addLibPaths(libpaths);
+
+	}
+
+	@Override
+	public void addLibPath(String libpath) {
+
+		if (libs.keySet().parallelStream().anyMatch(l -> l.equals(libpath))) {
+			return;
+		}
+
+		// Parse the new lib path and collect all entries
+		//
 		GenLibraryFactoryImpl lf = (GenLibraryFactoryImpl) GenLibraryFactoryImpl.eINSTANCE;
 
 		libpathparser = new LibraryPathParserImpl();
@@ -124,6 +163,7 @@ public class LibraryPluginImpl implements LibraryPlugin {
 
 		URI libXMI = URI.createFileURI(librarypath.getPath() + File.separator + "lib.xmi");
 		XMIResource resource = new XMIResourceImpl(libXMI);
+		Library lib = null;
 		try {
 			resource.load(null);
 			lib = (Library) resource.getContents().get(0);
@@ -139,12 +179,12 @@ public class LibraryPluginImpl implements LibraryPlugin {
 			}
 		}
 
+		libs.put(libpath, lib);
+
 		String libcheck = getLibraryChecksum(pathToLibrary);
 
 		if (!libcheck.equals(lib.getChecksum())) {
-			// System.out.println("Checksum File: " + lib.getChecksum());
-			// System.out.println("Checksum All: " + libcheck);
-			// System.out.println("Checksum not correct, creating new Index");
+
 			lib.getItems().clear();
 			lib.setChecksum(libcheck);
 			buildLibrary(pathToLibrary);
@@ -154,6 +194,12 @@ public class LibraryPluginImpl implements LibraryPlugin {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	@Override
+	public void addLibPaths(List<String> libpaths) {
+
+		libpaths.stream().forEach(this::addLibPath);
 	}
 
 	@Override
@@ -317,18 +363,15 @@ public class LibraryPluginImpl implements LibraryPlugin {
 
 	@Override
 	public List<String> getAllElementLibraryPathAsString(int startIndex, int count) {
-		List<String> tmp = new ArrayList<String>();
-		if (startIndex < 0) {
-			startIndex = 0;
-		}
-		if (count <= 0) {
-			count = lib.getItems().size();
-		}
 
-		for (int i = startIndex; i < lib.getItems().size(); i++) {
+		List<String> tmp = new ArrayList<>();
 
-			if (tmp.size() < count) {
-				tmp.add(lib.getItems().get(i).getKey());
+		List<Item> libItems = libs.values().stream().flatMap(lib -> lib.getItems().stream()).collect(Collectors.toList());
+
+		for (int i = startIndex < 0 ? 0 : startIndex; i < libItems.size(); i++) {
+
+			if (tmp.size() < (count <= 0 ? libItems.size() : count)) {
+				tmp.add(libItems.get(i).getKey());
 			} else {
 				break;
 			}
@@ -479,10 +522,14 @@ public class LibraryPluginImpl implements LibraryPlugin {
 	}
 
 	private Item getItem(LibraryPath path, boolean usehigher) {
+
+		List<Item> libItems = libs.values().stream().flatMap(lib -> lib.getItems().stream()).collect(Collectors.toList());
+
 		Item item = null;
+
 		while (item == null) {
-			for (int k = 0; k < lib.getItems().size(); k++) {
-				Item tmpitem = lib.getItems().get(k);
+			for (int k = 0; k < libItems.size(); k++) {
+				Item tmpitem = libItems.get(k);
 				if (tmpitem.getKey().equals(path.getPath())) {
 					// item with highest value
 					if (item == null || versionCompare(item.getVersion(), tmpitem.getVersion()) < 0) {
@@ -580,7 +627,7 @@ public class LibraryPluginImpl implements LibraryPlugin {
 				item.setKey(entry.getKey());
 				item.setPath(entry.getFile().getName());
 
-				lib.getItems().add(item);
+				libs.get(path.toString()).getItems().add(item);
 
 			} catch (Exception e) {
 				System.err.println("Error: " + e.getMessage());
