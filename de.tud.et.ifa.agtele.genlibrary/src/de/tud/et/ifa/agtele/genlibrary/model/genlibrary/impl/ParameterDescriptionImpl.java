@@ -31,11 +31,11 @@ import java.lang.reflect.InvocationTargetException;
  * <em><b>Parameter Description</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.ParameterDescriptionImpl#getResourceParameters <em>Resource Parameters</em>}</li>
  *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.ParameterDescriptionImpl#getID <em>ID</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.LibraryEntryImpl#getVersion <em>Version</em>}</li>
  *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.LibraryEntryImpl#getLibraryItem <em>Library Item</em>}</li>
@@ -28,7 +29,6 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.LibraryEntryImpl#getThumbnail <em>Thumbnail</em>}</li>
  *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.LibraryEntryImpl#getAuthor <em>Author</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

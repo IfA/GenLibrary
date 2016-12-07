@@ -10,11 +10,15 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
- * <ul>
- *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceParameter#getSource <em>Source</em>}</li>
- *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceParameter#getTarget <em>Target</em>}</li>
- * </ul>
  * </p>
+ * <ul>
+ * <li>
+ * {@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceParameter#getSource
+ * <em>Source</em>}</li>
+ * <li>
+ * {@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceParameter#getTarget
+ * <em>Target</em>}</li>
+ * </ul>
  *
  * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.GenLibraryPackage#getAbstractExternalReferenceParameter()
  * @model interface="true" abstract="true"
@@ -30,6 +34,7 @@ public interface AbstractExternalReferenceParameter<ExternalReferenceParameterSo
 	 * clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Source</em>' containment reference.
 	 * @see #setSource(Object)
 	 * @see de.tud.et.ifa.agtele.genlibrary.model.genlibrary.GenLibraryPackage#getAbstractExternalReferenceParameter_Source()
@@ -39,10 +44,13 @@ public interface AbstractExternalReferenceParameter<ExternalReferenceParameterSo
 	ExternalReferenceParameterSourceType getSource();
 
 	/**
-	 * Sets the value of the '{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceParameter#getSource <em>Source</em>}' containment reference.
-	 * <!-- begin-user-doc --> <!--
+	 * Sets the value of the '
+	 * {@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceParameter#getSource
+	 * <em>Source</em>}' containment reference. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * @param value the new value of the '<em>Source</em>' containment reference.
+	 * 
+	 * @param value
+	 *            the new value of the '<em>Source</em>' containment reference.
 	 * @see #getSource()
 	 * @generated
 	 */

@@ -12,7 +12,10 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.CommonPlugin;
 import org.eclipse.emf.common.util.URI;
@@ -23,7 +26,6 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.Item;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.Library;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryEntry;
-import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.LibraryItem;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ParameterDescription;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ResourceParameter;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.GenLibraryFactoryImpl;
@@ -37,22 +39,40 @@ import de.tud.et.ifa.agtele.genlibrary.util.impl.SearchZipAndJarFileVisitor;
 import de.tud.et.ifa.agtele.genlibrary.util.interfaces.FileParser;
 import de.tud.et.ifa.agtele.genlibrary.util.interfaces.LibraryFileEntry;
 
+/**
+ * The standard implementation of the {@link LibraryPlugin}.
+ *
+ * @author mfreund
+ */
 public class LibraryPluginImpl implements LibraryPlugin {
 
+	/**
+	 * The {@link LibraryContext} that is used by this plugin.
+	 */
 	private LibraryContext libraryContext;
 
-	private Library lib;
-
+	/**
+	 * The {@link LibraryPathParser} that is used by this plugin.
+	 */
 	private LibraryPathParser parser;
 
-	private LibraryPathParser libpathparser;
-
-	private final int version = 18;
-
+	/**
+	 * The {@link FileParser} used by this plugin.
+	 */
 	private FileParser fileparser;
 
-	public LibraryPluginImpl() {
+	/**
+	 * The current list of libraries that are managed by this plugin associated
+	 * with their location.
+	 */
+	private final Map<String, Library> libraries;
 
+	/**
+	 * This creates an instance.
+	 *
+	 */
+	public LibraryPluginImpl() {
+		libraries = new HashMap<>();
 	}
 
 	/**
@@ -80,8 +100,8 @@ public class LibraryPluginImpl implements LibraryPlugin {
 
 	@Override
 	public void init(LibraryContext librarycontext, LibraryPathParser parser) {
-		System.out.println("Init Library without a LibraryPath! ");
-		System.out.println("Version: " + version);
+
+		System.out.println("Initialize Library without a LibraryPath! ");
 
 		basicInit(librarycontext, parser);
 
@@ -90,8 +110,8 @@ public class LibraryPluginImpl implements LibraryPlugin {
 
 	@Override
 	public void init(String libpath, LibraryContext librarycontext, LibraryPathParser parser) {
-		System.out.println("Init Library! " + libpath);
-		System.out.println("Version: " + version);
+
+		System.out.println("Initialize Library with LibraryPath '" + libpath + "'!");
 
 		basicInit(librarycontext, parser);
 
@@ -102,14 +122,55 @@ public class LibraryPluginImpl implements LibraryPlugin {
 
 	@Override
 	public void setLibPath(String libpath) {
+
+		if (libraries.size() == 1 && libraries.containsKey(libpath)) {
+			return;
+		}
+
+		// Clear the existing list libraries
+		//
+		libraries.clear();
+
+		// Add the new library
+		//
+		addLibPath(libpath);
+
+	}
+
+	@Override
+	public void setLibPaths(List<String> libpaths) {
+
+		if (libraries.size() == 1 && libpaths.stream().allMatch(libraries::containsKey)) {
+			return;
+		}
+
+		// Clear the existing list libraries
+		//
+		libraries.clear();
+
+		// Add the new library
+		//
+		addLibPaths(libpaths);
+
+	}
+
+	@Override
+	public void addLibPath(String libpath) {
+
+		if (libraries.keySet().parallelStream().anyMatch(l -> l.equals(libpath))) {
+			return;
+		}
+
+		// Parse the new lib path and collect all entries
+		//
 		GenLibraryFactoryImpl lf = (GenLibraryFactoryImpl) GenLibraryFactoryImpl.eINSTANCE;
 
-		libpathparser = new LibraryPathParserImpl();
-		LibraryPath librarypath = libpathparser.parse(libpath);
+		LibraryPath librarypath = parser.parse(libpath);
 		Path pathToLibrary = new File(librarypath.getPath()).toPath();
 
 		URI libXMI = URI.createFileURI(librarypath.getPath() + File.separator + "lib.xmi");
 		XMIResource resource = new XMIResourceImpl(libXMI);
+		Library lib = null;
 		try {
 			resource.load(null);
 			lib = (Library) resource.getContents().get(0);
@@ -125,12 +186,12 @@ public class LibraryPluginImpl implements LibraryPlugin {
 			}
 		}
 
+		libraries.put(libpath, lib);
+
 		String libcheck = getLibraryChecksum(pathToLibrary);
 
 		if (!libcheck.equals(lib.getChecksum())) {
-			// System.out.println("Checksum File: " + lib.getChecksum());
-			// System.out.println("Checksum All: " + libcheck);
-			// System.out.println("Checksum not correct, creating new Index");
+
 			lib.getItems().clear();
 			lib.setChecksum(libcheck);
 			buildLibrary(pathToLibrary);
@@ -143,13 +204,17 @@ public class LibraryPluginImpl implements LibraryPlugin {
 	}
 
 	@Override
+	public void addLibPaths(List<String> libpaths) {
+
+		libpaths.stream().forEach(this::addLibPath);
+	}
+
+	@Override
 	public boolean elementExists(String path, boolean usehigher) {
+
 		LibraryPath libpath = parser.parse(path);
 		Item item = getItem(libpath, usehigher);
-		if (item == null) {
-			return false;
-		}
-		return true;
+		return item != null;
 	}
 
 	@Override
@@ -207,182 +272,81 @@ public class LibraryPluginImpl implements LibraryPlugin {
 		LibraryFileEntry fileitem = getLibraryFileEntry(item);
 		for (ResourceParameter res : resourceParameters) {
 			if (res.getNewPath() != null && !res.getNewPath().isEmpty()) {
-				LibraryPath newrespath = libpathparser.parse(res.getNewPath());
+				LibraryPath newrespath = parser.parse(res.getNewPath());
 				if (!new org.eclipse.core.runtime.Path(newrespath.getPath()).isAbsolute()) {
 					newrespath.setPath((new org.eclipse.core.runtime.Path(targetModel.eResource().getURI().trimSegments(1).toString())) + File.separator + newrespath.getPath());
 				}
-				copyResourceTo(item, fileitem, res.getName(), newrespath);
+				copyResourceTo(item.getKey(), fileitem, res.getName(), newrespath);
 			}
 
 		}
-	}
-
-	@Override
-	@Deprecated
-	public LibraryItem getElement(EObject targetModel, String path, ParameterDescription parameterDescription, boolean usehigher) {
-		LibraryPath libpath = parser.parse(path);
-		Item item = getItem(libpath, usehigher);
-		if (item == null) {
-			return null;
-		}
-		LibraryEntry entry = getLibraryEntry(item);
-		if (entry == null) {
-			return null;
-		}
-		LibraryItem libitem = entry.getLibraryItem();
-
-		LibraryFileEntry fileitem = getLibraryFileEntry(item);
-
-		libraryContext.applyParameters(libitem, entry, path);
-
-		List<ResourceParameter> resourceParameters = parameterDescription.getResourceParameters();
-
-		for (ResourceParameter res : resourceParameters) {
-			if (res.getNewPath() != null && !res.getNewPath().isEmpty()) {
-				LibraryPath newrespath = libpathparser.parse(res.getNewPath());
-				copyResourceTo(item, fileitem, res.getName(), newrespath);
-			}
-
-		}
-
-		return libitem;
-
 	}
 
 	@Override
 	public String getResultingElementLibraryPath(String path) {
+
 		LibraryPath libpath = parser.parse(path);
 		Item item = getItem(libpath, true);
-		if (item == null) {
-			return null;
-		} else {
-			return item.getKey();
-		}
-	}
 
-	@Override
-	@Deprecated
-	public ParameterDescription getMetaData(String path, boolean usehigher) {
-		LibraryPath libpath = parser.parse(path);
-		Item item = getItem(libpath, usehigher);
-		if (item == null) {
-			return null;
-		}
-		LibraryEntry entry = getLibraryEntry(item);
-		if (entry == null) {
-			return null;
-		}
-
-		ParameterDescription md = entry.getParameterDescription();
-
-		if (md != null) {
-			md.getResourceParameters().clear();
-		} else {
-			md = libraryContext.getNewMetaData();
-		}
-		LibraryFileEntry fileentry = getLibraryFileEntry(item);
-
-		GenLibraryFactoryImpl lf = (GenLibraryFactoryImpl) GenLibraryFactoryImpl.eINSTANCE;
-		try {
-			List<String> respathes = fileentry.getResourceNameList();
-			for (int i = 0; i < respathes.size(); i++) {
-
-				ResourceParameter resourceParameter = lf.createResourceParameter();
-
-				resourceParameter.setName(getFilename(respathes.get(i), getResultingElementLibraryPath(item.getKey())));
-
-				md.getResourceParameters().add(resourceParameter);
-			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		return libraryContext.transformMetaData(entry.getLibraryItem(), md);
+		return item != null ? item.getKey() : null;
 	}
 
 	@Override
 	public List<String> getAllElementLibraryPathAsString(int startIndex, int count) {
-		List<String> tmp = new ArrayList<String>();
-		if (startIndex < 0) {
-			startIndex = 0;
-		}
-		if (count <= 0) {
-			count = lib.getItems().size();
-		}
 
-		for (int i = startIndex; i < lib.getItems().size(); i++) {
+		List<String> paths = new ArrayList<>();
 
-			if (tmp.size() < count) {
-				tmp.add(lib.getItems().get(i).getKey());
+		List<Item> libItems = libraries.values().stream().flatMap(lib -> lib.getItems().stream()).collect(Collectors.toList());
+
+		for (int i = startIndex < 0 ? 0 : startIndex; i < libItems.size(); i++) {
+
+			if (paths.size() < (count <= 0 ? libItems.size() : count)) {
+				paths.add(libItems.get(i).getKey());
 			} else {
 				break;
 			}
 		}
 
-		return tmp;
+		return paths;
 	}
 
 	@Override
 	public InputStream getResourceInputStream(String path, boolean usehigher, String resourcename) throws IOException, IllegalArgumentException {
+
 		LibraryPath libpath = parser.parse(path);
+
 		Item item = getItem(libpath, usehigher);
 		if (item == null) {
 			return null;
 		}
+
 		LibraryFileEntry libfileentry = getLibraryFileEntry(item);
 		if (libfileentry == null) {
 			return null;
 		}
 
-		return getResourceInputStream(item, libfileentry, resourcename);
+		return getResourceInputStream(item.getKey(), libfileentry, resourcename);
 	}
 
-	@Override
-	public boolean copyResourceTo(String path, boolean usehigher, String resourcename, String pathto) {
-		LibraryPath libpath = parser.parse(path);
-		Item item = getItem(libpath, usehigher);
-		if (item == null) {
-			return false;
-		}
-		LibraryFileEntry libfileentry = getLibraryFileEntry(item);
-		if (libfileentry == null) {
-			return false;
-		}
+	/**
+	 * Get a {@link FileInputStream} for a resource contained in a library
+	 * entry.
+	 *
+	 * @param classPath
+	 *            The classpath of the LibraryEntry the resource is contained
+	 *            in.
+	 * @param libfileentry
+	 *            The {@link LibraryFileEntry} from which the resource shall be
+	 *            retrieved.
+	 * @param resourcename
+	 *            The name of the resource to be retrieved.
+	 * @return An {@link InputStream} for the resource to be retrieved.
+	 * @throws IOException
+	 * @throws IllegalArgumentException
+	 */
+	private InputStream getResourceInputStream(String classPath, LibraryFileEntry libfileentry, String resourcename) throws IOException, IllegalArgumentException {
 
-		LibraryPath filepath = libpathparser.parse(pathto);
-
-		return copyResourceTo(item, libfileentry, resourcename, filepath);
-	}
-
-	@Override
-	public List<String> getElementsResources(String path, boolean usehigher) {
-		LibraryPath libpath = parser.parse(path);
-		Item item = getItem(libpath, usehigher);
-		if (item == null) {
-			return null;
-		}
-		LibraryFileEntry libfileentry = getLibraryFileEntry(item);
-		if (libfileentry == null) {
-			return null;
-		}
-
-		try {
-
-			List<String> list = libfileentry.getResourceNameList();
-			List<String> result = new ArrayList<String>();
-			for (String str : list) {
-				result.add(getFilename(str, getResultingElementLibraryPath(item.getKey())));
-			}
-			return result;
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	private InputStream getResourceInputStream(Item item, LibraryFileEntry libfileentry, String resourcename) throws IOException, IllegalArgumentException {
-		String fullrespath = getFullResourcePath(item.getKey(), resourcename);
+		String fullrespath = getFullResourcePath(classPath, resourcename);
 
 		boolean exists = false;
 		for (String file : libfileentry.getResourceNameList()) {
@@ -398,9 +362,28 @@ public class LibraryPluginImpl implements LibraryPlugin {
 		return libfileentry.getResourceFileAsInputStream(fullrespath);
 	}
 
-	private boolean copyResourceTo(Item item, LibraryFileEntry libfileentry, String resourcename, LibraryPath pathTo) {
+	/**
+	 * Copies a resource from inside a library entry to the <em>pathTo</em>.
+	 *
+	 * @param classPath
+	 *            The classpath of the LibraryEntry the resource is contained
+	 *            in.
+	 * @param libfileentry
+	 *            The {@link LibraryFileEntry} containing the resource to be
+	 *            copied.
+	 * @param resourcename
+	 *            The name of the resource to be copied.
+	 * @param pathTo
+	 *            The target {@link LibraryPath} where the resource shall be
+	 *            copied to.
+	 * @return <em>true</em> if the resource was copied successful;
+	 *         <em>false</em> otherwise.
+	 */
+	private boolean copyResourceTo(String classPath, LibraryFileEntry libfileentry, String resourcename, LibraryPath pathTo) {
+
 		InputStream is = null;
 		FileOutputStream fos = null;
+
 		try {
 
 			URI uri = URI.createURI(pathTo.getPath());
@@ -419,7 +402,7 @@ public class LibraryPluginImpl implements LibraryPlugin {
 				parent.mkdirs();
 			}
 
-			is = getResourceInputStream(item, libfileentry, resourcename);
+			is = getResourceInputStream(classPath, libfileentry, resourcename);
 			fos = new FileOutputStream(outputfile);
 
 			int read = 0;
@@ -454,59 +437,145 @@ public class LibraryPluginImpl implements LibraryPlugin {
 		return false;
 	}
 
+	/**
+	 * Get a {@link LibraryEntry} for the given {@link Item}.
+	 *
+	 * @param item
+	 *            The {@link Item}.
+	 * @return The {@link LibraryEntry} for the <em>item</em>.
+	 */
 	private LibraryEntry getLibraryEntry(Item item) {
+
 		if (item == null)
 			return null;
+
 		XMIResource resource = getXMIResource(item);
 
-		if (resource == null)
-			return null;
-		return (LibraryEntry) resource.getContents().get(0);
+		return resource == null ? null : (LibraryEntry) resource.getContents().get(0);
 	}
 
+	/**
+	 * Retrieve an {@link Item} for the given {@link LibraryPath}.
+	 *
+	 * @param path
+	 *            The {@link LibraryPath}.
+	 * @param usehigher
+	 *            Whether a higher (more abstract) shall be returned instead if
+	 *            the requested element does not exist.
+	 * @return The retrieved {@link Item}.
+	 */
 	private Item getItem(LibraryPath path, boolean usehigher) {
+
+		List<Item> libItems = libraries.values().stream().flatMap(lib -> lib.getItems().stream()).collect(Collectors.toList());
+
 		Item item = null;
+
 		while (item == null) {
-			for (int k = 0; k < lib.getItems().size(); k++) {
-				Item tmpitem = lib.getItems().get(k);
+			for (int k = 0; k < libItems.size(); k++) {
+				Item tmpitem = libItems.get(k);
 				if (tmpitem.getKey().equals(path.getPath())) {
 					// item with highest value
-					if (item == null || Long.valueOf(item.getVersion()) < Long.valueOf(tmpitem.getVersion())) {
+					if (item == null || versionCompare(item.getVersion(), tmpitem.getVersion()) < 0) {
 						item = tmpitem;
 					}
 				}
 			}
 
 			// get Element of higher Class
-			if (item != null || !usehigher) {
+			if (item != null || !usehigher || !path.hasHigherPath()) {
 				break;
 			}
 
-			if (path.toHigherPath() == 0) {
-				break;
-			}
+			// Move up in the abstraction hierarchy to find a more abstract item
+			//
+			path.toHigherPath();
 		}
 
 		return item;
 	}
 
-	private XMIResource getXMIResource(Item item) {
-		if (item != null) {
-			LibraryFileEntry libfileentry = getLibraryFileEntry(item);
-			XMIResource resource = new XMIResourceImpl();
-			try {
-				resource.load(libfileentry.getXMIFileAsInputStream(), null);
-				return resource;
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+	/**
+	 * Compares two version strings.
+	 * 
+	 * Use this instead of String.compareTo() for a non-lexicographical
+	 * comparison that works for version strings. e.g. "1.10".compareTo("1.6").
+	 * 
+	 * @see <a href=
+	 *      "http://stackoverflow.com/questions/6701948/efficient-way-to-compare-version-strings-in-java/6702029#6702029"
+	 *      >Stackoverflow</a>
+	 * 
+	 * @note It does not work if "1.10" is supposed to be equal to "1.10.0".
+	 * 
+	 * @param str1
+	 *            a string of ordinal numbers separated by decimal points.
+	 * @param str2
+	 *            a string of ordinal numbers separated by decimal points.
+	 * @return The result is a negative integer if str1 is _numerically_ less
+	 *         than str2. The result is a positive integer if str1 is
+	 *         _numerically_ greater than str2. The result is zero if the
+	 *         strings are _numerically_ equal.
+	 */
+	private static int versionCompare(String str1, String str2) {
+		String[] vals1 = str1.split("\\.");
+		String[] vals2 = str2.split("\\.");
+		int i = 0;
+		// set index to first non-equal ordinal or length of shortest version
+		// string
+		while (i < vals1.length && i < vals2.length && vals1[i].equals(vals2[i])) {
+			i++;
 		}
-		return null;
+		// compare first non-equal ordinal number
+		if (i < vals1.length && i < vals2.length) {
+			int diff = Integer.valueOf(vals1[i]).compareTo(Integer.valueOf(vals2[i]));
+			return Integer.signum(diff);
+		}
+		// the strings are equal or one string is a substring of the other
+		// e.g. "1.2.3" = "1.2.3" or "1.2.3" < "1.2.3.4"
+		return Integer.signum(vals1.length - vals2.length);
 	}
 
-	private void buildLibrary(Path path) {
+	/**
+	 * Get the {@link XMIResource} containing the {@link LibraryEntry}
+	 * represented by the given <em>item</em>.
+	 *
+	 * @param item
+	 *            The {@link Item} for which the resource shall be returned.
+	 * @return The {@link XMIResource} containing the {@link LibraryEntry}
+	 *         represented by the given <em>item</em> or <em>null</em> if the
+	 *         resource could not be determined or doesn't exist.
+	 */
+	private XMIResource getXMIResource(Item item) {
+
+		if (item == null) {
+			return null;
+		}
+
+		LibraryFileEntry libfileentry = getLibraryFileEntry(item);
+		XMIResource resource = new XMIResourceImpl();
+		try {
+			resource.load(libfileentry.getXMIFileAsInputStream(), null);
+			return resource;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return resource;
+	}
+
+	/**
+	 * Build up the library represented by the given <em>pathToLibrary</em>.
+	 * <p />
+	 * This will (recursively) located all ZIP/JAR files for the given path,
+	 * determine all {@link LibraryEntry LibraryEntries} in these ZIP files and
+	 * updates the {@link #libraries}.
+	 *
+	 * @param pathToLibrary
+	 *            The path to the folder containing the library.
+	 */
+	private void buildLibrary(Path pathToLibrary) {
+
 		System.out.println("building Library...");
-		List<Path> res = getAllArchives(path);
+		List<Path> res = getAllArchives(pathToLibrary);
 		List<LibraryFileEntry> entries = getLibraryFileEntries(res);
 		GenLibraryFactoryImpl lf = (GenLibraryFactoryImpl) GenLibraryFactoryImpl.eINSTANCE;
 
@@ -527,7 +596,7 @@ public class LibraryPluginImpl implements LibraryPlugin {
 				item.setKey(entry.getKey());
 				item.setPath(entry.getFile().getName());
 
-				lib.getItems().add(item);
+				libraries.get(pathToLibrary.toString()).getItems().add(item);
 
 			} catch (Exception e) {
 				System.err.println("Error: " + e.getMessage());

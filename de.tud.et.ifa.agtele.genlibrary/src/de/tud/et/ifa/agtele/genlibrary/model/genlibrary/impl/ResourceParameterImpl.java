@@ -18,11 +18,11 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.ResourceParameterImpl#getName <em>Name</em>}</li>
  *   <li>{@link de.tud.et.ifa.agtele.genlibrary.model.genlibrary.impl.ResourceParameterImpl#getNewPath <em>New Path</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
