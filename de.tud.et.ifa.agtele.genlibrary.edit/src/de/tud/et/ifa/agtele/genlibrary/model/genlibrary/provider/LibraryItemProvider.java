@@ -66,7 +66,6 @@ public class LibraryItemProvider
 			super.getPropertyDescriptors(object);
 
 			addChecksumPropertyDescriptor(object);
-			addItemsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -89,28 +88,6 @@ public class LibraryItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Items feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addItemsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Library_Items_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Library_Items_feature", "_UI_Library_type"),
-				 GenLibraryPackage.Literals.LIBRARY__ITEMS,
-				 true,
-				 false,
-				 true,
-				 null,
 				 null,
 				 null));
 	}
