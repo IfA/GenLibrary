@@ -5,6 +5,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.wizard.Wizard;
 
 import de.tud.et.ifa.agtele.genlibrary.processor.impl.LibraryPluginImpl;
+import de.tud.et.ifa.agtele.genlibrary.ui.pages.EditParametersWizardPage;
+import de.tud.et.ifa.agtele.genlibrary.ui.pages.SelectLibraryEntryPage;
 import de.tud.et.ifa.agtele.resources.ResourceHelper;
 
 /**

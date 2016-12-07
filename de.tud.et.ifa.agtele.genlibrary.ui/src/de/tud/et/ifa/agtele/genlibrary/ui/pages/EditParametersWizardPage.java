@@ -1,4 +1,4 @@
-package de.tud.et.ifa.agtele.genlibrary.ui.wizards;
+package de.tud.et.ifa.agtele.genlibrary.ui.pages;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,6 +29,7 @@ import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractContainerParamet
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.AbstractExternalReferenceParameter;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ParameterDescription;
 import de.tud.et.ifa.agtele.genlibrary.model.genlibrary.ResourceParameter;
+import de.tud.et.ifa.agtele.genlibrary.ui.wizards.AddGenlibraryEntryWizardData;
 
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.widgets.Button;
@@ -58,7 +59,7 @@ public class EditParametersWizardPage extends WizardPage {
 	private Composite resourcesContainer;
 	private Composite externalReferencesContainer;
 	
-	protected EditParametersWizardPage(AddGenlibraryEntryWizardData data) {
+	public EditParametersWizardPage(AddGenlibraryEntryWizardData data) {
 		super("Edit Library Parameters");
 		setTitle("Edit Library Parameters");
 		setDescription("Add all necessary information for inserting the library item by editing the Library Parameters...");
@@ -388,7 +389,8 @@ public class EditParametersWizardPage extends WizardPage {
 	private String getEObjectText(EObject object) {
 		for (EAttribute attr : object.eClass().getEAllAttributes()) {
 			if(attr.getName().equalsIgnoreCase("name") || attr.getName().equalsIgnoreCase("id")) {
-				return object.eGet(attr).toString();
+				if(object.eGet(attr) != null && !object.eGet(attr).toString().isEmpty())
+					return object.eGet(attr).toString();
 			}
 		}
 		
