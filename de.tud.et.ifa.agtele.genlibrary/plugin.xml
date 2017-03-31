@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension-point id="de.tud.et.ifa.agtele.genlibrary.implementation" name="GenLibrary Implementation" schema="schema/de.tud.et.ifa.agtele.genlibrary.implementation.exsd"/>
+   
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated genlibrary -->
+      <package
+            uri="http://www.et.tu-dresden.de/ifa/agtele/genlib"
+            class="de.tud.et.ifa.agtele.genlibrary.model.genlibrary.GenLibraryPackage"
+            genModel="model/genlibrary.genmodel"/>
+   </extension>
+
+</plugin>
