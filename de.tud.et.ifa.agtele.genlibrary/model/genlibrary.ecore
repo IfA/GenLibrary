@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="genlibrary" nsURI="http://www.et.tu-dresden.de/ifa/agtele/genlib"
+    nsPrefix="genlib">
+  <eClassifiers xsi:type="ecore:EClass" name="LibraryEntry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Version" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="LibraryItem" lowerBound="1"
+        eType="#//LibraryItem" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameterDescription" lowerBound="1"
+        eType="#//ParameterDescription" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="thumbnail" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="author" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral="unknown"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Library">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Checksum" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Items" upperBound="-1"
+        eType="#//Item" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Item">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Key" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Path" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Version" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LibraryItem"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterDescription">
+    <eOperations name="getExternalReferenceParameters" lowerBound="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="EList&lt;AbstractExternalReferenceParameter&lt;EObject, EObject>> abstractParameters = &#xD;&#xA;&#x9;&#x9;new BasicEList&lt;AbstractExternalReferenceParameter&lt;EObject, EObject>>();&#xD;&#xA;&#xD;&#xA;// recursively iterate over all children of the metadata and collect&#xD;&#xA;// all objects that are of type 'AbstractParameter'&#xD;&#xA;Iterator&lt;Object> it = EcoreUtil.getAllContents(this, true);&#xD;&#xA;while (it.hasNext()) {&#xD;&#xA;&#x9;Object object = it.next();&#xD;&#xA;&#x9;if (object instanceof AbstractExternalReferenceParameter&lt;?, ?>) {&#xD;&#xA;&#x9;&#x9;abstractParameters.add((AbstractExternalReferenceParameter&lt;EObject, EObject>) object);&#xD;&#xA;&#x9;}&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;return abstractParameters;"/>
+      </eAnnotations>
+      <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EEList">
+        <eTypeArguments eClassifier="#//AbstractExternalReferenceParameter">
+          <eTypeArguments eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+          <eTypeArguments eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+        </eTypeArguments>
+      </eGenericType>
+    </eOperations>
+    <eOperations name="getContainerParameters" lowerBound="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="EList&lt;AbstractContainerParameter&lt;EObject, EObject>> abstractParameters = &#xD;&#xA;&#x9;&#x9;new BasicEList&lt;AbstractContainerParameter&lt;EObject, EObject>>();&#xD;&#xA;&#xD;&#xA;// recursively iterate over all children of the metadata and collect&#xD;&#xA;// all objects that are of type 'AbstractParameter'&#xD;&#xA;Iterator&lt;Object> it = EcoreUtil.getAllContents(this, true);&#xD;&#xA;while (it.hasNext()) {&#xD;&#xA;&#x9;Object object = it.next();&#xD;&#xA;&#x9;if (object instanceof AbstractContainerParameter&lt;?, ?>) {&#xD;&#xA;&#x9;&#x9;abstractParameters.add((AbstractContainerParameter&lt;EObject, EObject>) object);&#xD;&#xA;&#x9;}&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;return abstractParameters;"/>
+      </eAnnotations>
+      <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EEList">
+        <eTypeArguments eClassifier="#//AbstractContainerParameter">
+          <eTypeArguments eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+          <eTypeArguments eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+        </eTypeArguments>
+      </eGenericType>
+    </eOperations>
+    <eOperations name="getAttributeParameters" lowerBound="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="EList&lt;AbstractAttributeParameter&lt;EObject>> abstractParameters = &#xD;&#xA;&#x9;&#x9;new BasicEList&lt;AbstractAttributeParameter&lt;EObject>>();&#xD;&#xA;&#xD;&#xA;// recursively iterate over all children of the metadata and collect&#xD;&#xA;// all objects that are of type 'AbstractParameter'&#xD;&#xA;Iterator&lt;Object> it = EcoreUtil.getAllContents(this, true);&#xD;&#xA;while (it.hasNext()) {&#xD;&#xA;&#x9;Object object = it.next();&#xD;&#xA;&#x9;if (object instanceof AbstractAttributeParameter&lt;?>) {&#xD;&#xA;&#x9;&#x9;abstractParameters.add((AbstractAttributeParameter&lt;EObject>) object);&#xD;&#xA;&#x9;}&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;return abstractParameters;"/>
+      </eAnnotations>
+      <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EEList">
+        <eTypeArguments eClassifier="#//AbstractAttributeParameter">
+          <eTypeArguments eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+        </eTypeArguments>
+      </eGenericType>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="resourceParameters" upperBound="-1"
+        eType="#//ResourceParameter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ID" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ResourceParameter">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="newPath" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractExternalReferenceParameter"
+      abstract="true" interface="true">
+    <eTypeParameters name="ExternalReferenceParameterSourceType"/>
+    <eTypeParameters name="ExternalReferenceParameterTargetType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        containment="true">
+      <eGenericType eTypeParameter="#//AbstractExternalReferenceParameter/ExternalReferenceParameterSourceType"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target">
+      <eGenericType eTypeParameter="#//AbstractExternalReferenceParameter/ExternalReferenceParameterTargetType"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractContainerParameter" abstract="true"
+      interface="true">
+    <eTypeParameters name="ContainerParameterSourceType"/>
+    <eTypeParameters name="ContainerParameterTargetType"/>
+    <eOperations name="getReference" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1">
+      <eGenericType eTypeParameter="#//AbstractContainerParameter/ContainerParameterSourceType"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="container">
+      <eGenericType eTypeParameter="#//AbstractContainerParameter/ContainerParameterTargetType"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractAttributeParameter" abstract="true"
+      interface="true">
+    <eTypeParameters name="AttributeParameterSourceType"/>
+    <eOperations name="getAttribute" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EAttribute"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1">
+      <eGenericType eTypeParameter="#//AbstractAttributeParameter/AttributeParameterSourceType"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="newValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>
