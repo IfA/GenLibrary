@@ -14,3 +14,4 @@ Require-Bundle: org.eclipse.ui,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Export-Package: de.tud.et.ifa.agtele.genlibrary.ui.wizards
+Automatic-Module-Name: de.tud.et.ifa.agtele.genlibrary.ui
