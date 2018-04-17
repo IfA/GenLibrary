@@ -20,13 +20,7 @@
     </genClasses>
     <genClasses ecoreClass="genlibrary.ecore#//Library">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute genlibrary.ecore#//Library/Checksum"/>
-<<<<<<< Upstream, based on 7d465b7478781619888647300dc8b9dc09d57c9b
-      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference genlibrary.ecore#//Library/Items"/>
-=======
-      <genFeatures property="None" children="true" createChild="true" propertySortChoices="true"
-          ecoreFeature="ecore:EReference genlibrary.ecore#//Library/Items"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference genlibrary.ecore#//Library/targetMetamodel"/>
->>>>>>> 665d7a3 Minor fix: Do not Library#items in the property view
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference genlibrary.ecore#//Library/Items"/>
     </genClasses>
     <genClasses ecoreClass="genlibrary.ecore#//Item">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute genlibrary.ecore#//Item/Key"/>

@@ -1,3 +1,15 @@
+/*******************************************************************************
+ * Copyright (C) 2018-2018 Institute of Automation, TU Dresden
+ * 
+ * This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License 2.0
+ * which is available at https://www.eclipse.org/legal/epl-2.0/
+ * 
+ * Contributors:
+ *   Institute of Automation, TU Dresden - Initial API and implementation
+ * 
+ * SPDX-License-Identifier: EPL-2.0
+ ******************************************************************************/
 package de.tud.et.ifa.agtele.genlibrary.ui.wizards;
 
 import java.io.File;
@@ -25,57 +37,57 @@ public class GenerateGenlibraryEntryWizard extends Wizard {
 	
 	public GenerateGenlibraryEntryWizard(GenerateGenlibraryEntryWizardData data) {
 		super();
-		setNeedsProgressMonitor(true);
+		this.setNeedsProgressMonitor(true);
 		this.data = data;
 	}
 
 	@Override
 	public void addPages() {
-		one = new TargetSelectorPage(data);
-		addPage(one);
-		two = new PreviewPage(data);
-		addPage(two);
+		this.one = new TargetSelectorPage(this.data);
+		this.addPage(this.one);
+		this.two = new PreviewPage(this.data);
+		this.addPage(this.two);
 	}
 	
 	@Override
 	public boolean canFinish() {
 		// the wizard can finish if the last page is active and complete
-		return (getContainer().getCurrentPage().equals(two) && two.isPageComplete());
+		return this.getContainer().getCurrentPage().equals(this.two) && this.two.isPageComplete();
 	}
 	
 	@Override
 	public boolean performFinish() {
-		boolean createZip = (data.getZipFilePath() != null && data.getZipFilePath() != ""); 
+		boolean createZip = this.data.getZipFilePath() != null && this.data.getZipFilePath() != ""; 
 		String tempFolder = "";
 		
 		if(createZip) {
 			// if the specified zip file already exists, unzip it
-			tempFolder = (new Path(data.getTargetModelPath())).removeLastSegments(1).toString();
-			if((new File(data.getZipFilePath()).exists())) {
-				ResourceHelper.unzipFolder(data.getZipFilePath(), tempFolder);
+			tempFolder = new Path(this.data.getTargetModelPath()).removeLastSegments(1).toString();
+			if(new File(this.data.getZipFilePath()).exists()) {
+				ResourceHelper.unzipFolder(this.data.getZipFilePath(), tempFolder);
 			}
 			
 			// show an error message if the relative path inside the zip file already exists and
 			// 'overwrite' is set to false
-			if(!data.isOverwriteZipEntry() && new File(tempFolder + File.separator + data.getLibRelPath()).exists()) {
-				cleanup(new File[]{(new Path(data.getTargetModelPath())).removeLastSegments(1).toFile()});
-				MessageDialog.openError(getShell(), "Error", "The relative path already exists inside the archive file...");
+			if(!this.data.isOverwriteZipEntry() && new File(tempFolder + File.separator + this.data.getLibRelPath()).exists()) {
+				this.cleanup(new File[]{new Path(this.data.getTargetModelPath()).removeLastSegments(1).toFile()});
+				MessageDialog.openError(this.getShell(), "Error", "The relative path already exists inside the archive file...");
 				return true;
 			}
 		}
 		
 		// store the model into a file
-		saveModel(data.getLibItemModel(), data.getTargetModelPath());
+		this.saveModel(this.data.getLibItemModel(), this.data.getTargetModelPath());
 		
 		// if a zip file is to be created, copy the created model and related files to the relative path
 		if(createZip) {
-			(new File(tempFolder + File.separator + data.getLibRelPath())).mkdirs();
-			for(File file : (new File(tempFolder)).listFiles()) {
+			new File(tempFolder + File.separator + this.data.getLibRelPath()).mkdirs();
+			for(File file : new File(tempFolder).listFiles()) {
 				// move all created files but not the existing directories of the other library items
 				if(!file.isDirectory()) {
 					try {
 						ResourceHelper.copyFile(file, 
-								tempFolder + File.separator + data.getLibRelPath());
+								tempFolder + File.separator + this.data.getLibRelPath());
 						file.delete();
 					} catch (IOException e) {
 						e.printStackTrace();
@@ -86,13 +98,13 @@ public class GenerateGenlibraryEntryWizard extends Wizard {
 		
 		// if a zip file is to be created, zip the model and delete it afterwards
 		if(createZip) {
-			ResourceHelper.zipFolder(tempFolder, data.getZipFilePath());			
-			cleanup(new File[]{(new Path(data.getTargetModelPath())).removeLastSegments(1).toFile()});
+			ResourceHelper.zipFolder(tempFolder, this.data.getZipFilePath());			
+			this.cleanup(new File[]{new Path(this.data.getTargetModelPath()).removeLastSegments(1).toFile()});
 		} else {
-			cleanup(null);
+			this.cleanup(null);
 		}
 		
-		MessageDialog.openInformation(getShell(), "Success", "The library item has been created successfully!");
+		MessageDialog.openInformation(this.getShell(), "Success", "The library item has been created successfully!");
 		return true;
 	}
 
@@ -111,7 +123,6 @@ public class GenerateGenlibraryEntryWizard extends Wizard {
 	    try {
 	      resource.save(Collections.emptyMap());
 	    } catch (IOException e) {
-	      // TODO Auto-generated catch block
 	      e.printStackTrace();
 	    }
 	}
@@ -119,7 +130,7 @@ public class GenerateGenlibraryEntryWizard extends Wizard {
 	@Override
 	public boolean performCancel() {
 		
-		cleanup(null);
+		this.cleanup(null);
 		
 		return true;
 	}
